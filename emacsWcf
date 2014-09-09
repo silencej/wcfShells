@@ -1,0 +1,660 @@
+;;; -*- mode: lisp -*-
+;;; .emacs
+;;; author: owen263@gmail.com
+;;; Time-stamp: <2014-09-05 16:03:44 wangcf>
+
+;; Turn on debugging (comment this out for normal use)
+(setq debug-on-error t)
+;Emacs with the `--debug-init'
+
+;; Everytime using GUI options to save settings, remember to find "custome" items and delete them!
+
+; C-x 3		split-window-horizontally.
+; C-x 2		split-window-vertically.
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Theme and frame size.
+
+;; Evaluate the following when the others have errors loading and make color, font and themes absurd.
+(if (equal system-type 'windows-nt)
+	(custom-set-faces
+	 ;; custom-set-faces was added by Custom.
+	 ;; If you edit it by hand, you could mess it up, so be careful.
+	 ;; Your init file should contain only one such instance.
+	 ;; If there is more than one, they won't work right.
+	 '(default ((t (:family "Consolas" :foundry "outline" :slant normal :weight normal :height 145 :width normal)))))
+	; Else use Inconsolata font, which is an open-source font downloadable from internet.
+; (when (equal system-type 'darwin)
+	(custom-set-faces
+	 ;; custom-set-faces was added by Custom.
+	 ;; If you edit it by hand, you could mess it up, so be careful.
+	 ;; Your init file should contain only one such instance.
+	 ;; If there is more than one, they won't work right.
+	 '(default ((t (:family "Inconsolata" :foundry "outline" :slant normal :weight normal :height 200 :width normal)))))
+)
+
+
+(setq default-frame-alist '( 
+	(top . 0) (left . 100)
+;	(width . 75) (height . (/ (* 30 (display-pixel-height) ) 768) )
+	(width . 75) (height . 30)
+	)
+)
+
+(modify-frame-parameters nil '((wait-for-wm . nil))) ;; make font displaying faster.
+
+;; NOTE: put all other globa set below the theme settings.
+(when (not (equal window-system nil) )
+	(custom-set-variables
+	 ;; custom-set-variables was added by Custom.
+	 ;; If you edit it by hand, you could mess it up, so be careful.
+	 ;; Your init file should contain only one such instance.
+	 ;; If there is more than one, they won't work right.
+	 '(ansi-color-names-vector ["#242424" "#e5786d" "#95e454" "#cae682" "#8ac6f2" "#333366" "#ccaa8f" "#f6f3e8"])
+	 '(custom-enabled-themes (quote (manoj-dark)))
+	 '(ede-project-directories (quote ("e:/itk" "e:/itk/Modules")))
+	 '(size-indication-mode t))
+)
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(setq load-path (cons "~/shells/emacsEls" load-path))
+
+(add-hook 'before-save-hook 'time-stamp)
+
+;; C-u 0 M-x byte-recompile-directory
+;; will compile all the .el files in the directory and in all subdirectories below.
+;; The C-u 0 part is to make it not ask about every .el file that does not have a .elc counterpart.
+
+(when (>= emacs-major-version 24)
+	(require 'package)
+	(package-initialize)
+	;; melpa is emacswiki archive.
+	(add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/"))
+)
+
+; (global-set-key (kbd "C-c s f") 'speedbar-get-focus)
+;;(require 'sr-speedbar);;这句话是必须的
+;;(add-hook 'after-init-hook '(lambda () (sr-speedbar-toggle)));;开启程序即启用
+;;(setq-default sr-speedbar-right-side nil)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;
+;	 CEDET.
+;	cedet/common/cedet.info for configuration details.
+;	RTANT: For Emacs >= 23.2, you must place this *before* any
+;	T component (including EIEIO) gets activated by another 
+;	age (Gnus, auth-source, ...).
+;	to-list 'load-path "~/shells/emacsEls/cedet/common/")
+;	e 'cedet)
+;	
+;	le EDE (Project Management) features
+;	-ede-mode 1)
+;	
+;	le EDE for a pre-existing C++ project
+;	-cpp-root-project "NAME" :file "~/myproject/Makefile")
+;	
+;	ling Semantic (code-parsing, smart completion) features
+;	ct one of the following:
+;	
+;	is enables the database and idle reparse engines
+;	tic-load-enable-minimum-features)
+;	
+;	is enables some tools useful for coding, such as summary mode,
+;	enu support, and the semantic navigator
+;	tic-load-enable-code-helpers)
+;	
+;	is enables even more coding tools such as intellisense mode,
+;	coration mode, and stickyfunc mode (plus regular code helpers)
+;	tic-load-enable-gaudy-code-helpers)
+;	
+;	is enables the use of Exuberant ctags if you have it installed.
+;	 you use C++ templates or boost, you should NOT enable it.
+;	antic-load-enable-all-exuberent-ctags-support)
+;	, use one of these two types of support.
+;	d support for new languages only via ctags.
+;	antic-load-enable-primary-exuberent-ctags-support)
+;	d support for using ctags as a backup parser.
+;	antic-load-enable-secondary-exuberent-ctags-support)
+;	
+;	le SRecode (Template management) minor-mode.
+;	al-srecode-minor-mode 1)
+;	
+;	ntic-idle-completions-mode 1)
+;	tic-idle-local-symbol-highlight-mode t)
+;	efault highlight-symbol-mode t)
+;	efault highlight-symbol-idel-delay 0.5)
+;	ok 'c++-mode-hook
+;		(lambda ()
+;			(local-set-key (kbd "C-c h p") 'highlight-symbol-prev)
+;			(local-set-key (kbd "C-c h n") 'highlight-symbol-next)
+;		)
+;	
+;	
+;	n (and window-system
+;	         (> emacs-major-version 21)
+;	         (require 'semantic-tag-folding nil 'noerror))
+;	(global-semantic-tag-folding-mode 1)
+;	(global-set-key (kbd "C-?") 'global-semantic-tag-folding-mode)
+;	(define-key semantic-tag-folding-mode-map
+;	  (kbd "C-c f") 'semantic-tag-folding-fold-block)
+;	(define-key semantic-tag-folding-mode-map
+;	  (kbd "C-c u") 'semantic-tag-folding-show-block)
+;	(define-key semantic-tag-folding-mode-map
+;	  (kbd "C-c -") 'semantic-tag-folding-fold-all)
+;	(define-key semantic-tag-folding-mode-map
+;	  (kbd "C-c =") 'semantic-tag-folding-show-all))
+;	
+;	hook 'c++-mode-hook
+;		(lambda ()
+;			(local-set-key (kbd "F12") 'semantic-ia-fast-jump)
+;			(local-set-key (kbd "F11") 'semantic-mrub-switch-tags)
+;		)
+;	
+;	
+;	system header path
+;	ntic-add-system-include "~/exp/include/boost_1_37" 'c++-mode)
+;	
+;	有文件
+;	peedbar-show-unknown-files t)
+;	ags排列顺序为按照出现的先后次序排列
+;	peedbar-tag-hierarchy-method '(speedbar-prefix-group-tag-hierarchy))
+;	
+;	ar-add-supported-extension ".hxx")
+;	-list 'speedbar-fetch-etags-parse-list
+;		'("\\.hxx" . speedbar-parse-c-or-c++-tag))
+;	efault speedbar-frame-parameters '((minibuffer)
+;	 . 100)
+;	r-width . 0)
+;	bar-lines . 0)
+;	bar-lines . 0)
+;	ittable . t)
+;	fringe . 0))
+;	
+
+; C-x r m 添加书签
+; C-x r b 跳到某个书签
+; M-x list-bookmarks 显示所有书签，在里面d标记删除，u取消，r重命名，x执行操作
+; 要想保存书签，可以修改.emacs文件，在里面添加如下内容
+(setq bookmark-save-flag 1)
+; 这会把书签保存到~/.emacs.bmk
+; One more thing, perhaps, if you didn't know. Once you've typed the path after C-x C-f you can then use:
+; C-x C-f M-p or M-n to navigate the history of the files you've opened up and down.
+; C-x C-f M-r to search the history by providing it with regular expression (one downside though, you won't see the match it is going to make while you type the regexp). 
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; keyword: linuxSet
+;; Linux
+(when (eq system-type 'gnu/linux)
+
+(setq load-path (cons "/media/data/linuxShare/shells/emacsEls" load-path))
+
+; (global-set-key [?\C-,] (lambda () (interactive) (term "/bin/bash"))) ; C-,
+)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; keyword: windowsSet
+;; Windows
+(when (eq system-type 'windows-nt)
+
+(defun w32-browser (doc) (w32-shell-execute 1 doc))
+(eval-after-load "dired" '(define-key dired-mode-map [f9] (lambda () (interactive) (w32-browser (dired-replace-in-string "/" "\\" (dired-get-filename))))))
+
+;; (defun w32-cmd()
+;; 	(interactive)
+;; 	()
+;; )
+
+;;; Windows explorer to open current file - Arun Ravindran
+(defun explorer ()
+  "Launch the windows explorer in the current directory and selects current file"
+	(interactive)
+	(w32-shell-execute
+	"open"
+	"explorer"
+;	(concat "/e,/select," (convert-standard-filename buffer-file-name))
+	(concat "/e,/select," (convert-standard-filename default-directory))
+))
+(defun cmd ()
+  "Launch the windows cmd in the current directory"
+	(interactive)
+	(w32-shell-execute
+	"open"
+	"cmd"
+	;;(concat "/e,/select," (convert-standard-filename buffer-file-name))
+))
+;(global-set-key (kbd "F12") 'explorer)        ; F12 - Open Explorer for the current file path
+;(define-key dired-mode-map (kbd ""))
+
+;(set-default-font "-outline-Courier New-normal-normal-normal-mono-16-*-*-*-c-*-iso8859-1")
+;; Use consolas for latin-3 charset.
+;; (when (equal system-type "windows-nt")
+;; 	(set-fontset-font "fontset-default" 'iso-8859-3 "-outline-Consolas-normal-normal-normal-mono-16-*-*-*-c-*-iso8859-1")
+;; 	;; Chinese fontset.
+;; 	(set-fontset-font "fontset-default" 'unicode "-outline-微软雅黑-normal-normal-normal-sans-16-*-*-*-p-*-iso8859-1")
+;; 	(set-fontset-font "fontset-default" 'han "-outline-微软雅黑-normal-normal-normal-sans-16-*-*-*-p-*-iso8859-1")
+;; )
+
+(global-set-key [?\C-,] 'shell) ; C-,
+;      (setq explicit-shell-file-name "e:/proGreen/shells/bash.exe")
+(setq explicit-shell-file-name "cmdproxy.exe")
+;(setq explicit-shell-file-name "powershell.exe")
+(setq shell-file-name explicit-shell-file-name)
+;      (setq process-coding-system-alist '(("e:/proGreen/shells/bash.exe" . gbk)))
+(setq process-coding-system-alist '(("cmdproxy.exe" . gbk)))
+;(global-set-key [?\C-.] 'dirs) ; C-.
+; (global-set-key [?\C-.] 'dirtrack-mode)
+(global-set-key [?\C-.] 'dirs)
+
+(require 'dirtrack)
+(defun my-dirtrack-mode ()
+  "Add to shell-mode-hook to use dirtrack mode in my shell buffers."
+;  (when (member (buffer-name) my-shells)
+    (shell-dirtrack-mode 0)
+    (dirtrack-mode 1)
+    (set-variable 'dirtrack-list '("^.*[^ ]+:\\(.*\\)>" 1 nil))
+	;)
+)
+(add-hook 'shell-mode-hook 'my-dirtrack-mode)
+
+; (add-hook 'shell-mode-hook
+; 	(progn
+; ;		(dirtrack-mode t) (shell-dirtrack-mode t)
+; 		(setq dirtrack-list (list "^\\([a-zA-Z\-]:.*\\)>" 1))
+; 	)
+; ) ; dirtrack-mode doesn't accept args and it defaults to off.
+;(cua-mode t) ; used for C-c copy in windows OS. Not so good, in my opinion.
+)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; keyword: macSet
+;; Mac os
+; 'Mac'nize.
+(when (eq system-type 'darwin)
+
+;(setq load-path (cons "/picb/home52/wangcf/shells/emacsEls" load-path))
+; (setq-default shell-cd-regexp "cd\\|cdw")
+(setq mac-option-modifier 'meta)
+(setq mac-command-key-is-meta nil)
+;;use mac-key-mode package.
+(when (fboundp 'mac-key-mode)
+;  (require 'redo) ; redo.el.
+  (require 'mac-key-mode)
+  (mac-key-mode 1))
+
+; (global-set-key [?\C-,] (lambda () (interactive) (term "/bin/bash"))) ; C-,
+
+)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; keyword: not in (mac and nw)
+; When there is no window system, which is to say, -nw is used in Mac OS, packages with unicode chars will cause emacs init failure. So if not in (mac and nw), these packages can be loaded.
+
+;(when (or (equal window-system t) (and (not (eq system-type 'darwin)) (not (string= system-name "axel-svr1.icb.ac.cn"))) )
+(when (or (not (equal window-system nil)) (string= system-name "wangcf-laptop") )
+
+; mac and nw can only dispay ansi-8-colors through putty. So don't set colors for them, set colors here instead.
+;; (set-background-color "#FFFFFF")
+
+(require 'unicad) ; unicode charset automatic detector.
+
+; Emacs speaks statistics. Emacs R, SAS mode.
+; (load "~/shells/emacsEls/ess/lisp/ess-site")
+; (require 'ess-site)
+
+;	; html-toc.
+;	(require 'html-toc) ;; nxhtml is needed.
+;	; (load "~/shells/emacsEls/nxhtml/autostart.el") ;; for html-toc.
+;	(add-hook 'html-mode-hook
+;	 (lambda ()
+;	; (define-key html-mode-map (kbd "<M-left>") 'sgml-skip-tag-backward)
+;	 (define-key html-mode-map (kbd "C-c C-/") 'html-toc)
+;	; (define-key html-mode-map (kbd "<M-right>") 'sgml-skip-tag-forward)
+;	 )
+;	) ; HTML-toc ends.
+
+)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; keyword: nonwSet
+;; When there is window system, in case -nw is not used.
+(when (not (equal window-system nil))
+	(global-linum-mode t) ; M-x linum-mode
+	(tool-bar-mode -1) ; 隐藏工具栏
+
+)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; All Set.
+;; Common set.
+;; global Set.
+;; globalSet.
+
+;; Put global settings here.
+
+(setq initial-scratch-message nil) ; Set initial scratch message to nil.
+
+(setq delete-by-moving-to-trash t) ; Making deleted files go to the trash can.
+(menu-bar-mode -1) ; 隐藏菜单栏
+
+; glsl mode.
+;(setq load-path (cons "~/.emacs.d" load-path))
+(autoload 'glsl-mode "glsl-mode" nil t)
+(add-to-list 'auto-mode-alist '("\\.vert\\'" . glsl-mode))
+(add-to-list 'auto-mode-alist '("\\.frag\\'" . glsl-mode))
+(add-to-list 'auto-mode-alist '("\\.glsl\\'" . glsl-mode))
+(add-to-list 'auto-mode-alist '("\\.cg\\'" . glsl-mode))
+
+; cmake mode.
+;(setq load-path (cons (expand-file-name "~/cmake-mode") load-path))
+(require 'cmake-mode)
+(setq auto-mode-alist
+      (append '(("CMakeLists\\.txt\\'" . cmake-mode)
+                ("\\.cmake\\'" . cmake-mode))
+              auto-mode-alist))
+
+; dos-mode, .bat
+(autoload 'dos-mode "dos" "Edit Dos scripts." t)
+(add-to-list 'auto-mode-alist '("\\.bat$" . dos-mode))
+
+(setq default-enable-multibyte-characters t)
+(setq ansi-color-for-comint-mode t)
+
+;;用meta space键来set-mark，这样，C-SPC就可以用来调用外部输入法了。M-SPC (translated from <escape> SPC) runs the command just-one-space.
+;(global-set-key (kbd "C-SPC") 'nil)
+(global-set-key (kbd "M-SPC") 'set-mark-command)
+
+; revert-buffer key.
+(global-set-key (kbd "C-;") 'revert-buffer)
+
+; replace buffer-menu by ibuffer.
+(global-set-key (kbd "C-x C-b") 'ibuffer)
+(setq ibuffer-expert t)
+(add-hook 'ibuffer-mode-hook 
+  '(lambda ()
+	(ibuffer-auto-mode 1)
+	(toggle-truncate-lines 1)))
+
+;; Title shows the file path.
+(setq frame-title-format
+'("%S" (buffer-file-name "%f"
+(dired-directory dired-directory "%b"))))
+;; Disable copy file on drag-and-drop in dired mode.
+(setq dired-dnd-protocol-alist nil)
+
+;; Dired copy file path
+;; https://lists.gnu.org/archive/html/help-gnu-emacs/2002-10/msg00556.html
+(defun dired-copy-filename ()
+  "push the path and filename of the file under the point to the kill ring"
+  (interactive)
+  (message "added %s to kill ring" (kill-new (dired-get-filename))))
+;;And this will bind it to 'c' on entering dired
+(add-hook 'dired-mode-hook
+  (lambda ()
+    (define-key dired-mode-map "c" 'dired-copy-filename)))
+;; NOTE: use 'w' (dired-copy-filename-as-kill) to copy only the filename without path, or copy several marked filenames.
+
+(set-language-environment 'utf-8)
+(fset 'yes-or-no-p 'y-or-n-p) ;make the y or n suffice for a yes or no question.
+
+; (setq x-select-enable-clipboard t) ; make emacs use the clipboard.
+; (setq interprogram-paste-function 'x-cut-buffer-or-selection-value)
+; When the -nw is used, the interprograme-paste should be off.
+(when (and (eq system-type 'darwin) (eq window-system nil) )
+	(setq x-select-enable-clipboard nil)
+	(setq interprogram-paste-function nil)
+)
+
+;(setq kill-whole-line t)
+
+;;; tabs to spaces and tab width
+(setq-default indent-tabs-mode nil)  ; Will always use spaces to indent.
+(setq indent-tabs-width 4)
+(setq default-tab-width 4)
+;(define-key text-mode-map (kbd "TAB") 'self-insert-command) ; only in text-mode, pressing TAB will not indent apropriately but insert TAB.
+;; Reset these so it indents like in VS.
+(global-set-key (kbd "TAB") 'self-insert-command) ; for Fundamental mode.
+
+(setq inhibit-splash-screen t) ; Remove splash screen
+(setq scroll-preserve-screen-position t) ;; smooth scrolling
+; Make 'C-x C-f' completion case-sensitive.
+(setq read-file-name-completion-ignore-case nil)
+(prefer-coding-system 'utf-8)
+(setq-default c-syntatic-indentation nil) ; disable indentation engine of c++ mode.
+(setq default-truncate-lines nil) ;t is true. nil is false.
+(setq visible-bell t) ;turn off annoying beep.
+(display-time-mode t)
+(show-paren-mode t)
+(column-number-mode t)
+(when (fboundp 'size-indication-mode) (size-indication-mode t)) ;indicate the buffer size, in case that you delete blocks by mistake and cannot notice the damn fatal mistake. fboundp returns ture if the function symbol size-indication-mode is defined, false if undefined. Emacs 21 and 22.
+(delete-selection-mode t) ;transient-mark-mode will be set t automatically after this.
+(transient-mark-mode t) ;highlight the active region.
+;(setq default-input-method nil) ;avoid chinese input method when init emacs.
+(font-lock-mode t) ; syntax highlighted.
+
+(setq tex-default-mode 'latex-mode)
+(setq TeX-command-list '(("TeX" "tex %t" TeX-run-interactive nil t)
+                         ("LaTeX" "%l %t" TeX-run-interactive nil t)
+                         ("PDFLatex" "pdflatex %t" TeX-run-interactive nil t)
+                         ("View" "%v " TeX-run-silent t nil)))
+
+(add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
+(add-to-list 'auto-mode-alist '("\\.txx\\'" . c++-mode))
+(add-to-list 'auto-mode-alist '("\\.cu\\'" . c++-mode))
+;;;; general editing functionality
+;(require 'complete)
+
+; ;;; copy rectangle
+; (defun kill-rectangle-save (start end)
+;   "Save the region-rectangle as the last killed one."
+;   (interactive "r")
+;   (require 'rect)           ; Make sure killed-rectangle is defvar'ed.
+;   (setq killed-rectangle (extract-rectangle start end))
+;   (message "Rectangle saved")
+; )
+
+;; text mode, autoinserts and write hooks
+(setq default-major-mode 'text-mode)
+;(setq fill-column 78)
+;(add-hook 'text-mode-hook 'turn-on-auto-fill)
+(add-hook 'write-file-hooks 'copyright-update)
+;(add-hook 'write-file-hooks 'delete-trailing-whitespace)
+(setq ispell-program-name "aspell") ; ispell program.
+(auto-image-file-mode 1) ; autoimage
+;; shell-command completion
+;(shell-command-activate-advices)
+(setq shell-command-enable-completions t)
+; (provide 'jao-edit)
+
+;(setq sentence-end "[.?!][]\"')]*\\($\\|\t\\| \\)[ \t\n]*") ;the default.
+;(setq sentence-end "[.?!\),][]\"')]*\\($\\|\t\\| \\)*[ \t\n]*\\|[。，；？！）][］”’）]*[$\t ]*[ \t\n]*")
+(setq sentence-end "[.?!,][]\"')]*\\($\\|\t\\| \\)[ \t\n]*\\|[。，；？！）][］”’）]*[$\t ]*[ \t\n]*")
+;add the \),。，；
+;Two backslashes, \\, are required before the parentheses and vertical bars.
+;The asterisk indicates repeated zero or more times.
+;$ indicates the end of the line.
+;check: http://www.rattlesnake.com/intro/sentence_002dend.html
+(setq sentence-end-double-space nil) ; SENTENCES separated by just one space
+
+;; global-set-key
+(global-set-key (kbd "C-:") 'time-stamp) ; C-: was previously undefined.
+(global-set-key [?\C-t] 'toggle-truncate-lines) ; C-t is by default transpose-chars.
+;(use-hard-newlines t) ;make RET insert hard newlines.
+(global-set-key (kbd "C-c c") 'compile)
+(global-set-key (kbd "C-c n") 'next-error)
+(global-set-key (kbd "C-c /") 'comment-or-uncomment-region)
+
+;(define-key c-mode-map (kbd "C-c c") 'compile)
+;(define-key c-mode-map (kbd "C-c n") 'next-error)
+
+;(global-set-key (quote [\C-f9]) (quote compile))
+;(global-set-key (quote [\C-f10]) (quote next-error))
+;(global-set-key (quote [f9]) (quote compile))
+;(local-set-key (quote [f9])  (quote TeX-command-master))
+
+;(global-set-key "-." 'dirs) ; C-q C-c to insert Ctrl character.
+;Strings can't contain non-ASCII control characters. Use (kbd "C-.") or
+;[?\C-.] etc instead.
+
+(defun TeX-dollar ()
+  "Insert a math mode dollar pair, or if at beginning of line, a display math pair.  If the preceding character is a backslash, however, just put in a single dollar sign."
+  (interactive)
+  (cond
+   ((equal (preceding-char) ?\\)
+    (insert-string "$"))
+   ((> (current-column) 0)
+    (progn
+      (insert-string "$$")
+      (backward-char 1)))
+   (t (progn
+	(insert-string "$$\n  \n$$\n")
+	(backward-char 4)))))
+
+
+; • § ˚ ¥ £ € © ™ ® ≥ ≤ ≈ ∞ ≠ < ∆
+; a b c d e f g h i j k l m n o p q r s t u v w x y z
+; α β γ δ ε ζ η θ ι κ λ μ ν ξ ο π ρ ς σ τ υ φ χ ψ ω
+
+(global-set-key (kbd "C-c m *")
+                   '(lambda() (interactive) (insert "•") )
+)
+(global-set-key (kbd "C-c m a")
+                   '(lambda() (interactive) (insert "α") )
+)
+(global-set-key (kbd "C-c m b")
+                   '(lambda() (interactive) (insert "β") )
+)
+(global-set-key (kbd "C-c m c")
+                   '(lambda() (interactive) (insert "σ") )
+)
+(global-set-key (kbd "C-c m d")
+                   '(lambda() (interactive) (insert "δ") )
+)
+(global-set-key (kbd "C-c m e")
+                   '(lambda() (interactive) (insert "ε") )
+)
+(global-set-key (kbd "C-c m f")
+                   '(lambda() (interactive) (insert "φ") )
+)
+(global-set-key (kbd "C-c m g")
+                   '(lambda() (interactive) (insert "γ") )
+)
+(global-set-key (kbd "C-c m h")
+                   '(lambda() (interactive) (insert "η") )
+)
+(global-set-key (kbd "C-c m i")
+                   '(lambda() (interactive) (insert "ι") )
+)
+(global-set-key (kbd "C-c m k")
+                   '(lambda() (interactive) (insert "κ") )
+)
+(global-set-key (kbd "C-c m l")
+                   '(lambda() (interactive) (insert "λ") )
+)
+(global-set-key (kbd "C-c m m")
+                   '(lambda() (interactive) (insert "μ") )
+)
+(global-set-key (kbd "C-c m n")
+                   '(lambda() (interactive) (insert "ν") )
+)
+(global-set-key (kbd "C-c m p")
+                   '(lambda() (interactive) (insert "π") )
+)
+(global-set-key (kbd "C-c m s")
+                   '(lambda() (interactive) (insert "ψ") )
+)
+(global-set-key (kbd "C-c m t")
+                   '(lambda() (interactive) (insert "τ") )
+)
+(global-set-key (kbd "C-c m x")
+                   '(lambda() (interactive) (insert "χ") )
+)
+(global-set-key (kbd "C-c m z")
+                   '(lambda() (interactive) (insert "ζ") )
+)
+
+;;;;;;;;;;;;;;;;;;;;;;;;
+;; add-hook.
+
+;	;; Matlab mode.
+;	(add-to-list 'load-path "~/shells/emacsEls/matlab-emacs")
+;	(load-library "matlab-load")
+;	(autoload 'matlab-mode "matlab" "Enter MATLAB mode." t)
+;	(setq auto-mode-alist (cons '("\\.m\\'" . matlab-mode) auto-mode-alist))
+;	(autoload 'matlab-shell "matlab" "Interactive MATLAB mode." t)
+;	;User Level customizations (You need not use them all):
+;	(setq matlab-indent-function-body t)  ; if you want function bodies indented
+;	(setq matlab-verify-on-save-flag nil) ; turn off auto-verify on save
+;	;  (defun my-matlab-mode-hook ()
+;	;    (setq fill-column 76))              ; where auto-fill should wrap
+;	;(add-hook 'matlab-mode-hook 'my-matlab-mode-hook)
+;	(defun my-matlab-shell-mode-hook ()
+;	      '())
+;	(add-hook 'matlab-shell-mode-hook 'my-matlab-shell-mode-hook)
+;	; add-hook must use lambda function.
+;	(add-hook 'matlab-mode-hook
+;		(lambda ()
+;			(auto-fill-mode 0))
+;	)
+
+;;  ;; To begin using Octave mode for all .m files you visit, add the following lines to a file loaded by Emacs at startup time, typically your ~/.emacs file:
+;;  (autoload 'octave-mode "octave-mod" nil t)
+;;  (setq auto-mode-alist
+;;        (cons '("\\.m$" . octave-mode) auto-mode-alist))
+;;  ;; Finally, to turn on the abbrevs, auto-fill and font-lock features automatically, also add the following lines to one of the Emacs startup files:
+;;  ;; Turn auto-fill-mode to 0, because it's really annoying.
+;;  (add-hook 'octave-mode-hook
+;;            (lambda ()
+;;              (abbrev-mode 1)
+;;              (auto-fill-mode 0)
+;;              (if (eq window-system 'x)
+;;                  (font-lock-mode 1))
+;;            )
+;;  )
+
+;(global-set-key (kbd "C-c m") 'TeX-dollar)
+(add-hook 'tex-mode-hook
+          '(lambda ()
+             (define-key tex-mode-map (kbd "C-c m") 'TeX-dollar)))
+
+;; turn off the electric-state.
+(add-hook 'c-mode-hook
+          '(lambda()
+			  (c-toggle-electric-state -1)))
+(add-hook 'c++-mode-hook '(lambda()
+						  (c-toggle-electric-state -1)))
+;(add-hook 'c-mode-base-map-hook (c-toggle-electric-state -1)) ;seems doesn't work.
+;c-mode-base-map because c-mode-map, c++-mode-map, and so on, inherit from it.
+
+(put 'upcase-region 'disabled nil)
+(put 'downcase-region 'disabled nil)
+
+(require 'dired-details)
+(dired-details-install)
+
+; http://ergoemacs.org/emacs/emacs_html.html
+(defun replace-html-chars-region (start end)
+  "Replace “<” to “&lt;” and other chars in HTML. This works on the current region."
+  (interactive "r")
+  (save-restriction
+    (narrow-to-region start end)
+    (goto-char (point-min))
+    (while (search-forward "&" nil t) (replace-match "&amp;" nil t))
+    (goto-char (point-min))
+    (while (search-forward "<" nil t) (replace-match "&lt;" nil t))
+    (goto-char (point-min))
+    (while (search-forward ">" nil t) (replace-match "&gt;" nil t))
+    )
+)
+
+;; Make inserting code bring no newlines.
+(add-hook 'html-mode-hook
+	(lambda()
+		(add-to-list 'html-tag-alist '("code"))
+	)
+)
+
+(when (fboundp 'electric-pair-mode)
+	(electric-pair-mode t)
+)

@@ -1,0 +1,62 @@
+#!/bin/bash
+# -*- mode: shell-script; -*-
+# Time-stamp: <2014-08-16 18:20:37 wangcf>
+# Usage: add "source /path/bashrcWcf in ~/.bashrc. Note: bashrcWcf need not to be executable."
+
+shopt -s cmdhist
+# Do not record duplicate commands, ls, bg, fg and exit.
+export HISTIGNORE="&:ls:[bf]g:exit"
+
+# shopt -u 
+
+# The $PWD must be capitalized and the $ must be escaped, otherwise the $PWD will be evaluated where the PS1 is assigned, and then the PS1 will always show the home directory.
+PS1="\h:\$PWD \u\$ " # student-mini09:~ wangcf$ command...
+export PS1
+
+# Use emacs as default Editor instead of vim.
+export EDITOR=emacs
+
+# alias open="xdg-open"
+# export open
+
+export PATH=$PATH:~/bin
+export TERM='xterm-color';
+
+# Set CVSROOT for cvs.
+# export CVSROOT=/picb/topaln/cvsroot
+# export cvsLocal=~/cvsLocal/TOPALIGN/TAVIEWER
+# alias cdcl="cd $cvsLocal" # cd cvsLocal.
+# export cdcl
+# Set svn.
+# export svnRoot="file:///picb/patterns/wangcf/svnRoot"
+
+# alias ls='ls --color'
+alias ls='ls -G'
+export ls
+alias rm='rm -ir'
+export rm
+alias rmf='rm -fr'
+export rmf
+alias cp='cp -ir'
+export cp
+alias mv='mv -i'
+export mv
+alias ll='ls -al|less'
+export ll
+alias scp='scp -r'
+export scp
+
+# export projects=/Users/Shared/wangcf/Projects
+# export projects="$HOME/patterns/svrBase/projects"
+# alias cdp="cd $projects"
+# alias cddoc="cd /Users/Shared/wangcf/docs"
+# alias cdstu="cd /Users/Shared/wangcf/study"
+# alias cdbug='cd build/Debug'
+# alias cdw='cd /Users/Shared/wangcf'
+# export cdp
+# export cddoc
+# export cdstu
+# export cddebug
+# export cdw
+
+
