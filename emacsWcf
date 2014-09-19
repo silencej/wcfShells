@@ -1,7 +1,7 @@
 ;;; -*- mode: lisp -*-
 ;;; .emacs
 ;;; author: owen263@gmail.com
-;;; Time-stamp: <2014-09-05 16:03:44 wangcf>
+;;; Time-stamp: <2014-09-17 17:12:41 wangcf>
 
 ;; Turn on debugging (comment this out for normal use)
 (setq debug-on-error t)
@@ -11,6 +11,29 @@
 
 ; C-x 3		split-window-horizontally.
 ; C-x 2		split-window-vertically.
+
+;	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;	;; Cedet here to override the default cedet version.
+;	
+;	;; Load CEDET.
+;	;; See cedet/common/cedet.info for configuration details.
+;	;; IMPORTANT: Tou must place this *before* any CEDET component (including
+;	;; EIEIO) gets activated by another package (Gnus, auth-source, ...).
+;	(load-file "~/shells/emacsEls/cedet/cedet-devel-load.el")
+;	
+;	;; Add further minor-modes to be enabled by semantic-mode.
+;	;; See doc-string of `semantic-default-submodes' for other things
+;	;; you can use here.
+;	(add-to-list 'semantic-default-submodes 'global-semantic-idle-summary-mode t)
+;	(add-to-list 'semantic-default-submodes 'global-semantic-idle-completions-mode t)
+;	(add-to-list 'semantic-default-submodes 'global-cedet-m3-minor-mode t)
+;	
+;	;; Enable Semantic
+;	(semantic-mode 1)
+;	
+;	;; Enable EDE (Project Management) features
+;	(global-ede-mode 1)
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Theme and frame size.
@@ -79,80 +102,6 @@
 ;;(add-hook 'after-init-hook '(lambda () (sr-speedbar-toggle)));;开启程序即启用
 ;;(setq-default sr-speedbar-right-side nil)
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;;;;;;;;;;;;;;;;;;
-;	 CEDET.
-;	cedet/common/cedet.info for configuration details.
-;	RTANT: For Emacs >= 23.2, you must place this *before* any
-;	T component (including EIEIO) gets activated by another 
-;	age (Gnus, auth-source, ...).
-;	to-list 'load-path "~/shells/emacsEls/cedet/common/")
-;	e 'cedet)
-;	
-;	le EDE (Project Management) features
-;	-ede-mode 1)
-;	
-;	le EDE for a pre-existing C++ project
-;	-cpp-root-project "NAME" :file "~/myproject/Makefile")
-;	
-;	ling Semantic (code-parsing, smart completion) features
-;	ct one of the following:
-;	
-;	is enables the database and idle reparse engines
-;	tic-load-enable-minimum-features)
-;	
-;	is enables some tools useful for coding, such as summary mode,
-;	enu support, and the semantic navigator
-;	tic-load-enable-code-helpers)
-;	
-;	is enables even more coding tools such as intellisense mode,
-;	coration mode, and stickyfunc mode (plus regular code helpers)
-;	tic-load-enable-gaudy-code-helpers)
-;	
-;	is enables the use of Exuberant ctags if you have it installed.
-;	 you use C++ templates or boost, you should NOT enable it.
-;	antic-load-enable-all-exuberent-ctags-support)
-;	, use one of these two types of support.
-;	d support for new languages only via ctags.
-;	antic-load-enable-primary-exuberent-ctags-support)
-;	d support for using ctags as a backup parser.
-;	antic-load-enable-secondary-exuberent-ctags-support)
-;	
-;	le SRecode (Template management) minor-mode.
-;	al-srecode-minor-mode 1)
-;	
-;	ntic-idle-completions-mode 1)
-;	tic-idle-local-symbol-highlight-mode t)
-;	efault highlight-symbol-mode t)
-;	efault highlight-symbol-idel-delay 0.5)
-;	ok 'c++-mode-hook
-;		(lambda ()
-;			(local-set-key (kbd "C-c h p") 'highlight-symbol-prev)
-;			(local-set-key (kbd "C-c h n") 'highlight-symbol-next)
-;		)
-;	
-;	
-;	n (and window-system
-;	         (> emacs-major-version 21)
-;	         (require 'semantic-tag-folding nil 'noerror))
-;	(global-semantic-tag-folding-mode 1)
-;	(global-set-key (kbd "C-?") 'global-semantic-tag-folding-mode)
-;	(define-key semantic-tag-folding-mode-map
-;	  (kbd "C-c f") 'semantic-tag-folding-fold-block)
-;	(define-key semantic-tag-folding-mode-map
-;	  (kbd "C-c u") 'semantic-tag-folding-show-block)
-;	(define-key semantic-tag-folding-mode-map
-;	  (kbd "C-c -") 'semantic-tag-folding-fold-all)
-;	(define-key semantic-tag-folding-mode-map
-;	  (kbd "C-c =") 'semantic-tag-folding-show-all))
-;	
-;	hook 'c++-mode-hook
-;		(lambda ()
-;			(local-set-key (kbd "F12") 'semantic-ia-fast-jump)
-;			(local-set-key (kbd "F11") 'semantic-mrub-switch-tags)
-;		)
-;	
-;	
 ;	system header path
 ;	ntic-add-system-include "~/exp/include/boost_1_37" 'c++-mode)
 ;	
@@ -658,3 +607,13 @@
 (when (fboundp 'electric-pair-mode)
 	(electric-pair-mode t)
 )
+
+(require 'undo-tree)
+;;
+;; "M-x byte-compile-file" from within emacs.
+;;
+;; If you want to replace the standard Emacs' undo system with the
+;; `undo-tree-mode' system in all buffers, you can enable it globally by
+;; adding:
+;;
+(global-undo-tree-mode)
