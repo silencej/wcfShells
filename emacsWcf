@@ -1,7 +1,7 @@
 ;;; -*- mode: lisp -*-
 ;;; .emacs
 ;;; author: owen263@gmail.com
-;;; Time-stamp: <2014-09-17 17:12:41 wangcf>
+;;; Time-stamp: <2014-12-03 15:30:28 wangcf>
 
 ;; Turn on debugging (comment this out for normal use)
 (setq debug-on-error t)
@@ -358,7 +358,7 @@
 ;(setq kill-whole-line t)
 
 ;;; tabs to spaces and tab width
-(setq-default indent-tabs-mode nil)  ; Will always use spaces to indent.
+(setq-default indent-tabs-mode t)  ; Will always use spaces to indent.
 (setq indent-tabs-width 4)
 (setq default-tab-width 4)
 ;(define-key text-mode-map (kbd "TAB") 'self-insert-command) ; only in text-mode, pressing TAB will not indent apropriately but insert TAB.
@@ -604,9 +604,9 @@
 	)
 )
 
-(when (fboundp 'electric-pair-mode)
-	(electric-pair-mode t)
-)
+; (when (fboundp 'electric-pair-mode)
+; 	(electric-pair-mode t)
+; )
 
 (require 'undo-tree)
 ;;
