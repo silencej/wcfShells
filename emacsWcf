@@ -1,7 +1,7 @@
 ;;; -*- mode: lisp -*-
 ;;; .emacs
 ;;; author: owen263@gmail.com
-;;; Time-stamp: <2014-12-03 15:30:28 wangcf>
+;;; Time-stamp: <2014-12-05 09:29:49 wangcf>
 
 ;; Turn on debugging (comment this out for normal use)
 (setq debug-on-error t)
@@ -127,6 +127,7 @@
 ; M-x list-bookmarks 显示所有书签，在里面d标记删除，u取消，r重命名，x执行操作
 ; 要想保存书签，可以修改.emacs文件，在里面添加如下内容
 (setq bookmark-save-flag 1)
+(setq bookmark-default-file "~/.emacs.bmk")
 ; 这会把书签保存到~/.emacs.bmk
 ; One more thing, perhaps, if you didn't know. Once you've typed the path after C-x C-f you can then use:
 ; C-x C-f M-p or M-n to navigate the history of the files you've opened up and down.
@@ -294,6 +295,12 @@
 (add-to-list 'auto-mode-alist '("\\.frag\\'" . glsl-mode))
 (add-to-list 'auto-mode-alist '("\\.glsl\\'" . glsl-mode))
 (add-to-list 'auto-mode-alist '("\\.cg\\'" . glsl-mode))
+
+; Markdown mode.
+(autoload 'markdown-mode "markdown-mode" "Major mode for editing Markdown files" t)
+(add-to-list 'auto-mode-alist '("\\.text\\'" . markdown-mode))
+(add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
+(add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
 
 ; cmake mode.
 ;(setq load-path (cons (expand-file-name "~/cmake-mode") load-path))
