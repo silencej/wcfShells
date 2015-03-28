@@ -1,7 +1,7 @@
 ;;; -*- mode: lisp -*-
 ;;; .emacs
 ;;; author: owen263@gmail.com
-;;; Time-stamp: <2014-12-05 09:29:49 wangcf>
+;;; Time-stamp: <2015-03-28 00:01:20 wangcf>
 
 ;; Turn on debugging (comment this out for normal use)
 (setq debug-on-error t)
@@ -585,6 +585,7 @@
 
 (put 'upcase-region 'disabled nil)
 (put 'downcase-region 'disabled nil)
+(electric-indent-mode -1)
 
 (require 'dired-details)
 (dired-details-install)
