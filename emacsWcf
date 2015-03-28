@@ -1,7 +1,11 @@
 ;;; -*- mode: lisp -*-
 ;;; .emacs
 ;;; author: owen263@gmail.com
+<<<<<<< HEAD
 ;;; Time-stamp: <2015-03-28 00:01:20 wangcf>
+=======
+;;; Time-stamp: <2014-12-14 14:57:05 wangcf>
+>>>>>>> origin/master
 
 ;; Turn on debugging (comment this out for normal use)
 (setq debug-on-error t)
@@ -49,13 +53,12 @@
 	; Else use Inconsolata font, which is an open-source font downloadable from internet.
 ; (when (equal system-type 'darwin)
 	(custom-set-faces
-	 ;; custom-set-faces was added by Custom.
-	 ;; If you edit it by hand, you could mess it up, so be careful.
-	 ;; Your init file should contain only one such instance.
-	 ;; If there is more than one, they won't work right.
 	 '(default ((t (:family "Inconsolata" :foundry "outline" :slant normal :weight normal :height 200 :width normal)))))
 )
-
+;(set-fontset-font nil 'utf-8 '"Microsoft Yahei")
+;(set-face-attribute 'default nil :family "Consolas")
+;(set-fontset-font "fontset-default" 'unicode
+;                  "Microsoft YaHei" nil 'prepend)
 
 (setq default-frame-alist '( 
 	(top . 0) (left . 100)
@@ -390,10 +393,11 @@
 (font-lock-mode t) ; syntax highlighted.
 
 (setq tex-default-mode 'latex-mode)
-(setq TeX-command-list '(("TeX" "tex %t" TeX-run-interactive nil t)
-                         ("LaTeX" "%l %t" TeX-run-interactive nil t)
-                         ("PDFLatex" "pdflatex %t" TeX-run-interactive nil t)
-                         ("View" "%v " TeX-run-silent t nil)))
+(setq TeX-command-list
+	'(("TeX" "tex %t" TeX-run-interactive nil t)
+	("LaTeX" "%l %t" TeX-run-interactive nil t)
+	("PDFLatex" "pdflatex %t" TeX-run-interactive nil t)
+	("View" "%v " TeX-run-silent t nil)))
 
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
 (add-to-list 'auto-mode-alist '("\\.txx\\'" . c++-mode))
@@ -617,11 +621,8 @@
 ; )
 
 (require 'undo-tree)
-;;
 ;; "M-x byte-compile-file" from within emacs.
-;;
 ;; If you want to replace the standard Emacs' undo system with the
 ;; `undo-tree-mode' system in all buffers, you can enable it globally by
 ;; adding:
-;;
 (global-undo-tree-mode)
