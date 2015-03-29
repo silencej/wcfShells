@@ -1,11 +1,7 @@
 ;;; -*- mode: lisp -*-
 ;;; .emacs
 ;;; author: owen263@gmail.com
-<<<<<<< HEAD
 ;;; Time-stamp: <2015-03-28 00:01:20 wangcf>
-=======
-;;; Time-stamp: <2014-12-14 14:57:05 wangcf>
->>>>>>> origin/master
 
 ;; Turn on debugging (comment this out for normal use)
 (setq debug-on-error t)
