@@ -1,6 +1,6 @@
 #!/bin/bash
 # -*- mode: shell-script; -*-
-# Time-stamp: <2015-05-26 18:09:41 wangcf>
+# Time-stamp: <2015-05-26 18:13:49 wangcf>
 # Usage: add "source /path/bashrcWcf in ~/.bashrc. Note: bashrcWcf need not to be executable."
 
 shopt -s cmdhist
@@ -34,7 +34,7 @@ platform='unknown'
 unamestr=`uname`
 if [[ "$unamestr" == 'Linux' ]]; then
    platform='linux'
-elif [[ "$unamestr" == 'FreeBSD' ]]; then
+elif [[ "$unamestr" == 'FreeBSD' || "$unamestr" == 'Darwin' ]]; then
    platform='freebsd'
 fi
 
