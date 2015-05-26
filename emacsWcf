@@ -1,7 +1,7 @@
 ;;; -*- mode: lisp -*-
 ;;; .emacs
 ;;; author: owen263@gmail.com
-;;; Time-stamp: <2015-03-28 00:01:20 wangcf>
+;;; Time-stamp: <2015-05-26 13:15:35 wangcf>
 
 ;; Turn on debugging (comment this out for normal use)
 (setq debug-on-error t)
@@ -81,7 +81,7 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(setq load-path (cons "~/shells/emacsEls" load-path))
+(setq load-path (cons "~/wcfShells/emacsEls" load-path))
 
 (add-hook 'before-save-hook 'time-stamp)
 
