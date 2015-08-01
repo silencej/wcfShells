@@ -1,7 +1,7 @@
 ;;; -*- mode: lisp -*-
 ;;; .emacs
 ;;; author: owen263@gmail.com
-;;; Time-stamp: <2015-06-09 14:16:43 wangcf>
+;;; Time-stamp: <2015-08-01 01:40:49 wangcf>
 
 ;; Turn on debugging (comment this out for normal use)
 (setq debug-on-error t)
@@ -49,7 +49,7 @@
 	; Else use Inconsolata font, which is an open-source font downloadable from internet.
 ; (when (equal system-type 'darwin)
 	(custom-set-faces
-	 '(default ((t (:family "Inconsolata" :foundry "outline" :slant normal :weight normal :height 200 :width normal)))))
+	 '(default ((t (:family "Inconsolata" :foundry "outline" :slant normal :weight normal :height 150 :width normal)))))
 )
 ;(set-fontset-font nil 'utf-8 '"Microsoft Yahei")
 ;(set-face-attribute 'default nil :family "Consolas")
@@ -89,11 +89,12 @@
 ;; will compile all the .el files in the directory and in all subdirectories below.
 ;; The C-u 0 part is to make it not ask about every .el file that does not have a .elc counterpart.
 
+; start package.el with emacs
 (when (>= emacs-major-version 24)
 	(require 'package)
-	(package-initialize)
 	;; melpa is emacswiki archive.
 	(add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/"))
+	(package-initialize)
 )
 
 ; (global-set-key (kbd "C-c s f") 'speedbar-get-focus)
@@ -370,7 +371,7 @@
 (setq default-tab-width 4)
 ;(define-key text-mode-map (kbd "TAB") 'self-insert-command) ; only in text-mode, pressing TAB will not indent apropriately but insert TAB.
 ;; Reset these so it indents like in VS.
-(global-set-key (kbd "TAB") 'self-insert-command) ; for Fundamental mode.
+; (global-set-key (kbd "TAB") 'self-insert-command) ; for Fundamental mode.
 
 (setq inhibit-splash-screen t) ; Remove splash screen
 (setq scroll-preserve-screen-position t) ;; smooth scrolling
@@ -625,3 +626,69 @@
 ;; `undo-tree-mode' system in all buffers, you can enable it globally by
 ;; adding:
 (global-undo-tree-mode)
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; wcf note: remember to run:
+;; M-x package-install RET PKGNames RET
+;; PKGNames inlcude: auto-complete, auto-complete-c-headers (An auto-complete source for C/C++ header files), yasnippet.
+
+; Author: Baris Yuksel (2014)
+; http://barisyuksel.com/cppmode/.emacs
+;
+; start auto-complete with emacs
+(require 'auto-complete)
+; do default config for auto-complete
+(require 'auto-complete-config)
+(ac-config-default)
+; start yasnippet with emacs
+(require 'yasnippet)
+(yas-global-mode 1)
+; let's define a function which initializes auto-complete-c-headers and gets called for c/c++ hooks
+(defun my:ac-c-header-init ()
+  (require 'auto-complete-c-headers)
+  (add-to-list 'ac-sources 'ac-source-c-headers)
+;  (add-to-list 'achead:include-directories '"/Applications/Xcode.app/Contents/Developer/usr/llvm-gcc-4.2/lib/gcc/i686-apple-darwin11/4.2.1/include")
+)
+; now let's call this function from c/c++ hooks
+(add-hook 'c++-mode-hook 'my:ac-c-header-init)
+(add-hook 'c-mode-hook 'my:ac-c-header-init)
+
+; Fix iedit bug in Mac
+; (define-key global-map (kbd "C-c ;") 'iedit-mode)
+
+; ; start flymake-google-cpplint-load
+; ; let's define a function for flymake initialization
+; (defun my:flymake-google-init () 
+;   (require 'flymake-google-cpplint)
+;   (custom-set-variables
+;    '(flymake-google-cpplint-command "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/bin/cpplint"))
+;   (flymake-google-cpplint-load)
+; )
+; (add-hook 'c-mode-hook 'my:flymake-google-init)
+; (add-hook 'c++-mode-hook 'my:flymake-google-init)
+
+; ; start google-c-style with emacs
+; (require 'google-c-style)
+; (add-hook 'c-mode-common-hook 'google-set-c-style)
+; (add-hook 'c-mode-common-hook 'google-make-newline-indent)
+
+; turn on Semantic
+(semantic-mode 1)
+; let's define a function which adds semantic as a suggestion backend to auto complete
+; and hook this function to c-mode-common-hook
+(defun my:add-semantic-to-autocomplete() 
+  (add-to-list 'ac-sources 'ac-source-semantic)
+)
+(add-hook 'c-mode-common-hook 'my:add-semantic-to-autocomplete)
+; turn on ede mode 
+(global-ede-mode 1)
+; turn on automatic reparsing of open buffers in semantic
+(global-semantic-idle-scheduler-mode 1)
+
+; ; you can use system-include-path for setting up the system header file locations.
+; ; create a project for our program.
+; (ede-cpp-root-project "my project" :file "~/demos/my_program/src/main.cpp"
+; 		      :include-path '("/../my_inc"))
+
