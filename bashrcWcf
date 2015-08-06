@@ -1,6 +1,6 @@
 #!/bin/bash
 # -*- mode: shell-script; -*-
-# Time-stamp: <2015-05-26 19:48:26 wangcf>
+# Time-stamp: <2015-08-06 16:44:24 wangcf>
 # Usage: add "source /path/bashrcWcf in ~/.bashrc. Note: bashrcWcf need not to be executable."
 
 shopt -s cmdhist
@@ -11,7 +11,8 @@ export HISTIGNORE="&:ls:[bf]g:exit"
 
 # The $PWD must be capitalized and the $ must be escaped, otherwise the $PWD will be evaluated where the PS1 is assigned, and then the PS1 will always show the home directory.
 # export PS1="\u@\h:\w " # student-mini09:~ wangcf$ command...
-export PS1="\u@\h:\w/] "
+# [] will cause problem in PS.
+export PS1="\u@\h:\w/| "
 
 # Use emacs as default Editor instead of vim.
 export EDITOR=emacs
