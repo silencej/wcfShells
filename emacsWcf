@@ -1,7 +1,7 @@
 ;;; -*- mode: lisp -*-
 ;;; .emacs
 ;;; author: owen263@gmail.com
-;;; Time-stamp: <2015-06-09 14:16:43 wangcf>
+;;; Time-stamp: <2015-07-21 13:43:00 wangcf>
 
 ;; Turn on debugging (comment this out for normal use)
 (setq debug-on-error t)
@@ -49,7 +49,7 @@
 	; Else use Inconsolata font, which is an open-source font downloadable from internet.
 ; (when (equal system-type 'darwin)
 	(custom-set-faces
-	 '(default ((t (:family "Inconsolata" :foundry "outline" :slant normal :weight normal :height 200 :width normal)))))
+	 '(default ((t (:family "Inconsolata" :foundry "outline" :slant normal :weight normal :height 100 :width normal)))))
 )
 ;(set-fontset-font nil 'utf-8 '"Microsoft Yahei")
 ;(set-face-attribute 'default nil :family "Consolas")
