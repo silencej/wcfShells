@@ -1,7 +1,15 @@
 #!/bin/bash
 # -*- mode: shell-script; -*-
-# Time-stamp: <2015-08-06 16:44:24 wangcf>
+# Time-stamp: <2015-08-07 11:36:50 wangcf>
 # Usage: add "source /path/bashrcWcf in ~/.bashrc. Note: bashrcWcf need not to be executable."
+
+# Suppress the annoying output.
+pushd () {
+    command pushd "$@" > /dev/null
+}
+popd () {
+    command popd "$@" > /dev/null
+}
 
 shopt -s cmdhist
 # Do not record duplicate commands, ls, bg, fg and exit.
