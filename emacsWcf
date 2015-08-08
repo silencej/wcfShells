@@ -83,6 +83,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (setq load-path (cons "~/wcfShells/emacsEls" load-path))
+(setq load-path (cons "~/wcfShells/emacsEls/smartparens" load-path))
 
 (add-hook 'before-save-hook 'time-stamp)
 
@@ -139,7 +140,7 @@
 ;; Linux
 (when (eq system-type 'gnu/linux)
 
-(setq load-path (cons "/media/data/linuxShare/shells/emacsEls" load-path))
+; (setq load-path (cons "/media/data/linuxShare/shells/emacsEls" load-path))
 
 ; (global-set-key [?\C-,] (lambda () (interactive) (term "/bin/bash"))) ; C-,
 )
@@ -633,6 +634,10 @@
 
 (when (>= emacs-major-version 24)
 
+(require 'sr-speedbar)
+(global-set-key (kbd "M-s s") 'sr-speedbar-toggle)
+
+
 ;; wcf note: remember to run:
 ;; M-x package-install RET PKGNames RET
 ;; PKGNames inlcude: auto-complete, auto-complete-c-headers (An auto-complete source for C/C++ header files), yasnippet.
@@ -679,22 +684,45 @@
 ; (add-hook 'c-mode-common-hook 'google-set-c-style)
 ; (add-hook 'c-mode-common-hook 'google-make-newline-indent)
 
+(require 'cc-mode)
+(require 'semantic)
 ; turn on Semantic
 (semantic-mode 1)
-; let's define a function which adds semantic as a suggestion backend to auto complete
-; and hook this function to c-mode-common-hook
-(defun my:add-semantic-to-autocomplete() 
-  (add-to-list 'ac-sources 'ac-source-semantic)
-)
-(add-hook 'c-mode-common-hook 'my:add-semantic-to-autocomplete)
-; turn on ede mode 
-(global-ede-mode 1)
+(global-semanticdb-minor-mode 1)
 ; turn on automatic reparsing of open buffers in semantic
 (global-semantic-idle-scheduler-mode 1)
+(require 'stickyfunc-enhance)
+(add-to-list 'semantic-default-submodes 'global-semantic-stickyfunc-mode)
+
+; let's define a function which adds semantic as a suggestion backend to auto complete and hook this function to c-mode-common-hook.
+(defun my:add-semantic-to-autocomplete() 
+;  (add-to-list 'ac-sources 'ac-source-semantic)
+  (add-to-list 'ac-sources 'ac-source-semantic-raw)
+)
+(add-hook 'c-mode-common-hook 'my:add-semantic-to-autocomplete)
+
+; turn on ede mode 
+(require 'ede)
+(global-ede-mode 1)
 
 ; ; you can use system-include-path for setting up the system header file locations.
 ; ; create a project for our program.
 ; (ede-cpp-root-project "my project" :file "~/demos/my_program/src/main.cpp"
 ; 		      :include-path '("/../my_inc"))
+
+(add-hook 'c-mode-common-hook 'hs-minor-mode)
+
+;; Package: smartparens
+(load-file "~/wcfShells/emacsEls/dash.el")
+; (load-file "~/wcfShells/emacsEls/smartparens/smartparens.el")
+(require 'smartparens-config)
+(show-smartparens-global-mode +1)
+(smartparens-global-mode 1)
+;; when you press RET, the curly braces automatically
+;; add another newline
+(sp-with-modes '(c-mode c++-mode)
+  (sp-local-pair "{" nil :post-handlers '(("||\n[i]" "RET")))
+  (sp-local-pair "/*" "*/" :post-handlers '((" | " "SPC")
+                                            ("* ||\n[i]" "RET"))))
 
 );; When emacs version >=24 ends.
