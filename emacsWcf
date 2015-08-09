@@ -713,11 +713,12 @@
 (add-hook 'c-mode-common-hook 'hs-minor-mode)
 
 ;; Package: smartparens
-(load-file "~/wcfShells/emacsEls/dash.el")
+; (load-file "~/wcfShells/emacsEls/dash.el")
 ; (load-file "~/wcfShells/emacsEls/smartparens/smartparens.el")
-(require 'smartparens-config)
-(show-smartparens-global-mode +1)
-(smartparens-global-mode 1)
+; (require 'smartparens-config)
+; (show-smartparens-global-mode +1)
+; (smartparens-global-mode 1)
+
 ;; when you press RET, the curly braces automatically
 ;; add another newline
 (sp-with-modes '(c-mode c++-mode)
