@@ -367,6 +367,13 @@
 
 ;(setq kill-whole-line t)
 
+;; Python
+(add-hook 'python-mode-hook
+  (lambda ()
+    (setq indent-tabs-mode t)
+    (setq python-indent 4)
+    (setq tab-width 4)))
+
 ;;; tabs to spaces and tab width
 (setq-default indent-tabs-mode t)  ; Will always use spaces to indent.
 (setq indent-tabs-width 4)
