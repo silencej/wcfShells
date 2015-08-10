@@ -367,6 +367,13 @@
 
 ;(setq kill-whole-line t)
 
+;; Python
+(add-hook 'python-mode-hook
+  (lambda ()
+    (setq indent-tabs-mode t)
+    (setq python-indent 4)
+    (setq tab-width 4)))
+
 ;;; tabs to spaces and tab width
 (setq-default indent-tabs-mode t)  ; Will always use spaces to indent.
 (setq indent-tabs-width 4)
@@ -714,16 +721,15 @@
 (add-hook 'c-mode-common-hook 'hs-minor-mode)
 
 ;; Package: smartparens
-(load-file "~/wcfShells/emacsEls/dash.el")
+; (load-file "~/wcfShells/emacsEls/dash.el")
 ; (load-file "~/wcfShells/emacsEls/smartparens/smartparens.el")
-(require 'smartparens-config)
-(show-smartparens-global-mode +1)
-(smartparens-global-mode 1)
-;; when you press RET, the curly braces automatically
-;; add another newline
-(sp-with-modes '(c-mode c++-mode)
-  (sp-local-pair "{" nil :post-handlers '(("||\n[i]" "RET")))
-  (sp-local-pair "/*" "*/" :post-handlers '((" | " "SPC")
-                                            ("* ||\n[i]" "RET"))))
+; (require 'smartparens-config)
+; (show-smartparens-global-mode +1)
+; (smartparens-global-mode 1)
+;; when you press RET, the curly braces automatically add another newline
+; (sp-with-modes '(c-mode c++-mode)
+;   (sp-local-pair "{" nil :post-handlers '(("||\n[i]" "RET")))
+;   (sp-local-pair "/*" "*/" :post-handlers '((" | " "SPC")
+;                                            ("* ||\n[i]" "RET"))))
 
 );; When emacs version >=24 ends.

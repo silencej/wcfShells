@@ -1,6 +1,6 @@
 #!/bin/bash
 # -*- mode: shell-script; -*-
-# Time-stamp: <2015-08-07 11:36:50 wangcf>
+# Time-stamp: <2015-08-10 00:29:10 wangcf>
 # Usage: add "source /path/bashrcWcf in ~/.bashrc. Note: bashrcWcf need not to be executable."
 
 # Suppress the annoying output.
@@ -29,7 +29,7 @@ export EDITOR=emacs
 # export open
 
 export PATH=$PATH:~/bin
-export TERM='xterm-color';
+# export TERM='xterm-color';
 
 # Set CVSROOT for cvs.
 # export CVSROOT=/picb/topaln/cvsroot
@@ -52,7 +52,6 @@ if [[ $platform == 'linux' ]]; then
 elif [[ $platform == 'freebsd' ]]; then
    alias ls='ls -G'
 fi
-
 # alias ls='ls --color'
 # alias ls='ls -G'
 export ls
