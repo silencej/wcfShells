@@ -323,6 +323,10 @@
 ;(global-set-key (kbd "C-SPC") 'nil)
 (global-set-key (kbd "M-SPC") 'set-mark-command)
 
+; The original C-M-% just doen't work for Escape key.
+(global-set-key (kbd "<f7>") nil)
+(global-set-key (kbd "<f7> %") 'query-replace-regexp)
+
 ; revert-buffer key.
 ; (global-set-key (kbd "C-;") 'revert-buffer)
 (global-set-key (kbd "\e\e;") 'revert-buffer)

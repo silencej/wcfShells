@@ -1,6 +1,6 @@
 #!/bin/bash
 # -*- mode: shell-script; -*-
-# Time-stamp: <2015-08-10 00:29:10 wangcf>
+# Time-stamp: <2015-08-10 10:55:31 wangcf>
 # Usage: add "source /path/bashrcWcf in ~/.bashrc. Note: bashrcWcf need not to be executable."
 
 # Suppress the annoying output.
@@ -11,6 +11,8 @@ popd () {
     command popd "$@" > /dev/null
 }
 
+# bash checks the window size after each command and, if necessary, updates the values of LINES and COLUMNS.
+shopt -s checkwinsize
 shopt -s cmdhist
 # Do not record duplicate commands, ls, bg, fg and exit.
 export HISTIGNORE="&:ls:[bf]g:exit"
