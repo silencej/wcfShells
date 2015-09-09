@@ -371,12 +371,24 @@
 
 ;(setq kill-whole-line t)
 
+(defun insertTab (&optional unindented-ok)
+  "Insert Tab."
+  (interactive "p")
+  (insert-char #x09)
+)
+
 ;; Python
 (add-hook 'python-mode-hook
   (lambda ()
     (setq indent-tabs-mode t)
     (setq python-indent 4)
-    (setq tab-width 4)))
+    (setq tab-width 4)
+	(remove-hook 'post-self-insert-hook 'python-indent-post-self-insert-function 'local)
+;	(set (make-local-variable 'indent-line-function) #'indent-relative)))
+	(set (make-local-variable 'indent-line-function) #'insertTab)))
+;; Remember to comment out the following in python.el.gz:
+;  (add-hook 'post-self-insert-hook
+;            'python-indent-post-self-insert-function nil 'local)
 
 ;;; tabs to spaces and tab width
 (setq-default indent-tabs-mode t)  ; Will always use spaces to indent.
