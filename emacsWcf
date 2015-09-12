@@ -758,4 +758,5 @@
 ;	; (define-key html-mode-map (kbd "<M-right>") 'sgml-skip-tag-forward)
 ;	 )
 ;	) ; HTML-toc ends.
+; Stop nxthml to mess with my background-color.
 (setq-default mumamo-background-colors nil)
