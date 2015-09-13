@@ -747,6 +747,13 @@
 
 );; When emacs version >=24 ends.
 
+;;; yasnippet
+(add-to-list 'load-path "~/wcfShells/emacsEls/yasnippet")
+(require 'yasnippet)
+(add-to-list 'yas-snippet-dirs "~/wcfShells/emacsEls/wcfSnippets")
+(yas-global-mode 1) ;; or M-x yas-reload-all if you've started YASnippet already.
+(setq-default yas-indent-line 'fixed) ;; The other choice is auto, which causes trouble for me.
+
 (load "~/wcfShells/emacsEls/nxhtml/autostart.el")
 ;	; html-toc.
 ;	(require 'html-toc) ;; nxhtml is needed.
@@ -760,3 +767,36 @@
 ;	) ; HTML-toc ends.
 ; Stop nxthml to mess with my background-color.
 (setq-default mumamo-background-colors nil)
+;; Workaround the annoying warnings:
+; mumamo-per-buffer-local-vars): Already 'permanent-local t: buffer-file-name
+; (when (and (equal emacs-major-version 24)
+;            (equal emacs-minor-version 2))
+(when (equal emacs-major-version 24)
+  (eval-after-load "mumamo"
+	'(setq mumamo-per-buffer-local-vars
+		   (delq 'buffer-file-name mumamo-per-buffer-local-vars))))
+; Turn off nxhtml validation.
+; http://stackoverflow.com/questions/11247666/emacs-nxhtml-mode-memory-full
+(setq rng-nxml-auto-validate-flag nil)
+(defun wcfHtmlOccur ()
+  "List all html headers in occur buffer."
+  (interactive)
+  (occur "<h[1-6]>.*</h[1-6]>")
+)
+(global-set-key (kbd "<f7>") nil)
+(global-set-key (kbd "<f7> s") nil)
+(global-set-key (kbd "<f7> s o") 'wcfHtmlOccur)
+
+(defun wcfPhpHtmlEntities ()
+  "Insert php string and convert it with html entities."
+  (interactive)
+  (insert "
+<?php
+$str=<<<EOT
+
+EOT;
+echo htmlentities($str);
+?>"
+  )
+)
+(global-set-key (kbd "<f7> p h") 'wcfPhpHtmlEntities)

@@ -1,0 +1,9 @@
+#contributor : Chaofeng Wang <owen263@gmail.com>
+#name : code and pre.
+#group : list
+# --
+<code class="$1">
+<pre>
+$0
+</pre>
+</code>
