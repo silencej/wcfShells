@@ -641,6 +641,11 @@
 ;; adding:
 (global-undo-tree-mode)
 
+; (require 'tramp)
+(setq tramp-default-user "wangcf"
+      tramp-default-host "127.0.0.1")
+;	  tramp-shell-prompt-pattern "\\([\\w/:@~]+\\|\\)*")
+; "\\(?:^\\|\\)[^]#$%>\n]*#?[]#$%>] *\\(\\[[0-9;]*[a-zA-Z] *\\)*"
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -754,7 +759,7 @@
 (yas-global-mode 1) ;; or M-x yas-reload-all if you've started YASnippet already.
 (setq-default yas-indent-line 'fixed) ;; The other choice is auto, which causes trouble for me.
 
-(load "~/wcfShells/emacsEls/nxhtml/autostart.el")
+;(load "~/wcfShells/emacsEls/nxhtml/autostart.el")
 ;	; html-toc.
 ;	(require 'html-toc) ;; nxhtml is needed.
 ;	; (load "~/shells/emacsEls/nxhtml/autostart.el") ;; for html-toc.
