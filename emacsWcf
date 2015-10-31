@@ -289,9 +289,15 @@
 
 ; Markdown mode.
 (autoload 'markdown-mode "markdown-mode" "Major mode for editing Markdown files" t)
+; (autoload 'markdown-mode "gfm-mode" "Major mode for editing Markdown files" t)
 (add-to-list 'auto-mode-alist '("\\.text\\'" . markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
+; ;; gfm-mode (Github Flavored Mode) is also provided by markdown-mode.el.
+; ;; Remember to turn off visual-line-mode which is automatically brought by gfm-mode.
+; (add-to-list 'auto-mode-alist '("\\.text\\'" . gfm-mode))
+; (add-to-list 'auto-mode-alist '("\\.markdown\\'" . gfm-mode))
+; (add-to-list 'auto-mode-alist '("\\.md\\'" . gfm-mode))
 
 ; cmake mode.
 ;(setq load-path (cons (expand-file-name "~/cmake-mode") load-path))
