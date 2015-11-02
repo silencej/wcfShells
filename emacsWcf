@@ -140,10 +140,12 @@
 ;; Linux
 (when (eq system-type 'gnu/linux)
 
-; (setq load-path (cons "/media/data/linuxShare/shells/emacsEls" load-path))
-
+(require 'multi-term)
+(setq multi-term-program "/bin/bash")
+;(setq term-unbind-key-list '())
+;(setq term-bind-key-alist '(()))
 ; (global-set-key [?\C-,] (lambda () (interactive) (term "/bin/bash"))) ; C-,
-)
+) ; Linux endos.
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; keyword: windowsSet
@@ -758,6 +760,9 @@
 (add-to-list 'yas-snippet-dirs "~/wcfShells/emacsEls/wcfSnippets")
 (yas-global-mode 1) ;; or M-x yas-reload-all if you've started YASnippet already.
 (setq-default yas-indent-line 'fixed) ;; The other choice is auto, which causes trouble for me.
+; Prevent key def loop between auto-complete.
+; (setq yas-fallback-behavior 'return-nil)
+; wcf fix: M-x yas-minor-mode. Disable it.
 
 ;(load "~/wcfShells/emacsEls/nxhtml/autostart.el")
 ;	; html-toc.
