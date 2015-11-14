@@ -135,17 +135,6 @@
 ; C-x C-f M-p or M-n to navigate the history of the files you've opened up and down.
 ; C-x C-f M-r to search the history by providing it with regular expression (one downside though, you won't see the match it is going to make while you type the regexp). 
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; keyword: linuxSet
-;; Linux
-(when (eq system-type 'gnu/linux)
-
-(require 'multi-term)
-(setq multi-term-program "/bin/bash")
-;(setq term-unbind-key-list '())
-;(setq term-bind-key-alist '(()))
-; (global-set-key [?\C-,] (lambda () (interactive) (term "/bin/bash"))) ; C-,
-) ; Linux endos.
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; keyword: windowsSet
@@ -816,3 +805,6 @@ echo htmlentities($str);
   )
 )
 (global-set-key (kbd "<f7> p h") 'wcfPhpHtmlEntities)
+
+;; Must put those OS-specific scripts in the end, because they may have some prerequisites to be loaded before.
+(load-file "emacsEls/wcfLinux")
