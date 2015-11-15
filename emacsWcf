@@ -807,4 +807,4 @@ echo htmlentities($str);
 (global-set-key (kbd "<f7> p h") 'wcfPhpHtmlEntities)
 
 ;; Must put those OS-specific scripts in the end, because they may have some prerequisites to be loaded before.
-(load-file "emacsEls/wcfLinux")
+(load-file "~/wcfShells/emacsEls/wcfLinux")
