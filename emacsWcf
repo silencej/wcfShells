@@ -624,6 +624,8 @@
 (add-hook 'html-mode-hook
 	(lambda()
 		(add-to-list 'html-tag-alist '("code"))
+		; Disable html autoview.
+		(html-autoview-mode -1)
 	)
 )
 
