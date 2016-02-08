@@ -797,8 +797,7 @@
 (defun wcfPhpHtmlEntities ()
   "Insert php string and convert it with html entities."
   (interactive)
-  (insert "
-<?php
+  (insert "<?php
 $str=<<<EOT
 
 EOT;
