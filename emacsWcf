@@ -179,6 +179,7 @@
 ;; 	(set-fontset-font "fontset-default" 'han "-outline-微软雅黑-normal-normal-normal-sans-16-*-*-*-p-*-iso8859-1")
 ;; )
 
+
 (global-set-key [?\C-,] 'shell) ; C-,
 ;      (setq explicit-shell-file-name "e:/proGreen/shells/bash.exe")
 (setq explicit-shell-file-name "cmdproxy.exe")
@@ -807,5 +808,22 @@ echo htmlentities($str);
 )
 (global-set-key (kbd "<f7> p h") 'wcfPhpHtmlEntities)
 
+(require 'frame-cmds)
+(defun wcfSmallWindow ()
+  "Change current frame to small size."
+  (interactive)
+  (setq default-frame-alist '(
+    (top . 0) (left . 100)
+    (width . 75) (height . 30)
+    )
+  )
+)
+(defun wcfMaxWindow ()
+  "Change current frame to big size."
+  (interactive)
+  (maximize-frame)
+)
+
 ;; Must put those OS-specific scripts in the end, because they may have some prerequisites to be loaded before.
 (load-file "~/wcfShells/emacsEls/wcfLinux")
+
