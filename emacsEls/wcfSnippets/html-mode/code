@@ -2,8 +2,6 @@
 #name : code and pre.
 #group : list
 # --
-<code class="$1">
-<pre>
+<pre><code class="$1">
 $0
-</pre>
-</code>
+</code></pre>

@@ -607,7 +607,7 @@
 (dired-details-install)
 
 ; http://ergoemacs.org/emacs/emacs_html.html
-(defun replace-html-chars-region (start end)
+(defun wcfReplaceHtml-chars-region (start end)
   "Replace “<” to “&lt;” and other chars in HTML. This works on the current region."
   (interactive "r")
   (save-restriction
@@ -823,6 +823,12 @@ echo htmlentities($str);
   (interactive)
   (maximize-frame)
 )
+
+;; Json
+(setq load-path (cons (expand-file-name "~/wcfShells/emacsEls/json") load-path))
+(require 'json-mode)
+(setq-default json-reformat:pretty-string? t) ; Note the last '?' in the varName.
+(setq-default json-reformat:indent-width 2)
 
 ;; Must put those OS-specific scripts in the end, because they may have some prerequisites to be loaded before.
 (load-file "~/wcfShells/emacsEls/wcfLinux")
