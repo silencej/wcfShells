@@ -679,6 +679,7 @@
   (add-to-list 'ac-sources 'ac-source-c-headers)
 ;  (add-to-list 'achead:include-directories '"/Applications/Xcode.app/Contents/Developer/usr/llvm-gcc-4.2/lib/gcc/i686-apple-darwin11/4.2.1/include")
 )
+
 ; now let's call this function from c/c++ hooks
 (add-hook 'c++-mode-hook 'my:ac-c-header-init)
 (add-hook 'c-mode-hook 'my:ac-c-header-init)
@@ -752,7 +753,7 @@
 
 );; When emacs version >=24 ends.
 
-;;; yasnippet
+; ------ yasnippet
 (add-to-list 'load-path "~/wcfShells/emacsEls/yasnippet")
 (require 'yasnippet)
 (add-to-list 'yas-snippet-dirs "~/wcfShells/emacsEls/wcfSnippets")
@@ -786,6 +787,8 @@
 ; Turn off nxhtml validation.
 ; http://stackoverflow.com/questions/11247666/emacs-nxhtml-mode-memory-full
 (setq rng-nxml-auto-validate-flag nil)
+
+; ------ wcf
 (defun wcfHtmlOccur ()
   "List all html headers in occur buffer."
   (interactive)
@@ -808,6 +811,7 @@ echo htmlentities($str);
 )
 (global-set-key (kbd "<f7> p h") 'wcfPhpHtmlEntities)
 
+; ------ window
 (require 'frame-cmds)
 (defun wcfSmallWindow ()
   "Change current frame to small size."
@@ -824,12 +828,20 @@ echo htmlentities($str);
   (maximize-frame)
 )
 
-;; Json
+; ------ Json
 (setq load-path (cons (expand-file-name "~/wcfShells/emacsEls/json") load-path))
 (require 'json-mode)
 (setq-default json-reformat:pretty-string? t) ; Note the last '?' in the varName.
 (setq-default json-reformat:indent-width 2)
 
+; ------ web-mode
+(require 'web-mode)
+
+; ------ indent-guide
+(require 'indent-guide)
+(indent-guide-global-mode)
+
+; ------ Linux.
 ;; Must put those OS-specific scripts in the end, because they may have some prerequisites to be loaded before.
 (load-file "~/wcfShells/emacsEls/wcfLinux")
 
