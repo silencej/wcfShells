@@ -49,7 +49,7 @@
 ; (when (equal system-type 'darwin)
 	(custom-set-faces
 
-	 '(default ((t (:family "Inconsolata" :foundry "outline" :slant normal :weight normal :height 100 :width normal)))))
+	 '(default ((t (:family "Inconsolata" :foundry "outline" :slant normal :weight normal :height 140 :width normal)))))
 
 )
 ;(set-fontset-font nil 'utf-8 '"Microsoft Yahei")
