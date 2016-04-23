@@ -38,7 +38,7 @@
 ;; Theme and frame size.
 
 ;; Evaluate the following when the others have errors loading and make color, font and themes absurd.
-(if (equal system-type 'windows-nt)
+; (if (equal system-type 'windows-nt)
 	(custom-set-faces
 	 ;; custom-set-faces was added by Custom.
 	 ;; If you edit it by hand, you could mess it up, so be careful.
@@ -47,11 +47,10 @@
 	 '(default ((t (:family "Consolas" :foundry "outline" :slant normal :weight normal :height 145 :width normal)))))
 	; Else use Inconsolata font, which is an open-source font downloadable from internet.
 ; (when (equal system-type 'darwin)
-	(custom-set-faces
+;	(custom-set-faces
+;	 '(default ((t (:family "Inconsolata" :foundry "outline" :slant normal :weight normal :height 140 :width normal)))))
+;)
 
-	 '(default ((t (:family "Inconsolata" :foundry "outline" :slant normal :weight normal :height 140 :width normal)))))
-
-)
 ;(set-fontset-font nil 'utf-8 '"Microsoft Yahei")
 ;(set-face-attribute 'default nil :family "Consolas")
 ;(set-fontset-font "fontset-default" 'unicode
