@@ -366,18 +366,19 @@
 ;; Python
 (add-hook 'python-mode-hook
   (lambda ()
-    (setq indent-tabs-mode t)
+    ; (setq indent-tabs-mode t)
     (setq python-indent 4)
     (setq tab-width 4)
 	(remove-hook 'post-self-insert-hook 'python-indent-post-self-insert-function 'local)
-;	(set (make-local-variable 'indent-line-function) #'indent-relative)))
-	(set (make-local-variable 'indent-line-function) #'insertTab)))
+;	(set (make-local-variable 'indent-line-function) #'indent-relative))
+;	(set (make-local-variable 'indent-line-function) #'insertTab))
 ;; Remember to comment out the following in python.el.gz:
 ;  (add-hook 'post-self-insert-hook
 ;            'python-indent-post-self-insert-function nil 'local)
+))
 
 ;;; tabs to spaces and tab width
-(setq-default indent-tabs-mode t)  ; Will always use spaces to indent.
+(setq-default indent-tabs-mode nil)
 (setq indent-tabs-width 4)
 (setq default-tab-width 4)
 ;(define-key text-mode-map (kbd "TAB") 'self-insert-command) ; only in text-mode, pressing TAB will not indent apropriately but insert TAB.
