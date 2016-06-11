@@ -269,6 +269,13 @@
   (insert-char #x09)
 )
 
+(defun wcfInsertNoteHead ()
+    "Insert notes' head."
+    (interactive)
+    (goto-char (point-min))
+    (insert "<!-- -*- mode:html; -*- -->")
+)
+
 ;; Python
 (add-hook 'python-mode-hook
   (lambda ()
