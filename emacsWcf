@@ -725,10 +725,10 @@
   "Insert php string and convert it with html entities."
   (interactive)
   (insert "<?php
-$str=<<<EOT
+$str=<<<'EOT'
 
 EOT;
-echo htmlentities($str);
+echo htmlspecialchars($str);
 ?>"
   )
 )
