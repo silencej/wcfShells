@@ -1,7 +1,4 @@
 
-(setq load-path (cons "~/wcfShells/emacsEls" load-path))
-(setq load-path (cons "~/wcfShells/emacsEls/smartparens" load-path))
-
 ; (global-set-key (kbd "C-c s f") 'speedbar-get-focus)
 ;;(require 'sr-speedbar);;这句话是必须的
 ;;(add-hook 'after-init-hook '(lambda () (sr-speedbar-toggle)));;开启程序即启用
