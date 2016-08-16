@@ -6,55 +6,12 @@
 (setq debug-on-error t)
 ;Emacs with the `--debug-init'
 
-;; Everytime using GUI options to save settings, remember to find "custome" items and delete them!
-
-; C-x 3		split-window-horizontally.
-; C-x 2		split-window-vertically.
-
-;	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;	;; Cedet here to override the default cedet version.
-;	
-;	;; Load CEDET.
-;	;; See cedet/common/cedet.info for configuration details.
-;	;; IMPORTANT: Tou must place this *before* any CEDET component (including
-;	;; EIEIO) gets activated by another package (Gnus, auth-source, ...).
-;	(load-file "~/shells/emacsEls/cedet/cedet-devel-load.el")
-;	
-;	;; Add further minor-modes to be enabled by semantic-mode.
-;	;; See doc-string of `semantic-default-submodes' for other things
-;	;; you can use here.
-;	(add-to-list 'semantic-default-submodes 'global-semantic-idle-summary-mode t)
-;	(add-to-list 'semantic-default-submodes 'global-semantic-idle-completions-mode t)
-;	(add-to-list 'semantic-default-submodes 'global-cedet-m3-minor-mode t)
-;	
-;	;; Enable Semantic
-;	(semantic-mode 1)
-;	
-;	;; Enable EDE (Project Management) features
-;	(global-ede-mode 1)
-
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Theme and frame size.
 
 ;; Evaluate the following when the others have errors loading and make color, font and themes absurd.
-; (if (equal system-type 'windows-nt)
-	(custom-set-faces
-	 ;; custom-set-faces was added by Custom.
-	 ;; If you edit it by hand, you could mess it up, so be careful.
-	 ;; Your init file should contain only one such instance.
-	 ;; If there is more than one, they won't work right.
-	 '(default ((t (:family "Consolas" :foundry "outline" :slant normal :weight normal :height 145 :width normal)))))
-	; Else use Inconsolata font, which is an open-source font downloadable from internet.
-; (when (equal system-type 'darwin)
-;	(custom-set-faces
-;	 '(default ((t (:family "Inconsolata" :foundry "outline" :slant normal :weight normal :height 140 :width normal)))))
-;)
-
-;(set-fontset-font nil 'utf-8 '"Microsoft Yahei")
-;(set-face-attribute 'default nil :family "Consolas")
-;(set-fontset-font "fontset-default" 'unicode
-;                  "Microsoft YaHei" nil 'prepend)
+(custom-set-faces
+ '(default ((t (:family "Consolas" :foundry "outline" :slant normal :weight normal :height 145 :width normal)))))
 
 (setq default-frame-alist '( 
 	(top . 0) (left . 100)
@@ -79,216 +36,39 @@
 )
 
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;-- GUI
 
-(setq load-path (cons "~/wcfShells/emacsEls" load-path))
-(setq load-path (cons "~/wcfShells/emacsEls/smartparens" load-path))
-
-(add-hook 'before-save-hook 'time-stamp)
-
-;; C-u 0 M-x byte-recompile-directory
-;; will compile all the .el files in the directory and in all subdirectories below.
-;; The C-u 0 part is to make it not ask about every .el file that does not have a .elc counterpart.
-
-; start package.el with emacs
-(when (>= emacs-major-version 24)
-	(require 'package)
-	;; melpa is emacswiki archive.
-	(add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/"))
-	(package-initialize)
-)
-
-; (global-set-key (kbd "C-c s f") 'speedbar-get-focus)
-;;(require 'sr-speedbar);;这句话是必须的
-;;(add-hook 'after-init-hook '(lambda () (sr-speedbar-toggle)));;开启程序即启用
-;;(setq-default sr-speedbar-right-side nil)
-
-;	system header path
-;	ntic-add-system-include "~/exp/include/boost_1_37" 'c++-mode)
-;	
-;	有文件
-;	peedbar-show-unknown-files t)
-;	ags排列顺序为按照出现的先后次序排列
-;	peedbar-tag-hierarchy-method '(speedbar-prefix-group-tag-hierarchy))
-;	
-;	ar-add-supported-extension ".hxx")
-;	-list 'speedbar-fetch-etags-parse-list
-;		'("\\.hxx" . speedbar-parse-c-or-c++-tag))
-;	efault speedbar-frame-parameters '((minibuffer)
-;	 . 100)
-;	r-width . 0)
-;	bar-lines . 0)
-;	bar-lines . 0)
-;	ittable . t)
-;	fringe . 0))
-;	
-
-; C-x r m 添加书签
-; C-x r b 跳到某个书签
-; M-x list-bookmarks 显示所有书签，在里面d标记删除，u取消，r重命名，x执行操作
-; 要想保存书签，可以修改.emacs文件，在里面添加如下内容
-(setq bookmark-save-flag 1)
-(setq bookmark-default-file "~/.emacs.bmk")
-; 这会把书签保存到~/.emacs.bmk
-; One more thing, perhaps, if you didn't know. Once you've typed the path after C-x C-f you can then use:
-; C-x C-f M-p or M-n to navigate the history of the files you've opened up and down.
-; C-x C-f M-r to search the history by providing it with regular expression (one downside though, you won't see the match it is going to make while you type the regexp). 
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; keyword: macSet
-;; Mac os
-; 'Mac'nize.
-(when (eq system-type 'darwin)
-
-;(setq load-path (cons "/picb/home52/wangcf/shells/emacsEls" load-path))
-; (setq-default shell-cd-regexp "cd\\|cdw")
-(setq mac-option-modifier 'meta)
-(setq mac-command-key-is-meta nil)
-;;use mac-key-mode package.
-(when (fboundp 'mac-key-mode)
-;  (require 'redo) ; redo.el.
-  (require 'mac-key-mode)
-  (mac-key-mode 1))
-
-; (global-set-key [?\C-,] (lambda () (interactive) (term "/bin/bash"))) ; C-,
-
-)
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-; keyword: not in (mac and nw)
-; When there is no window system, which is to say, -nw is used in Mac OS, packages with unicode chars will cause emacs init failure. So if not in (mac and nw), these packages can be loaded.
-
-;(when (or (equal window-system t) (and (not (eq system-type 'darwin)) (not (string= system-name "axel-svr1.icb.ac.cn"))) )
-(when (or (not (equal window-system nil)) (string= system-name "wangcf-laptop") )
-
-; mac and nw can only dispay ansi-8-colors through putty. So don't set colors for them, set colors here instead.
-;; (set-background-color "#FFFFFF")
-
-(require 'unicad) ; unicode charset automatic detector.
-
-; Emacs speaks statistics. Emacs R, SAS mode.
-; (load "~/shells/emacsEls/ess/lisp/ess-site")
-; (require 'ess-site)
-
-)
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; keyword: nonwSet
 ;; When there is window system, in case -nw is not used.
 (when (not (equal window-system nil))
 	(global-linum-mode t) ; M-x linum-mode
 	(tool-bar-mode -1) ; 隐藏工具栏
-
 )
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; All Set.
-;; Common set.
-;; global Set.
-;; globalSet.
-
-;; Put global settings here.
-
-(setq initial-scratch-message nil) ; Set initial scratch message to nil.
-
-(setq delete-by-moving-to-trash t) ; Making deleted files go to the trash can.
 (menu-bar-mode -1) ; 隐藏菜单栏
 
-; glsl mode.
-;(setq load-path (cons "~/.emacs.d" load-path))
-(autoload 'glsl-mode "glsl-mode" nil t)
-(add-to-list 'auto-mode-alist '("\\.vert\\'" . glsl-mode))
-(add-to-list 'auto-mode-alist '("\\.frag\\'" . glsl-mode))
-(add-to-list 'auto-mode-alist '("\\.glsl\\'" . glsl-mode))
-(add-to-list 'auto-mode-alist '("\\.cg\\'" . glsl-mode))
+(setq inhibit-splash-screen t) ; Remove splash screen
+(setq initial-scratch-message nil) ; Set initial scratch message to nil.
 
-; Markdown mode.
-(autoload 'markdown-mode "markdown-mode" "Major mode for editing Markdown files" t)
-; (autoload 'markdown-mode "gfm-mode" "Major mode for editing Markdown files" t)
-(add-to-list 'auto-mode-alist '("\\.text\\'" . markdown-mode))
-(add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
-(add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
-; ;; gfm-mode (Github Flavored Mode) is also provided by markdown-mode.el.
-; ;; Remember to turn off visual-line-mode which is automatically brought by gfm-mode.
-; (add-to-list 'auto-mode-alist '("\\.text\\'" . gfm-mode))
-; (add-to-list 'auto-mode-alist '("\\.markdown\\'" . gfm-mode))
-; (add-to-list 'auto-mode-alist '("\\.md\\'" . gfm-mode))
+(setq visible-bell t) ;turn off annoying beep.
+(setq scroll-preserve-screen-position t) ;; smooth scrolling
 
-; cmake mode.
-;(setq load-path (cons (expand-file-name "~/cmake-mode") load-path))
-(require 'cmake-mode)
-(setq auto-mode-alist
-      (append '(("CMakeLists\\.txt\\'" . cmake-mode)
-                ("\\.cmake\\'" . cmake-mode))
-              auto-mode-alist))
+(display-time-mode t)
+(show-paren-mode t)
+(column-number-mode t)
+(when (fboundp 'size-indication-mode) (size-indication-mode t)) ;indicate the buffer size, in case that you delete blocks by mistake and cannot notice the damn fatal mistake. fboundp returns ture if the function symbol size-indication-mode is defined, false if undefined. Emacs 21 and 22.
 
-; dos-mode, .bat
-(autoload 'dos-mode "dos" "Edit Dos scripts." t)
-(add-to-list 'auto-mode-alist '("\\.bat$" . dos-mode))
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(add-hook 'before-save-hook 'time-stamp)
+
+(setq delete-by-moving-to-trash t) ; Making deleted files go to the trash can.
 
 (setq default-enable-multibyte-characters t)
 (setq ansi-color-for-comint-mode t)
 
-;;用meta space键来set-mark，这样，C-SPC就可以用来调用外部输入法了。M-SPC (translated from <escape> SPC) runs the command just-one-space.
-;(global-set-key (kbd "C-SPC") 'nil)
-(global-set-key (kbd "M-SPC") 'set-mark-command)
-
-; The original C-M-% just doen't work for Escape key.
-(global-set-key (kbd "<f7>") nil)
-(global-set-key (kbd "<f7> %") 'query-replace-regexp)
-
-; revert-buffer key.
-; (global-set-key (kbd "C-;") 'revert-buffer)
-(global-set-key (kbd "\e\e;") 'revert-buffer)
-
-; replace buffer-menu by ibuffer.
-(global-set-key (kbd "C-x C-b") 'ibuffer)
-(setq ibuffer-expert t)
-(add-hook 'ibuffer-mode-hook 
-  '(lambda ()
-	(ibuffer-auto-mode 1)
-	(toggle-truncate-lines 1)))
-
 (set-language-environment 'utf-8)
 (fset 'yes-or-no-p 'y-or-n-p) ;make the y or n suffice for a yes or no question.
 
-; (setq x-select-enable-clipboard t) ; make emacs use the clipboard.
-; (setq interprogram-paste-function 'x-cut-buffer-or-selection-value)
-; When the -nw is used, the interprograme-paste should be off.
-(when (and (eq system-type 'darwin) (eq window-system nil) )
-	(setq x-select-enable-clipboard nil)
-	(setq interprogram-paste-function nil)
-)
-
 ;(setq kill-whole-line t)
-
-(defun insertTab (&optional unindented-ok)
-  "Insert Tab."
-  (interactive "p")
-  (insert-char #x09)
-)
-
-(defun wcfInsertNoteHead ()
-    "Insert notes' head."
-    (interactive)
-    (goto-char (point-min))
-    (insert "<!-- -*- mode:html; -*- -->")
-)
-
-;; Python
-(add-hook 'python-mode-hook
-  (lambda ()
-    ; (setq indent-tabs-mode t)
-    (setq python-indent 4)
-    (setq tab-width 4)
-	(remove-hook 'post-self-insert-hook 'python-indent-post-self-insert-function 'local)
-;	(set (make-local-variable 'indent-line-function) #'indent-relative))
-;	(set (make-local-variable 'indent-line-function) #'insertTab))
-;; Remember to comment out the following in python.el.gz:
-;  (add-hook 'post-self-insert-hook
-;            'python-indent-post-self-insert-function nil 'local)
-))
 
 ;;; tabs to spaces and tab width
 (setq-default indent-tabs-mode nil)
@@ -296,37 +76,16 @@
 (setq default-tab-width 4)
 ;(define-key text-mode-map (kbd "TAB") 'self-insert-command) ; only in text-mode, pressing TAB will not indent apropriately but insert TAB.
 ;; Reset these so it indents like in VS.
-; (global-set-key (kbd "TAB") 'self-insert-command) ; for Fundamental mode.
 
-(setq inhibit-splash-screen t) ; Remove splash screen
-(setq scroll-preserve-screen-position t) ;; smooth scrolling
 ; Make 'C-x C-f' completion case-sensitive.
 (setq read-file-name-completion-ignore-case nil)
 (prefer-coding-system 'utf-8)
-(setq-default c-syntatic-indentation nil) ; disable indentation engine of c++ mode.
 (setq default-truncate-lines nil) ;t is true. nil is false.
-(setq visible-bell t) ;turn off annoying beep.
-(display-time-mode t)
-(show-paren-mode t)
-(column-number-mode t)
-(when (fboundp 'size-indication-mode) (size-indication-mode t)) ;indicate the buffer size, in case that you delete blocks by mistake and cannot notice the damn fatal mistake. fboundp returns ture if the function symbol size-indication-mode is defined, false if undefined. Emacs 21 and 22.
+
 (delete-selection-mode t) ;transient-mark-mode will be set t automatically after this.
 (transient-mark-mode t) ;highlight the active region.
 ;(setq default-input-method nil) ;avoid chinese input method when init emacs.
 (font-lock-mode t) ; syntax highlighted.
-
-(setq tex-default-mode 'latex-mode)
-(setq TeX-command-list
-	'(("TeX" "tex %t" TeX-run-interactive nil t)
-	("LaTeX" "%l %t" TeX-run-interactive nil t)
-	("PDFLatex" "pdflatex %t" TeX-run-interactive nil t)
-	("View" "%v " TeX-run-silent t nil)))
-
-(add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
-(add-to-list 'auto-mode-alist '("\\.txx\\'" . c++-mode))
-(add-to-list 'auto-mode-alist '("\\.cu\\'" . c++-mode))
-;;;; general editing functionality
-;(require 'complete)
 
 ; ;;; copy rectangle
 ; (defun kill-rectangle-save (start end)
@@ -348,17 +107,35 @@
 ;; shell-command completion
 ;(shell-command-activate-advices)
 (setq shell-command-enable-completions t)
-; (provide 'jao-edit)
 
 ;(setq sentence-end "[.?!][]\"')]*\\($\\|\t\\| \\)[ \t\n]*") ;the default.
 ;(setq sentence-end "[.?!\),][]\"')]*\\($\\|\t\\| \\)*[ \t\n]*\\|[。，；？！）][］”’）]*[$\t ]*[ \t\n]*")
 (setq sentence-end "[.?!,][]\"')]*\\($\\|\t\\| \\)[ \t\n]*\\|[。，；？！）][］”’）]*[$\t ]*[ \t\n]*")
-;add the \),。，；
-;Two backslashes, \\, are required before the parentheses and vertical bars.
-;The asterisk indicates repeated zero or more times.
-;$ indicates the end of the line.
-;check: http://www.rattlesnake.com/intro/sentence_002dend.html
 (setq sentence-end-double-space nil) ; SENTENCES separated by just one space
+
+;(define-key c-mode-map (kbd "C-c c") 'compile)
+;(define-key c-mode-map (kbd "C-c n") 'next-error)
+
+;(global-set-key "-." 'dirs) ; C-q C-c to insert Ctrl character.
+;Strings can't contain non-ASCII control characters. Use (kbd "C-.") or
+;[?\C-.] etc instead.
+
+(put 'upcase-region 'disabled nil)
+(put 'downcase-region 'disabled nil)
+
+;; Shourcut
+
+;;用meta space键来set-mark，这样，C-SPC就可以用来调用外部输入法了。M-SPC (translated from <escape> SPC) runs the command just-one-space.
+;(global-set-key (kbd "C-SPC") 'nil)
+(global-set-key (kbd "M-SPC") 'set-mark-command)
+
+; The original C-M-% just doen't work for Escape key.
+(global-set-key (kbd "<f7>") nil)
+(global-set-key (kbd "<f7> %") 'query-replace-regexp)
+
+; revert-buffer key.
+; (global-set-key (kbd "C-;") 'revert-buffer)
+(global-set-key (kbd "\e\e;") 'revert-buffer)
 
 ;; global-set-key
 (global-set-key (kbd "C-:") 'time-stamp) ; C-: was previously undefined.
@@ -368,138 +145,65 @@
 (global-set-key (kbd "C-c n") 'next-error)
 (global-set-key (kbd "C-c /") 'comment-or-uncomment-region)
 
-;(define-key c-mode-map (kbd "C-c c") 'compile)
-;(define-key c-mode-map (kbd "C-c n") 'next-error)
+; (global-set-key (kbd "TAB") 'self-insert-command) ; for Fundamental mode.
 
-;(global-set-key (quote [\C-f9]) (quote compile))
-;(global-set-key (quote [\C-f10]) (quote next-error))
-;(global-set-key (quote [f9]) (quote compile))
-;(local-set-key (quote [f9])  (quote TeX-command-master))
+;; Buffer
 
-;(global-set-key "-." 'dirs) ; C-q C-c to insert Ctrl character.
-;Strings can't contain non-ASCII control characters. Use (kbd "C-.") or
-;[?\C-.] etc instead.
+; replace buffer-menu by ibuffer.
+(global-set-key (kbd "C-x C-b") 'ibuffer)
+(setq ibuffer-expert t)
+(add-hook 'ibuffer-mode-hook 
+  '(lambda ()
+	(ibuffer-auto-mode 1)
+	(toggle-truncate-lines 1)))
 
-(defun TeX-dollar ()
-  "Insert a math mode dollar pair, or if at beginning of line, a display math pair.  If the preceding character is a backslash, however, just put in a single dollar sign."
-  (interactive)
-  (cond
-   ((equal (preceding-char) ?\\)
-    (insert-string "$"))
-   ((> (current-column) 0)
-    (progn
-      (insert-string "$$")
-      (backward-char 1)))
-   (t (progn
-	(insert-string "$$\n  \n$$\n")
-	(backward-char 4)))))
+;; Tramp
 
+; (require 'tramp)
+(setq tramp-default-user "wangcf"
+      tramp-default-host "127.0.0.1")
+;	  tramp-shell-prompt-pattern "\\([\\w/:@~]+\\|\\)*")
+; "\\(?:^\\|\\)[^]#$%>\n]*#?[]#$%>] *\\(\\[[0-9;]*[a-zA-Z] *\\)*"
 
-; • § ˚ ¥ £ € © ™ ® ≥ ≤ ≈ ∞ ≠ < ∆
-; a b c d e f g h i j k l m n o p q r s t u v w x y z
-; α β γ δ ε ζ η θ ι κ λ μ ν ξ ο π ρ ς σ τ υ φ χ ψ ω
+;; Bookmark.
 
-(global-set-key (kbd "C-c m *")
-                   '(lambda() (interactive) (insert "•") )
-)
-(global-set-key (kbd "C-c m a")
-                   '(lambda() (interactive) (insert "α") )
-)
-(global-set-key (kbd "C-c m b")
-                   '(lambda() (interactive) (insert "β") )
-)
-(global-set-key (kbd "C-c m c")
-                   '(lambda() (interactive) (insert "σ") )
-)
-(global-set-key (kbd "C-c m d")
-                   '(lambda() (interactive) (insert "δ") )
-)
-(global-set-key (kbd "C-c m e")
-                   '(lambda() (interactive) (insert "ε") )
-)
-(global-set-key (kbd "C-c m f")
-                   '(lambda() (interactive) (insert "φ") )
-)
-(global-set-key (kbd "C-c m g")
-                   '(lambda() (interactive) (insert "γ") )
-)
-(global-set-key (kbd "C-c m h")
-                   '(lambda() (interactive) (insert "η") )
-)
-(global-set-key (kbd "C-c m i")
-                   '(lambda() (interactive) (insert "ι") )
-)
-(global-set-key (kbd "C-c m k")
-                   '(lambda() (interactive) (insert "κ") )
-)
-(global-set-key (kbd "C-c m l")
-                   '(lambda() (interactive) (insert "λ") )
-)
-(global-set-key (kbd "C-c m m")
-                   '(lambda() (interactive) (insert "μ") )
-)
-(global-set-key (kbd "C-c m n")
-                   '(lambda() (interactive) (insert "ν") )
-)
-(global-set-key (kbd "C-c m p")
-                   '(lambda() (interactive) (insert "π") )
-)
-(global-set-key (kbd "C-c m s")
-                   '(lambda() (interactive) (insert "ψ") )
-)
-(global-set-key (kbd "C-c m t")
-                   '(lambda() (interactive) (insert "τ") )
-)
-(global-set-key (kbd "C-c m x")
-                   '(lambda() (interactive) (insert "χ") )
-)
-(global-set-key (kbd "C-c m z")
-                   '(lambda() (interactive) (insert "ζ") )
+(setq bookmark-save-flag 1)
+(setq bookmark-default-file "~/.emacs.bmk")
+; 这会把书签保存到~/.emacs.bmk
+; One more thing, perhaps, if you didn't know. Once you've typed the path after C-x C-f you can then use:
+; C-x C-f M-p or M-n to navigate the history of the files you've opened up and down.
+; C-x C-f M-r to search the history by providing it with regular expression (one downside though, you won't see the match it is going to make while you type the regexp). 
+
+;; Python
+
+(defun insertTab (&optional unindented-ok)
+  "Insert Tab."
+  (interactive "p")
+  (insert-char #x09)
 )
 
-;;;;;;;;;;;;;;;;;;;;;;;;
-;; add-hook.
+;; Python
+(add-hook 'python-mode-hook
+  (lambda ()
+    ; (setq indent-tabs-mode t)
+    (setq python-indent 4)
+    (setq tab-width 4)
+	(remove-hook 'post-self-insert-hook 'python-indent-post-self-insert-function 'local)
+;	(set (make-local-variable 'indent-line-function) #'indent-relative))
+;	(set (make-local-variable 'indent-line-function) #'insertTab))
+;; Remember to comment out the following in python.el.gz:
+;  (add-hook 'post-self-insert-hook
+;            'python-indent-post-self-insert-function nil 'local)
+))
 
-;	;; Matlab mode.
-;	(add-to-list 'load-path "~/shells/emacsEls/matlab-emacs")
-;	(load-library "matlab-load")
-;	(autoload 'matlab-mode "matlab" "Enter MATLAB mode." t)
-;	(setq auto-mode-alist (cons '("\\.m\\'" . matlab-mode) auto-mode-alist))
-;	(autoload 'matlab-shell "matlab" "Interactive MATLAB mode." t)
-;	;User Level customizations (You need not use them all):
-;	(setq matlab-indent-function-body t)  ; if you want function bodies indented
-;	(setq matlab-verify-on-save-flag nil) ; turn off auto-verify on save
-;	;  (defun my-matlab-mode-hook ()
-;	;    (setq fill-column 76))              ; where auto-fill should wrap
-;	;(add-hook 'matlab-mode-hook 'my-matlab-mode-hook)
-;	(defun my-matlab-shell-mode-hook ()
-;	      '())
-;	(add-hook 'matlab-shell-mode-hook 'my-matlab-shell-mode-hook)
-;	; add-hook must use lambda function.
-;	(add-hook 'matlab-mode-hook
-;		(lambda ()
-;			(auto-fill-mode 0))
-;	)
 
-;;  ;; To begin using Octave mode for all .m files you visit, add the following lines to a file loaded by Emacs at startup time, typically your ~/.emacs file:
-;;  (autoload 'octave-mode "octave-mod" nil t)
-;;  (setq auto-mode-alist
-;;        (cons '("\\.m$" . octave-mode) auto-mode-alist))
-;;  ;; Finally, to turn on the abbrevs, auto-fill and font-lock features automatically, also add the following lines to one of the Emacs startup files:
-;;  ;; Turn auto-fill-mode to 0, because it's really annoying.
-;;  (add-hook 'octave-mode-hook
-;;            (lambda ()
-;;              (abbrev-mode 1)
-;;              (auto-fill-mode 0)
-;;              (if (eq window-system 'x)
-;;                  (font-lock-mode 1))
-;;            )
-;;  )
+;; C++
 
-;(global-set-key (kbd "C-c m") 'TeX-dollar)
-(add-hook 'tex-mode-hook
-          '(lambda ()
-             (define-key tex-mode-map (kbd "C-c m") 'TeX-dollar)))
+(setq-default c-syntatic-indentation nil) ; disable indentation engine of c++ mode.
+
+(add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
+(add-to-list 'auto-mode-alist '("\\.txx\\'" . c++-mode))
+(add-to-list 'auto-mode-alist '("\\.cu\\'" . c++-mode))
 
 ;; turn off the electric-state.
 (add-hook 'c-mode-hook
@@ -510,11 +214,16 @@
 ;(add-hook 'c-mode-base-map-hook (c-toggle-electric-state -1)) ;seems doesn't work.
 ;c-mode-base-map because c-mode-map, c++-mode-map, and so on, inherit from it.
 
-(put 'upcase-region 'disabled nil)
-(put 'downcase-region 'disabled nil)
-
 (when (fboundp 'electric-indent-mode) (electric-indent-mode -1))
 ; (electric-indent-mode -1)
+
+
+; (when (fboundp 'electric-pair-mode)
+; 	(electric-pair-mode t)
+; )
+
+
+;; HTML
 
 ; http://ergoemacs.org/emacs/emacs_html.html
 (defun wcfReplaceHtml-chars-region (start end)
@@ -553,165 +262,13 @@
 	)
 )
 
-; (when (fboundp 'electric-pair-mode)
-; 	(electric-pair-mode t)
-; )
-
-(require 'undo-tree)
-;; "M-x byte-compile-file" from within emacs.
-;; If you want to replace the standard Emacs' undo system with the
-;; `undo-tree-mode' system in all buffers, you can enable it globally by
-;; adding:
-(global-undo-tree-mode)
-
-; (require 'tramp)
-(setq tramp-default-user "wangcf"
-      tramp-default-host "127.0.0.1")
-;	  tramp-shell-prompt-pattern "\\([\\w/:@~]+\\|\\)*")
-; "\\(?:^\\|\\)[^]#$%>\n]*#?[]#$%>] *\\(\\[[0-9;]*[a-zA-Z] *\\)*"
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(when (>= emacs-major-version 24)
-
-; (require 'ede-cmake)
-
-(require 'sr-speedbar)
-(global-set-key (kbd "M-s s") 'sr-speedbar-toggle)
-
-;; wcf note: remember to run:
-;; M-x package-install RET PKGNames RET
-;; PKGNames inlcude: auto-complete, auto-complete-c-headers (An auto-complete source for C/C++ header files), yasnippet.
-
-; Author: Baris Yuksel (2014)
-; http://barisyuksel.com/cppmode/.emacs
-
-; start yasnippet with emacs
-;(require 'yasnippet)
-;(yas-global-mode 1)
-
-; start auto-complete with emacs
-(require 'auto-complete)
-; do default config for auto-complete
-(require 'auto-complete-config)
-(ac-config-default)
-
-; let's define a function which initializes auto-complete-c-headers and gets called for c/c++ hooks
-(defun my:ac-c-header-init ()
-  (require 'auto-complete-c-headers)
-  (add-to-list 'ac-sources 'ac-source-c-headers)
-;  (add-to-list 'achead:include-directories '"/Applications/Xcode.app/Contents/Developer/usr/llvm-gcc-4.2/lib/gcc/i686-apple-darwin11/4.2.1/include")
+(defun wcfInsertNoteHead ()
+    "Insert notes' head."
+    (interactive)
+    (goto-char (point-min))
+    (insert "<!-- -*- mode:html; -*- -->")
 )
 
-; now let's call this function from c/c++ hooks
-(add-hook 'c++-mode-hook 'my:ac-c-header-init)
-(add-hook 'c-mode-hook 'my:ac-c-header-init)
-
-; Fix iedit bug in Mac
-; (define-key global-map (kbd "C-c ;") 'iedit-mode)
-
-; ; start flymake-google-cpplint-load
-; ; let's define a function for flymake initialization
-; (defun my:flymake-google-init () 
-;   (require 'flymake-google-cpplint)
-;   (custom-set-variables
-;    '(flymake-google-cpplint-command "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/bin/cpplint"))
-;   (flymake-google-cpplint-load)
-; )
-; (add-hook 'c-mode-hook 'my:flymake-google-init)
-; (add-hook 'c++-mode-hook 'my:flymake-google-init)
-
-; ; start google-c-style with emacs
-; (require 'google-c-style)
-; (add-hook 'c-mode-common-hook 'google-set-c-style)
-; (add-hook 'c-mode-common-hook 'google-make-newline-indent)
-
-(require 'cc-mode)
-(setq-default c-basic-offset 4)
-(setq-default c-default-style "k&r")
-
-(add-hook 'html-mode-hook
-	(lambda ()
-	  ;; Default indentation is usually 2 spaces, changing to 4.
-	  (set (make-local-variable 'sgml-basic-offset) 4)))
-
-(require 'semantic)
-; turn on Semantic
-(semantic-mode 1)
-(global-semanticdb-minor-mode 1)
-; turn on automatic reparsing of open buffers in semantic
-(global-semantic-idle-scheduler-mode 1)
-(require 'stickyfunc-enhance)
-(add-to-list 'semantic-default-submodes 'global-semantic-stickyfunc-mode)
-
-; let's define a function which adds semantic as a suggestion backend to auto complete and hook this function to c-mode-common-hook.
-(defun my:add-semantic-to-autocomplete() 
-;  (add-to-list 'ac-sources 'ac-source-semantic)
-  (add-to-list 'ac-sources 'ac-source-semantic-raw)
-)
-(add-hook 'c-mode-common-hook 'my:add-semantic-to-autocomplete)
-
-; turn on ede mode 
-(require 'ede)
-(global-ede-mode 1)
-
-; ; you can use system-include-path for setting up the system header file locations.
-; ; create a project for our program.
-; (ede-cpp-root-project "my project" :file "~/demos/my_program/src/main.cpp"
-; 		      :include-path '("/../my_inc"))
-
-(add-hook 'c-mode-common-hook 'hs-minor-mode)
-
-;; Package: smartparens
-; (load-file "~/wcfShells/emacsEls/dash.el")
-; (load-file "~/wcfShells/emacsEls/smartparens/smartparens.el")
-; (require 'smartparens-config)
-; (show-smartparens-global-mode +1)
-; (smartparens-global-mode 1)
-;; when you press RET, the curly braces automatically add another newline
-; (sp-with-modes '(c-mode c++-mode)
-;   (sp-local-pair "{" nil :post-handlers '(("||\n[i]" "RET")))
-;   (sp-local-pair "/*" "*/" :post-handlers '((" | " "SPC")
-;                                            ("* ||\n[i]" "RET"))))
-
-);; When emacs version >=24 ends.
-
-; ------ yasnippet
-(add-to-list 'load-path "~/wcfShells/emacsEls/yasnippet")
-(require 'yasnippet)
-(add-to-list 'yas-snippet-dirs "~/wcfShells/emacsEls/wcfSnippets")
-(yas-global-mode 1) ;; or M-x yas-reload-all if you've started YASnippet already.
-(setq-default yas-indent-line 'fixed) ;; The other choice is auto, which causes trouble for me.
-; Prevent key def loop between auto-complete.
-; (setq yas-fallback-behavior 'return-nil)
-; wcf fix: M-x yas-minor-mode. Disable it.
-
-;(load "~/wcfShells/emacsEls/nxhtml/autostart.el")
-;	; html-toc.
-;	(require 'html-toc) ;; nxhtml is needed.
-;	; (load "~/shells/emacsEls/nxhtml/autostart.el") ;; for html-toc.
-;	(add-hook 'html-mode-hook
-;	 (lambda ()
-;	; (define-key html-mode-map (kbd "<M-left>") 'sgml-skip-tag-backward)
-;	 (define-key html-mode-map (kbd "C-c C-/") 'html-toc)
-;	; (define-key html-mode-map (kbd "<M-right>") 'sgml-skip-tag-forward)
-;	 )
-;	) ; HTML-toc ends.
-; Stop nxthml to mess with my background-color.
-(setq-default mumamo-background-colors nil)
-;; Workaround the annoying warnings:
-; mumamo-per-buffer-local-vars): Already 'permanent-local t: buffer-file-name
-; (when (and (equal emacs-major-version 24)
-;            (equal emacs-minor-version 2))
-(when (equal emacs-major-version 24)
-  (eval-after-load "mumamo"
-	'(setq mumamo-per-buffer-local-vars
-		   (delq 'buffer-file-name mumamo-per-buffer-local-vars))))
-; Turn off nxhtml validation.
-; http://stackoverflow.com/questions/11247666/emacs-nxhtml-mode-memory-full
-(setq rng-nxml-auto-validate-flag nil)
-
-; ------ wcf
 (defun wcfHtmlOccur ()
   "List all html headers in occur buffer."
   (interactive)
@@ -734,37 +291,18 @@ echo htmlspecialchars($str);
 )
 (global-set-key (kbd "<f7> p h") 'wcfPhpHtmlEntities)
 
-; ------ window
-(require 'frame-cmds)
-(defun wcfSmallWindow ()
-  "Change current frame to small size."
-  (interactive)
-  (setq default-frame-alist '(
-    (top . 0) (left . 100)
-    (width . 75) (height . 30)
-    )
-  )
+;; Packages.
+
+(when (>= emacs-major-version 24)
+	(require 'package)
+	;; melpa is emacswiki archive.
+	(add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/"))
+	(package-initialize)
 )
-(defun wcfMaxWindow ()
-  "Change current frame to big size."
-  (interactive)
-  (maximize-frame)
-)
+; (load-file "~/wcfShells/emacsEls/wcfModules/wcfPackages.el")
 
-; ------ Json
-(setq load-path (cons (expand-file-name "~/wcfShells/emacsEls/json") load-path))
-(require 'json-mode)
-(setq-default json-reformat:pretty-string? t) ; Note the last '?' in the varName.
-(setq-default json-reformat:indent-width 2)
+;; OS-specific.
 
-; ------ web-mode
-(require 'web-mode)
-
-; ------ indent-guide
-(require 'indent-guide)
-(indent-guide-global-mode)
-
-; ------ Linux.
 ;; Must put those OS-specific scripts in the end, because they may have some prerequisites to be loaded before.
 (load-file "~/wcfShells/emacsEls/wcfModulesLoad.el")
 

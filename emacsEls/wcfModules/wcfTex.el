@@ -1,0 +1,96 @@
+
+(setq tex-default-mode 'latex-mode)
+(setq TeX-command-list
+	'(("TeX" "tex %t" TeX-run-interactive nil t)
+	("LaTeX" "%l %t" TeX-run-interactive nil t)
+	("PDFLatex" "pdflatex %t" TeX-run-interactive nil t)
+	("View" "%v " TeX-run-silent t nil)))
+
+;(global-set-key (quote [\C-f9]) (quote compile))
+;(global-set-key (quote [\C-f10]) (quote next-error))
+;(global-set-key (quote [f9]) (quote compile))
+;(local-set-key (quote [f9])  (quote TeX-command-master))
+
+
+(defun TeX-dollar ()
+  "Insert a math mode dollar pair, or if at beginning of line, a display math pair.  If the preceding character is a backslash, however, just put in a single dollar sign."
+  (interactive)
+  (cond
+   ((equal (preceding-char) ?\\)
+    (insert-string "$"))
+   ((> (current-column) 0)
+    (progn
+      (insert-string "$$")
+      (backward-char 1)))
+   (t (progn
+	(insert-string "$$\n  \n$$\n")
+	(backward-char 4)))))
+
+
+; • § ˚ ¥ £ € © ™ ® ≥ ≤ ≈ ∞ ≠ < ∆
+; a b c d e f g h i j k l m n o p q r s t u v w x y z
+; α β γ δ ε ζ η θ ι κ λ μ ν ξ ο π ρ ς σ τ υ φ χ ψ ω
+
+(global-set-key (kbd "C-c m *")
+                   '(lambda() (interactive) (insert "•") )
+)
+(global-set-key (kbd "C-c m a")
+                   '(lambda() (interactive) (insert "α") )
+)
+(global-set-key (kbd "C-c m b")
+                   '(lambda() (interactive) (insert "β") )
+)
+(global-set-key (kbd "C-c m c")
+                   '(lambda() (interactive) (insert "σ") )
+)
+(global-set-key (kbd "C-c m d")
+                   '(lambda() (interactive) (insert "δ") )
+)
+(global-set-key (kbd "C-c m e")
+                   '(lambda() (interactive) (insert "ε") )
+)
+(global-set-key (kbd "C-c m f")
+                   '(lambda() (interactive) (insert "φ") )
+)
+(global-set-key (kbd "C-c m g")
+                   '(lambda() (interactive) (insert "γ") )
+)
+(global-set-key (kbd "C-c m h")
+                   '(lambda() (interactive) (insert "η") )
+)
+(global-set-key (kbd "C-c m i")
+                   '(lambda() (interactive) (insert "ι") )
+)
+(global-set-key (kbd "C-c m k")
+                   '(lambda() (interactive) (insert "κ") )
+)
+(global-set-key (kbd "C-c m l")
+                   '(lambda() (interactive) (insert "λ") )
+)
+(global-set-key (kbd "C-c m m")
+                   '(lambda() (interactive) (insert "μ") )
+)
+(global-set-key (kbd "C-c m n")
+                   '(lambda() (interactive) (insert "ν") )
+)
+(global-set-key (kbd "C-c m p")
+                   '(lambda() (interactive) (insert "π") )
+)
+(global-set-key (kbd "C-c m s")
+                   '(lambda() (interactive) (insert "ψ") )
+)
+(global-set-key (kbd "C-c m t")
+                   '(lambda() (interactive) (insert "τ") )
+)
+(global-set-key (kbd "C-c m x")
+                   '(lambda() (interactive) (insert "χ") )
+)
+(global-set-key (kbd "C-c m z")
+                   '(lambda() (interactive) (insert "ζ") )
+)
+
+
+;(global-set-key (kbd "C-c m") 'TeX-dollar)
+(add-hook 'tex-mode-hook
+          '(lambda ()
+             (define-key tex-mode-map (kbd "C-c m") 'TeX-dollar)))
