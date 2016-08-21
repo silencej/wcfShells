@@ -337,7 +337,7 @@
               ;; care of by the grammar.
               (t (setq result (autoit-backward-identifier)))))
       (setq autoit-last-token-start (point)))
-    (when (or (< (point) old) (not *autoit-smie-backward-bob*))
+    (when (or (< (point) old) (or (not (boundp '*autoit-smie-backward-bob*)) (not *autoit-smie-backward-bob*)))
       (setq *autoit-smie-backward-bob* (= (point) old)
             *autoit-smie-forward-eob* nil)
       result)))
