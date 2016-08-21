@@ -10,8 +10,15 @@
 ;; Theme and frame size.
 
 ;; Evaluate the following when the others have errors loading and make color, font and themes absurd.
+
 (custom-set-faces
  '(default ((t (:family "Consolas" :foundry "outline" :slant normal :weight normal :height 145 :width normal)))))
+
+;(set-fontset-font nil 'utf-8 '"Microsoft Yahei")
+;(set-face-attribute 'default nil :family "Consolas")
+;; Set fallback fontset for unicode chars.
+(set-fontset-font "fontset-default" 'unicode
+                  "Microsoft YaHei" nil 'prepend)
 
 (setq default-frame-alist '( 
 	(top . 0) (left . 100)
