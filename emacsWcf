@@ -203,7 +203,14 @@
 	(w32-shell-execute
      "open"
      "explorer"
-  ;	(concat "/e,/select," (convert-standard-filename buffer-file-name))
+  	(concat "/e,/select," (convert-standard-filename buffer-file-name))))
+
+  (defun explorerInDired ()
+    "Launch the windows explorer in the current directory and selects current file"
+	(interactive)
+	(w32-shell-execute
+     "open"
+     "explorer"
      (concat "/e,/select," (convert-standard-filename default-directory))))
 
   (defun cmd ()
