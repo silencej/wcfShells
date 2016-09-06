@@ -21,6 +21,10 @@
 ; (require 'ess-site)
 )
 
+;; Editorconfig
+(add-to-list 'load-path "~/wcfShells/emacsEls/editorconfig")
+(require 'editorconfig)
+(editorconfig-mode 1)
 
 ; glsl mode.
 ;(setq load-path (cons "~/.emacs.d" load-path))
