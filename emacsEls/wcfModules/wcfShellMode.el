@@ -43,3 +43,12 @@
 ; ) ; dirtrack-mode doesn't accept args and it defaults to off.
 ;(cua-mode t) ; used for C-c copy in windows OS. Not so good, in my opinion.
 )
+
+;; Mac OS
+(when (eq system-type 'darwin)
+  (setq explicit-shell-file-name "/bin/bash")
+  (setq shell-file-name "bash")
+  (setq explicit-bash.exe-args '("--noediting" "--login" "-i"))
+  (setenv "SHELL" shell-file-name)
+  (add-hook 'comint-output-filter-functions 'comint-strip-ctrl-m)
+)
