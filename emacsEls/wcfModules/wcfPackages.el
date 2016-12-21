@@ -133,6 +133,9 @@
 
 ; (require 'ede-cmake)
 
+(require 'helm)
+; (require 'helm-config)
+;; Add helm before sr-speedbar for depressing the warning (bytecomp): reference to free variable 'helm-alive-p'
 (require 'sr-speedbar)
 (global-set-key (kbd "M-s s") 'sr-speedbar-toggle)
 
