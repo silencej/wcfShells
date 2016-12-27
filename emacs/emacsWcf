@@ -1,0 +1,256 @@
+;;; -*- mode: lisp -*-
+;;; author: owen263@gmail.com
+
+;; This program is free software; you can redistribute it and/or
+;; modify it under the terms of the GNU General Public License as
+;; published by the Free Software Foundation; either version 2 of
+;; the License, or (at your option) any later version.
+;;
+;; This program is distributed in the hope that it will be
+;; useful, but WITHOUT ANY WARRANTY; without even the implied
+;; warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
+;; PURPOSE.  See the GNU General Public License for more details.
+
+;;
+;; Code inspired by:
+;;      http://www.cachestocaches.com/2015/8/getting-started-use-package/
+
+;;; Code:
+
+;; Turn on debugging (comment this out for normal use)
+; Emacs with the `--debug-init'
+(setq debug-on-error t)
+
+;; User Info
+(setq user-full-name "Chaofeng Wang")
+(setq user-mail-address "owen263@gmail.com")
+
+;; Install use-package if necessary
+(require 'package)
+(setq package-enable-at-startup nil)
+(setq package-archives (append package-archives
+			 '(("melpa" . "http://melpa.org/packages/")
+			 ("marmalade" . "http://marmalade-repo.org/packages/")
+			 ("gnu" . "http://elpa.gnu.org/packages/")
+			 ("elpy" . "http://jorgenschaefer.github.io/packages/"))))
+(package-initialize)
+
+;; Bootstrap `use-package'
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
+
+;; Enable use-package
+(eval-when-compile
+  (require 'use-package))
+(require 'diminish)                ;; if you use :diminish
+(require 'bind-key)                ;; if you use any :bind variant
+(setq use-package-always-ensure t) ;; Make sure every package is installed before loading.
+
+;; Set the path variable
+(use-package exec-path-from-shell
+  :ensure t
+  :config (exec-path-from-shell-initialize))
+
+;; 
+(setq load-path (cons (expand-file-name "~/wcfShells/emacs/config") load-path))
+
+;; === Face Customization ===
+(load "init-10-face")
+(load "init-10-copypaste")
+
+(load "init-20-dired")
+(load "init-20-shell")
+(load "init-41-coding-others")
+(load "init-41-coding-ruby")
+(load "init-42-coding-web")
+
+;; === Interface ===
+; (load "init-20-nav-interface")
+
+;; === Document Editing ===
+; (load "init-30-doc-gen")
+; (load "init-31-doc-org")
+
+;; === Programming & Coding Functions ===
+; (load "init-40-coding-gen")
+; (load "init-41-coding-c-cpp")
+; (load "init-42-coding-web")
+; (load "init-43-coding-matlab")
+; (load "init-44-coding-python")
+; (load "init-45-coding-ROS")
+; (load "init-46-coding-rust")
+
+; ;; === misc ===
+; (load "init-70-misc-ledger")
+
+;;; init.el ends here
+
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(flycheck-c/c++-googlelint-executable "~/.emacs.d/scripts/cpplint.py")
+ '(flycheck-google-cpplint-filter "-whitespace,+whitespace/braces")
+ '(flycheck-google-cpplint-linelength "120")
+ '(flycheck-google-cpplint-verbose "3")
+ '(package-selected-packages
+   (quote
+    (evil-magit evil scss-mode flymake-sass sass-mode less-css-mode ledger-mode flycheck-rust rust-mode yaml-mode elpy matlab-mode emmet-mode web-mode cmake-mode flycheck-google-cpplint google-c-style helm-gtags swift-mode flycheck magit helm-ag ag helm-projectile projectile yasnippet company-irony company auctex markdown-mode helm color-theme-solarized color-theme exec-path-from-shell use-package))))
+
+;; Shourcut
+
+;;用meta space键来set-mark，这样，C-SPC就可以用来调用外部输入法了。M-SPC (translated from <escape> SPC) runs the command just-one-space.
+;(global-set-key (kbd "C-SPC") 'nil)
+(global-set-key (kbd "M-SPC") 'set-mark-command)
+
+; The original C-M-% just doen't work for Escape key.
+(global-set-key (kbd "<f7>") nil)
+(global-set-key (kbd "<f7> %") 'query-replace-regexp)
+
+; revert-buffer key.
+; (global-set-key (kbd "C-;") 'revert-buffer)
+(global-set-key (kbd "\e\e;") 'revert-buffer)
+
+;; global-set-key
+(global-set-key (kbd "C-:") 'time-stamp) ; C-: was previously undefined.
+(global-set-key (kbd "C-t") 'toggle-truncate-lines) ; C-t is by default transpose-chars.
+;(use-hard-newlines t) ;make RET insert hard newlines.
+(global-set-key (kbd "C-c c") 'compile)
+(global-set-key (kbd "C-c n") 'next-error)
+(global-set-key (kbd "C-c /") 'comment-or-uncomment-region)
+
+; (global-set-key (kbd "TAB") 'self-insert-command) ; for Fundamental mode.
+
+;; Buffer
+
+; replace buffer-menu by ibuffer.
+(global-set-key (kbd "C-x C-b") 'ibuffer)
+(setq ibuffer-expert t)
+(add-hook 'ibuffer-mode-hook 
+	'(lambda ()
+	(ibuffer-auto-mode 1)
+	(toggle-truncate-lines 1)))
+
+;; Tramp
+
+; (require 'tramp)
+(setq tramp-default-user "wangcf"
+		tramp-default-host "127.0.0.1")
+;		tramp-shell-prompt-pattern "\\([\\w/:@~]+\\|\\)*")
+; "\\(?:^\\|\\)[^]#$%>\n]*#?[]#$%>] *\\(\\[[0-9;]*[a-zA-Z] *\\)*"
+
+
+;; Dired
+(when (eq system-type 'windows-nt)
+
+	;; Type F9 to open file in Dired mode.
+	(defun w32-browser (doc)
+	(w32-shell-execute 1 doc))
+	
+; (eval-after-load "dired" '(define-key dired-mode-map [f9] (lambda () (interactive) (w32-browser (dired-replace-in-string "/" "\\" (dired-get-filename))))))
+	(eval-after-load "dired"
+	'(define-key dired-mode-map [f9] 
+		(lambda ()
+			(interactive)
+			(w32-browser (dired-get-filename)))))
+
+;;; Windows explorer to open current file - Arun Ravindran
+	(defun explorer ()
+	"Launch the windows explorer in the current directory and selects current file"
+	(interactive)
+	(w32-shell-execute
+	 "open"
+	 "explorer"
+	(concat "/e,/select," (convert-standard-filename buffer-file-name))))
+
+	(defun explorerInDired ()
+	"Launch the windows explorer in the current directory and selects current file"
+	(interactive)
+	(w32-shell-execute
+	 "open"
+	 "explorer"
+	 (concat "/e,/select," (convert-standard-filename default-directory))))
+
+	(defun cmd ()
+	"Launch the windows cmd in the current directory"
+	(interactive)
+	(w32-shell-execute
+	 "open"
+	 "cmd"
+	 ;;(concat "/e,/select," (convert-standard-filename buffer-file-name))
+	 ))
+
+	;(global-set-key (kbd "F12") 'explorer)			 ; F12 - Open Explorer for the current file path
+	;(define-key dired-mode-map (kbd ""))
+
+)
+
+;; Python
+
+(defun insertTab (&optional unindented-ok)
+	"Insert Tab."
+	(interactive "p")
+	(insert-char #x09)
+)
+
+(add-hook 'python-mode-hook
+	(lambda ()
+	; (setq indent-tabs-mode t)
+	(setq python-indent 4)
+	(setq tab-width 4)
+	(remove-hook 'post-self-insert-hook 'python-indent-post-self-insert-function 'local)
+;	(set (make-local-variable 'indent-line-function) #'indent-relative))
+;	(set (make-local-variable 'indent-line-function) #'insertTab))
+;; Remember to comment out the following in python.el.gz:
+;	 (add-hook 'post-self-insert-hook
+;			 'python-indent-post-self-insert-function nil 'local)
+))
+
+
+;; C++
+
+(setq-default c-syntatic-indentation nil) ; disable indentation engine of c++ mode.
+
+(add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
+(add-to-list 'auto-mode-alist '("\\.txx\\'" . c++-mode))
+(add-to-list 'auto-mode-alist '("\\.cu\\'" . c++-mode))
+
+;; turn off the electric-state.
+(add-hook 'c-mode-hook
+			'(lambda()
+				(c-toggle-electric-state -1)))
+(add-hook 'c++-mode-hook '(lambda()
+							(c-toggle-electric-state -1)))
+;(add-hook 'c-mode-base-map-hook (c-toggle-electric-state -1)) ;seems doesn't work.
+;c-mode-base-map because c-mode-map, c++-mode-map, and so on, inherit from it.
+
+(when (fboundp 'electric-indent-mode) (electric-indent-mode -1))
+; (electric-indent-mode -1)
+
+; (when (fboundp 'electric-pair-mode)
+;	(electric-pair-mode t)
+; )
+
+
+;; Packages.
+
+; (when (>= emacs-major-version 24)
+; 	(require 'package)
+; 	;; melpa is emacswiki archive.
+; 	(add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/"))
+; 	(package-initialize)
+; )
+
+;; Use-package
+; (setq url-proxy-services
+;    '(("no_proxy" . "^\\(localhost\\|10.*\\)")
+;      ("http" . "proxy.sin.sap.corp:8080")
+;      ("https" . "proxy.sin.sap.corp:8080")))
+
+;; OS-specific.
+
+;; Must put those OS-specific scripts in the end, because they may have some prerequisites to be loaded before.
+; (load-file "~/wcfShells/emacsEls/wcfModulesLoad.el")
+

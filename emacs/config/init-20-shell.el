@@ -1,6 +1,6 @@
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; keyword: windowsSet
-;; Windows
+
+;;;;;;;;;; Windows
+
 (when (eq system-type 'windows-nt)
 
 ;(set-default-font "-outline-Courier New-normal-normal-normal-mono-16-*-*-*-c-*-iso8859-1")
@@ -11,7 +11,6 @@
 ;; 	(set-fontset-font "fontset-default" 'unicode "-outline-微软雅黑-normal-normal-normal-sans-16-*-*-*-p-*-iso8859-1")
 ;; 	(set-fontset-font "fontset-default" 'han "-outline-微软雅黑-normal-normal-normal-sans-16-*-*-*-p-*-iso8859-1")
 ;; )
-
 
 (global-set-key [?\C-,] 'shell) ; C-,
 ;      (setq explicit-shell-file-name "e:/proGreen/shells/bash.exe")
@@ -53,23 +52,26 @@
   (add-hook 'comint-output-filter-functions 'comint-strip-ctrl-m)
 )
 
-;; Multi-term
-(when (or (eq system-type 'gnu/linux) (eq system-type 'darwin))
-	(require 'multi-term)
-	(global-set-key (kbd "<f7> m") nil)
-	(global-set-key (kbd "<f7> m t") 'multi-term)
-	(setq multi-term-program "/bin/bash")
-	; Increase buffer from 2048 to larger:
-	(add-hook 'term-mode-hook
-    (lambda ()
-      (setq term-buffer-maximum-size 10000)))
-	(add-hook 'term-mode-hook (lambda()
-    (yas-minor-mode -1)))
-  ; Add shortcuts:
-  (add-hook 'term-mode-hook
-    (lambda ()
-      (add-to-list 'term-bind-key-alist '("M-[" . multi-term-prev))
-      (add-to-list 'term-bind-key-alist '("M-]" . multi-term-next))
-      (add-to-list 'term-bind-key-alist '("C-c C-k" . term-char-mode))
-      (add-to-list 'term-bind-key-alist '("C-c C-j" . term-line-mode))))
-)
+; (when (or (eq system-type 'gnu/linux) (eq system-type 'darwin))
+	(use-package multi-term
+		:ensure t
+		:bind* (
+			("<f7> m t" . multi-term))
+		:config
+		(setq multi-term-program "/bin/bash")
+		; Increase buffer from 2048 to larger:
+  	(add-hook 'term-mode-hook
+      (lambda ()
+        (setq term-buffer-maximum-size 10000)))
+		(when (fboundp 'yas-minor-mode)
+	  	(add-hook 'term-mode-hook (lambda()
+		    (yas-minor-mode -1))))
+    ; Add shortcuts:
+    (add-hook 'term-mode-hook
+      (lambda ()
+        (add-to-list 'term-bind-key-alist '("M-[" . multi-term-prev))
+        (add-to-list 'term-bind-key-alist '("M-]" . multi-term-next))
+        (add-to-list 'term-bind-key-alist '("C-c C-k" . term-char-mode))
+        (add-to-list 'term-bind-key-alist '("C-c C-j" . term-line-mode))))
+	)
+; )

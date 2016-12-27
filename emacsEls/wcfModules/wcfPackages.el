@@ -21,11 +21,6 @@
 ; (require 'ess-site)
 )
 
-;; Editorconfig
-(add-to-list 'load-path "~/wcfShells/emacsEls/editorconfig")
-(require 'editorconfig)
-(editorconfig-mode 1)
-
 ; glsl mode.
 ;(setq load-path (cons "~/.emacs.d" load-path))
 (autoload 'glsl-mode "glsl-mode" nil t)
@@ -53,11 +48,6 @@
       (append '(("CMakeLists\\.txt\\'" . cmake-mode)
                 ("\\.cmake\\'" . cmake-mode))
               auto-mode-alist))
-
-; dos-mode, .bat
-(autoload 'dos-mode "dos" "Edit Dos scripts." t)
-(add-to-list 'auto-mode-alist '("\\.bat$" . dos-mode))
-
 
 
 ;	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -122,13 +112,6 @@
 ;;            )
 ;;  )
 
-(require 'undo-tree)
-;; "M-x byte-compile-file" from within emacs.
-;; If you want to replace the standard Emacs' undo system with the
-;; `undo-tree-mode' system in all buffers, you can enable it globally by
-;; adding:
-(global-undo-tree-mode)
-
 (when (>= emacs-major-version 24)
 
 ; (require 'ede-cmake)
@@ -150,18 +133,6 @@
 ;(require 'yasnippet)
 ;(yas-global-mode 1)
 
-; start auto-complete with emacs
-(require 'auto-complete)
-; do default config for auto-complete
-(require 'auto-complete-config)
-(ac-config-default)
-
-; let's define a function which initializes auto-complete-c-headers and gets called for c/c++ hooks
-(defun my:ac-c-header-init ()
-  (require 'auto-complete-c-headers)
-  (add-to-list 'ac-sources 'ac-source-c-headers)
-;  (add-to-list 'achead:include-directories '"/Applications/Xcode.app/Contents/Developer/usr/llvm-gcc-4.2/lib/gcc/i686-apple-darwin11/4.2.1/include")
-)
 
 ; now let's call this function from c/c++ hooks
 (add-hook 'c++-mode-hook 'my:ac-c-header-init)
@@ -236,15 +207,6 @@
 
 );; When emacs version >=24 ends.
 
-; ------ yasnippet
-(add-to-list 'load-path "~/wcfShells/emacsEls/yasnippet")
-(require 'yasnippet)
-(add-to-list 'yas-snippet-dirs "~/wcfShells/emacsEls/wcfSnippets")
-(yas-global-mode 1) ;; or M-x yas-reload-all if you've started YASnippet already.
-(setq-default yas-indent-line 'fixed) ;; The other choice is auto, which causes trouble for me.
-; Prevent key def loop between auto-complete.
-; (setq yas-fallback-behavior 'return-nil)
-; wcf fix: M-x yas-minor-mode. Disable it.
 
 ;(load "~/wcfShells/emacsEls/nxhtml/autostart.el")
 ;	; html-toc.
@@ -271,11 +233,11 @@
 ; http://stackoverflow.com/questions/11247666/emacs-nxhtml-mode-memory-full
 (setq rng-nxml-auto-validate-flag nil)
 
-; ------ Json
-(setq load-path (cons (expand-file-name "~/wcfShells/emacsEls/json") load-path))
-(require 'json-mode)
-(setq-default json-reformat:pretty-string? t) ; Note the last '?' in the varName.
-(setq-default json-reformat:indent-width 2)
+; ; ------ Json
+; (setq load-path (cons (expand-file-name "~/wcfShells/emacsEls/json") load-path))
+; (require 'json-mode)
+; (setq-default json-reformat:pretty-string? t) ; Note the last '?' in the varName.
+; (setq-default json-reformat:indent-width 2)
 
 ; ------ web-mode
 (require 'web-mode)
@@ -304,6 +266,3 @@
 ;;;; general editing functionality
 ;(require 'complete)
 
-(require 'autoit-mode)
-(add-to-list 'auto-mode-alist
-    '("\\.au3" . autoit-mode))
