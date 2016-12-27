@@ -45,7 +45,7 @@
 	 '(size-indication-mode t))
 
 	(global-linum-mode t) ; M-x linum-mode
-	(tool-bar-mode -1) ; 隐藏工具栏
+	(when (boundp 'tool-bar-mode) (tool-bar-mode -1)) ; 隐藏工具栏
 )
 (menu-bar-mode -1) ; 隐藏菜单栏
 

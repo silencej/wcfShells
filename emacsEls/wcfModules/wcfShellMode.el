@@ -52,3 +52,24 @@
   (setenv "SHELL" shell-file-name)
   (add-hook 'comint-output-filter-functions 'comint-strip-ctrl-m)
 )
+
+;; Multi-term
+(when (or (eq system-type 'gnu/linux) (eq system-type 'darwin))
+	(require 'multi-term)
+	(global-set-key (kbd "<f7> m") nil)
+	(global-set-key (kbd "<f7> m t") 'multi-term)
+	(setq multi-term-program "/bin/bash")
+	; Increase buffer from 2048 to larger:
+	(add-hook 'term-mode-hook
+    (lambda ()
+      (setq term-buffer-maximum-size 10000)))
+	(add-hook 'term-mode-hook (lambda()
+    (yas-minor-mode -1)))
+  ; Add shortcuts:
+  (add-hook 'term-mode-hook
+    (lambda ()
+      (add-to-list 'term-bind-key-alist '("M-[" . multi-term-prev))
+      (add-to-list 'term-bind-key-alist '("M-]" . multi-term-next))
+      (add-to-list 'term-bind-key-alist '("C-c C-k" . term-char-mode))
+      (add-to-list 'term-bind-key-alist '("C-c C-j" . term-line-mode))))
+)
