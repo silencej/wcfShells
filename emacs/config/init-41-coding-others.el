@@ -1,8 +1,14 @@
+;;;;;;;;;;;; Common
+
 ;; Editorconfig
 ; It is not in Melpa, so we add it manually.
 (add-to-list 'load-path "~/wcfShells/emacs/packages/editorconfig")
 (require 'editorconfig)
 (editorconfig-mode 1)
+
+;; Etag
+
+
 
 
 (use-package dos
@@ -58,3 +64,5 @@
     '("\\.au3" . autoit-mode)
 	)
 )
+
+; (use-package flymake-

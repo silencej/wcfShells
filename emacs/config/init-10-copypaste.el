@@ -2,6 +2,17 @@
 (setq kill-whole-line nil)
 (delete-selection-mode t) ;transient-mark-mode will be set t automatically after this.
 
+(defun wcfCopyCurrentWord ()
+  (interactive)
+  (forward-word)
+  (let ((end (point)))
+    (backward-word)
+    (kill-ring-save (point) end)
+;    (query-replace (current-kill 0) replace-str)
+	)
+)
+(bind-key* "<f7> c w" 'wcfCopyCurrentWord)
+
 ;;;;;;;;;; Mac OS
 
 (when (eq system-type 'darwin)
