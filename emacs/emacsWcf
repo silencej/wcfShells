@@ -115,7 +115,7 @@
 
 ;; global-set-key
 (global-set-key (kbd "C-:") 'time-stamp) ; C-: was previously undefined.
-(global-set-key (kbd "C-t") 'toggle-truncate-lines) ; C-t is by default transpose-chars.
+(bind-key* "<f7> t t" 'toggle-truncate-lines) ; C-t is by default transpose-chars.
 ;(use-hard-newlines t) ;make RET insert hard newlines.
 (global-set-key (kbd "C-c c") 'compile)
 (global-set-key (kbd "C-c n") 'next-error)
