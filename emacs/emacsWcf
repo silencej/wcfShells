@@ -15,6 +15,9 @@
 ;; Code inspired by:
 ;;      http://www.cachestocaches.com/2015/8/getting-started-use-package/
 
+;;; Note for windows:
+;; package-check-signature is a variable defined in ‘package.el’. Its value is ‘allow-unsigned’. Original value was nil. Non-nil means to check package signatures when installing.
+
 ;;; Code:
 
 ;; Turn on debugging (comment this out for normal use)

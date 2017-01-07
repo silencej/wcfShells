@@ -52,7 +52,7 @@
   (add-hook 'comint-output-filter-functions 'comint-strip-ctrl-m)
 )
 
-; (when (or (eq system-type 'gnu/linux) (eq system-type 'darwin))
+(when (or (eq system-type 'gnu/linux) (eq system-type 'darwin))
 	(use-package multi-term
 		:ensure t
 		:bind* (
@@ -74,4 +74,4 @@
         (add-to-list 'term-bind-key-alist '("C-c C-k" . term-char-mode))
         (add-to-list 'term-bind-key-alist '("C-c C-j" . term-line-mode))))
 	)
-; )
+)
