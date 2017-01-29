@@ -51,9 +51,12 @@
 (setq use-package-always-ensure t) ;; Make sure every package is installed before loading.
 
 ;; Set the path variable
-(use-package exec-path-from-shell
+(when (memq window-system '(mac ns))
+  (use-package exec-path-from-shell
   :ensure t
-  :config (exec-path-from-shell-initialize))
+  :config (exec-path-from-shell-initialize)
+  )
+)
 
 ;; 
 (setq load-path (cons (expand-file-name "~/wcfShells/emacs/config") load-path))

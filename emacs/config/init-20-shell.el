@@ -1,6 +1,18 @@
 
 ;;;;;;;;;; Windows
 
+(defun kill-shell-buffer(process event) 
+  "The one actually kill shell buffer when exit. "
+  (kill-buffer (process-buffer process)) 
+) 
+
+(defun kill-shell-buffer-after-exit() 
+  "kill shell buffer when exit."
+  (set-process-sentinel (get-buffer-process (current-buffer)) 
+                #'kill-shell-buffer) 
+)
+(add-hook 'shell-mode-hook 'kill-shell-buffer-after-exit t)
+
 (when (eq system-type 'windows-nt)
 
 ;(set-default-font "-outline-Courier New-normal-normal-normal-mono-16-*-*-*-c-*-iso8859-1")

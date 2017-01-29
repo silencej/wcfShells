@@ -29,7 +29,7 @@
     (custom-set-faces '(default ((t (:inherit nil :stipple nil :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 120 :width normal :foundry "nil" :family "Monaco"))))))
   ;; Evaluate the following when the others have errors loading and make color, font and themes absurd.
   (t
-    '(default ((t (:family "Consolas" :foundry "outline" :slant normal :weight normal :height 145 :width normal)))))
+    (custom-set-faces '(default ((t (:family "Consolas" :foundry "outline" :slant normal :weight normal :height 130 :width normal))))))
   ; (custom-set-faces '(default ((t (:inherit nil :stipple nil :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 110 :width normal :foundry "nil" :family "Ubuntu Mono"))))))
 )
 
