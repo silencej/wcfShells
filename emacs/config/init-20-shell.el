@@ -1,15 +1,43 @@
 
+;;;;;;;;;; Shell mode
+
+;;;;; Automatic rename shell buffer
+; http://ann77.emacser.com/Emacs/EmacsShellAutoDirName.html
+
+(make-variable-buffer-local 'wcy-shell-mode-directory-changed)
+(setq wcy-shell-mode-directory-changed t)
+
+(defun wcf-rename-shell-buffer-when-start()
+  (let ((bn (concat "*sh:" (file-name-base (directory-file-name default-directory)) "*")))
+    (if (not (string= (buffer-name) bn))
+        (rename-buffer bn t))))
+
+(defun wcy-shell-mode-auto-rename-buffer-output-filter (text)
+  (if (and (eq major-mode 'shell-mode)
+           wcy-shell-mode-directory-changed)
+      (progn
+				(wcf-rename-shell-buffer-when-start)
+        (setq wcy-shell-mode-directory-changed nil))))
+
+(defun wcy-shell-mode-auto-rename-buffer-input-filter (text)
+  (if (eq major-mode 'shell-mode)
+      (if ( string-match "^[ \t]*cd *" text)
+          (setq wcy-shell-mode-directory-changed t))))
+(add-hook 'comint-output-filter-functions 'wcy-shell-mode-auto-rename-buffer-output-filter)
+(add-hook 'comint-input-filter-functions 'wcy-shell-mode-auto-rename-buffer-input-filter )
+(add-hook 'shell-mode-hook 'wcf-rename-shell-buffer-when-start)
+
 ;;;;;;;;;; Windows
 
-(defun kill-shell-buffer(process event) 
+; http://www.ibm.com/developerworks/cn/linux/l-cn-emacs-shell2/index.html
+(defun kill-shell-buffer(process event)
   "The one actually kill shell buffer when exit. "
-  (kill-buffer (process-buffer process)) 
-) 
-
-(defun kill-shell-buffer-after-exit() 
+  (kill-buffer (process-buffer process))
+)
+(defun kill-shell-buffer-after-exit()
   "kill shell buffer when exit."
-  (set-process-sentinel (get-buffer-process (current-buffer)) 
-                #'kill-shell-buffer) 
+  (set-process-sentinel (get-buffer-process (current-buffer))
+                #'kill-shell-buffer)
 )
 (add-hook 'shell-mode-hook 'kill-shell-buffer-after-exit t)
 
