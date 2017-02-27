@@ -9,7 +9,10 @@
 ;; Etag
 
 
-
+(use-package yaml-mode
+	:config
+	(add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
+)
 
 (use-package dos
 	:config
@@ -63,6 +66,9 @@
 	(add-to-list 'auto-mode-alist
     '("\\.au3" . autoit-mode)
 	)
+)
+
+(use-package dockerfile-mode
 )
 
 ; (use-package flymake-
