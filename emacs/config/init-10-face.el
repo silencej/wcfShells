@@ -103,8 +103,8 @@
 
 ;; Tabs to spaces and tab width
 (setq-default indent-tabs-mode nil)
-(setq indent-tabs-width 4)
-(setq default-tab-width 4)
+(setq indent-tabs-width 2)
+(setq default-tab-width 2)
 ;(define-key text-mode-map (kbd "TAB") 'self-insert-command) ; only in text-mode, pressing TAB will not indent apropriately but insert TAB.
 ;; Reset these so it indents like in VS.
 
