@@ -71,4 +71,7 @@
 (use-package dockerfile-mode
 )
 
+(use-package nginx-mode
+)
+
 ; (use-package flymake-
