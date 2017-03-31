@@ -10,6 +10,7 @@
 (use-package ruby-mode
 	:config
 	(setq ruby-deep-indent-paren nil)
+	(setq ruby-insert-encoding-magic-comment nil)
 	(add-hook 'ruby-mode-hook 'robe-mode)
 	:bind* (
 		("C-c r r" . inf-ruby) ; Ruby shell.

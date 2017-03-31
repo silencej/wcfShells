@@ -80,6 +80,8 @@
 	)
 )
 
+(use-package coffee-mode)
+
 ;; Make inserting code bring no newlines.
 (add-hook 'html-mode-hook
 	(lambda()
