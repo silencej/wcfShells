@@ -33,6 +33,8 @@
   ; (custom-set-faces '(default ((t (:inherit nil :stipple nil :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 110 :width normal :foundry "nil" :family "Ubuntu Mono"))))))
 )
 
+(global-linum-mode t) ; M-x linum-mode
+
 ;;-- GUI
 ;; When there is window system, in case -nw is not used.
 (when window-system
@@ -56,15 +58,16 @@
 	 ; '(ede-project-directories (quote ("e:/itk" "e:/itk/Modules")))
 	 '(size-indication-mode t))
 
-	(global-linum-mode t) ; M-x linum-mode
-    (scroll-bar-mode -1)
+  (scroll-bar-mode -1)
 
-    ;(set-fontset-font nil 'utf-8 '"Microsoft Yahei")
-    ;(set-face-attribute 'default nil :family "Consolas")
-    ;; Set fallback fontset for unicode chars.
-    (set-fontset-font "fontset-default" 'unicode
-    					"Microsoft YaHei" nil 'prepend)
-
+  ;(set-fontset-font nil 'utf-8 '"Microsoft Yahei")
+  ;(set-face-attribute 'default nil :family "Consolas")
+  ;; Set fallback fontset for unicode chars.
+  (set-fontset-font "fontset-default" 'unicode
+  					"Microsoft YaHei" nil 'prepend)
+)
+(unless window-system
+	(setq-default linum-format "%3d\u2502")
 )
 
 
