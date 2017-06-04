@@ -97,6 +97,7 @@
 ;; Encoding.
 (setq default-enable-multibyte-characters t)
 (setq ansi-color-for-comint-mode t)
+; We recommend to use utf-8 always, for cross-platform. If you use gb18030 on Windows but utf-8 elsewhere, the file will have problems for git- file change only because of encoding switching.
 (set-language-environment 'utf-8)
 (prefer-coding-system 'utf-8)
 
