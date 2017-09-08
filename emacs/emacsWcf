@@ -138,6 +138,7 @@
 	'(lambda ()
 	(ibuffer-auto-mode 1)
 	(toggle-truncate-lines 1)))
+(use-package ibuffer-vc)
 
 ;; Tramp
 
