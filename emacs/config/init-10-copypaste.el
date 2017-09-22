@@ -1,6 +1,6 @@
 ;; Copy and Paste.
 (setq kill-whole-line nil)
-(delete-selection-mode t) ;transient-mark-mode will be set t automatically after this.
+(delete-selection-mode t) ;transient-mark-mode will be set t automatically after this. In this mode, pasting replaces the selected text with the contents of the clipboard.
 
 (defun wcfCopyCurrentWord ()
   (interactive)
