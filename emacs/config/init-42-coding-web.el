@@ -88,6 +88,7 @@
 		(add-to-list 'html-tag-alist '("code"))
 		; Disable html autoview.
 		(html-autoview-mode -1)
+		(setq-local skeleton-end-newline nil) ; Suppress html-mode auto-indent. By setting this, for example "C-c RET" before some text will never append a newline and reindent.
 	)
 )
 
