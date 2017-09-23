@@ -92,6 +92,7 @@
 		(setq-local skeleton-end-newline nil) ; Suppress html-mode auto-indent. By setting this, for example "C-c RET" before some text will never append a newline and reindent.
 	)
 )
+(customize-set-variable 'sgml-basic-offset 0)
 
 (defun wcfInsertNoteHead ()
 	"Insert notes' head."
