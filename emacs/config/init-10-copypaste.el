@@ -48,3 +48,7 @@
   (setq interprogram-cut-function 'paste-to-osx)
   (setq interprogram-paste-function 'copy-from-osx)
   )
+
+(use-package xclip
+  :config (xclip-mode 1)
+)
