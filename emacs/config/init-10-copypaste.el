@@ -49,6 +49,8 @@
   (setq interprogram-paste-function 'copy-from-osx)
   )
 
-(use-package xclip
-  :config (xclip-mode 1)
+(when (eq system-type 'gnu/linux)
+ (use-package xclip
+   :config (xclip-mode 1)
+ )
 )
