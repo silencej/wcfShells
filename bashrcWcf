@@ -1,6 +1,6 @@
 #!/bin/bash
 # -*- mode: shell-script; -*-
-# Time-stamp: <2017-05-12 17:08:25 i337146>
+# Time-stamp: <2017-11-02 11:03:03 i337146>
 # Usage: add "source /path/bashrcWcf in ~/.bashrc. Note: bashrcWcf need not to be executable."
 
 # Suppress the annoying output.
@@ -10,6 +10,16 @@ pushd () {
 popd () {
     command popd "$@" > /dev/null
 }
+
+w_run() {
+  number=$1
+  shift
+  for i in `seq $number`; do
+    $@
+  done
+}
+export w_run
+# Example: w_run 4 echo "Hehe"
 
 # bash checks the window size after each command and, if necessary, updates the values of LINES and COLUMNS.
 shopt -s checkwinsize
