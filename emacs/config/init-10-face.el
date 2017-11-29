@@ -135,7 +135,7 @@
 (setq default-major-mode 'gfm-mode)
 
 ;(add-hook 'text-mode-hook 'turn-on-auto-fill)
-(add-hook 'write-file-hooks 'copyright-update)
+; (add-hook 'write-file-hooks 'copyright-update)
 ;(add-hook 'write-file-hooks 'delete-trailing-whitespace)
 (setq ispell-program-name "aspell") ; ispell program.
 (auto-image-file-mode 1) ; autoimage

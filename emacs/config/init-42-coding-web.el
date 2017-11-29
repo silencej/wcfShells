@@ -39,6 +39,13 @@
 
   )
 
+(use-package jsx-mode
+  :defer t
+  :init
+  (add-to-list 'auto-mode-alist '("\\.jsx\\'" . jsx-mode))
+  (autoload 'jsx-mode "jsx-mode" "JSX mode" t)
+)
+
 ;; == emmet ==
 (use-package emmet-mode
   :ensure t
