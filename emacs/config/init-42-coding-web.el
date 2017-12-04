@@ -40,6 +40,7 @@
   )
 
 (add-to-list 'auto-mode-alist '("\\.es6\\'" . javascript-mode))
+(add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-mode))
 
 (use-package jsx-mode
   :defer t
