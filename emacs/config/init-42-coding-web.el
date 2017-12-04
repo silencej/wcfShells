@@ -39,6 +39,8 @@
 
   )
 
+(add-to-list 'auto-mode-alist '("\\.es6\\'" . javascript-mode))
+
 (use-package jsx-mode
   :defer t
   :init
