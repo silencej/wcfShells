@@ -1,5 +1,10 @@
 (require 'use-package)
 
+(use-package ir-black-theme
+  :config
+  (load-theme 'ir-black)
+)
+
 (use-package markdown-mode
     :demand)
 
