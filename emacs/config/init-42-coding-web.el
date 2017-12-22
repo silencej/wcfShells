@@ -114,7 +114,8 @@
 (defun wcfHtmlOccur ()
 	"List all html headers in occur buffer."
 	(interactive)
-	(occur "\\(<h[1-6]>.*</h[1-6]>\\)\\|\\(<article>\\)")
+	; (occur "\\(<h[1-6]>.*</h[1-6]>\\)\\|\\(<article>\\)")
+	(occur "^<h[1-6]>.*</h[1-6]>\\|^<article>")
 )
 ; (global-set-key (kbd "<f7>") nil)
 ; (global-set-key (kbd "<f7> s") nil)
