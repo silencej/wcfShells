@@ -15,8 +15,8 @@
 )
 
 (use-package dos
-	:config
-	(add-to-list 'auto-mode-alist '("\\.bat$" . dos-mode))
+;	:config
+;	(add-to-list 'auto-mode-alist '("\\.bat$" . dos-mode))
 	)
 ; (autoload 'dos-mode "dos" "Edit Dos scripts." t)
 ; (add-to-list 'auto-mode-alist '("\\.bat$" . dos-mode))

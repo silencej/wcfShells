@@ -28,9 +28,6 @@
 (setq user-full-name "Chaofeng Wang")
 (setq user-mail-address "owen263@gmail.com")
 
-; For dos.el.
-(setq load-path (cons "~/wcfShells/emacsEls" load-path))
-
 ;; Install use-package if necessary
 (require 'package)
 (setq package-enable-at-startup nil)
