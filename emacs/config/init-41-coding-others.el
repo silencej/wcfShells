@@ -76,4 +76,3 @@
 (use-package nginx-mode
 )
 
-; (use-package flymake-

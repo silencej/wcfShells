@@ -93,5 +93,9 @@
 	 ("C-l" . helm-execute-persistent-action)
 	 ("C-h" . helm-find-files-up-one-level)
 	 )
-  )
+)
 
+(use-package bookmark+
+	:ensure t
+;	:load-path "~/wcfShells/emacs/packages/bookmark-plus"
+)

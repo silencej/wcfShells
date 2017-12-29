@@ -2,7 +2,7 @@
 
 (use-package ir-black-theme
   :config
-  (load-theme 'ir-black)
+  (load-theme 'ir-black t)
 )
 
 (use-package markdown-mode
