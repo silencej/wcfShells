@@ -97,5 +97,8 @@
 
 (use-package bookmark+
 	:ensure t
+  :config
+	(setq bookmark-version-control t)
+	(setq delete-old-versions t)
 ;	:load-path "~/wcfShells/emacs/packages/bookmark-plus"
 )
