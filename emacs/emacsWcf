@@ -270,5 +270,6 @@
 
 ; (global-)auto-reverse-mode will not revert a file if the corresponding buffer is modified, so there should be no risk of you losing unsaved changes.
 ; https://stackoverflow.com/questions/1480572/how-to-have-emacs-auto-refresh-all-buffers-when-files-have-changed-on-disk
-(global-auto-revert-mode t)
+;; wcfNote: disable this since it has serious problem with git rebase. https://stackoverflow.com/questions/6512086/emacs-reverts-buffer-to-weird-previous-state-with-git-rebase
+(global-auto-revert-mode nil)
 
