@@ -37,6 +37,13 @@
 			 ("gnu" . "http://elpa.gnu.org/packages/")
 			 ("elpy" . "http://jorgenschaefer.github.io/packages/"))))
 (package-initialize)
+;; quelpa
+; If the following fails, run "M-x package-install RET quelpa RET" instead.
+(unless (require 'quelpa nil t)
+  ;  (quelpa-self-upgrade)
+  (with-temp-buffer
+    (url-insert-file-contents "https://framagit.org/steckerhalter/quelpa/raw/master/bootstrap.el")
+    (eval-buffer)))
 
 ;; Bootstrap `use-package'
 (unless (package-installed-p 'use-package)
@@ -271,5 +278,5 @@
 ; (global-)auto-reverse-mode will not revert a file if the corresponding buffer is modified, so there should be no risk of you losing unsaved changes.
 ; https://stackoverflow.com/questions/1480572/how-to-have-emacs-auto-refresh-all-buffers-when-files-have-changed-on-disk
 ;; wcfNote: disable this since it has serious problem with git rebase. https://stackoverflow.com/questions/6512086/emacs-reverts-buffer-to-weird-previous-state-with-git-rebase
-(global-auto-revert-mode nil)
+; (global-auto-revert-mode nil)
 

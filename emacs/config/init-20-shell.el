@@ -112,6 +112,34 @@
         (add-to-list 'term-bind-key-alist '("M-[" . multi-term-prev))
         (add-to-list 'term-bind-key-alist '("M-]" . multi-term-next))
         (add-to-list 'term-bind-key-alist '("C-c C-k" . term-char-mode))
-        (add-to-list 'term-bind-key-alist '("C-c C-j" . term-line-mode))))
+        (add-to-list 'term-bind-key-alist '("C-c C-j" . term-line-mode))
+				(wcf-rename-shell-buffer-when-start)
+			)
+		)
 	)
+
+	(use-package kill-term-buffer-on-exit-mode
+		:load-path "~/wcfShells/emacs/packages"
+		:ensure nil
+	)
+	; May need: quelpa-use-package
+  ; (use-package kill-term-buffer-on-exit-mode
+  ;   :quelpa (kill-term-buffer-on-exit-mode
+  ;            :fetcher github
+  ;            :repo "EricCrosson/kill-term-buffer-on-exit-mode"))
+
+	; TODO: not work on Mac: no /proc/ directory.
+	; https://stackoverflow.com/questions/13655782/update-multi-term-buffer-name-based-on-pwd
+	; Credits: Albert K
+  (defadvice term-send-input (after update-current-directory)
+    (run-at-time "0.1 sec" nil 'term-update-dir)
+    )
+  (ad-activate 'term-send-input)
+  (defadvice term-send-return (after update-current-directory)
+    (run-at-time "0.1 sec" nil 'term-update-dir)
+    )
+  (ad-activate 'term-send-return)
+  (defun term-update-dir ()
+		(wcf-rename-shell-buffer-when-start)
+  )
 )
