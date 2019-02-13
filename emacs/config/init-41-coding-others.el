@@ -21,17 +21,18 @@
 ;	(add-to-list 'auto-mode-alist '("\\.bat$" . dos-mode))
 ; (autoload 'dos-mode "dos" "Edit Dos scripts." t)
 
-(use-package auto-complete
-; (use-package auto-complete-config
-	:config
-	(ac-config-default)
-  ; let's define a function which initializes auto-complete-c-headers and gets called for c/c++ hooks
-  (defun my:ac-c-header-init ()
-    (require 'auto-complete-c-headers)
-    (add-to-list 'ac-sources 'ac-source-c-headers)
-  ;  (add-to-list 'achead:include-directories '"/Applications/Xcode.app/Contents/Developer/usr/llvm-gcc-4.2/lib/gcc/i686-apple-darwin11/4.2.1/include")
-  )
-)
+; (use-package auto-complete
+; ; (use-package auto-complete-config
+; 	:config
+; 	(ac-config-default)
+;   ; let's define a function which initializes auto-complete-c-headers and gets called for c/c++ hooks
+;   (defun my:ac-c-header-init ()
+;     (require 'auto-complete-c-headers)
+;     (add-to-list 'ac-sources 'ac-source-c-headers)
+;   ;  (add-to-list 'achead:include-directories '"/Applications/Xcode.app/Contents/Developer/usr/llvm-gcc-4.2/lib/gcc/i686-apple-darwin11/4.2.1/include")
+;   )
+; )
+
 ; ; start auto-complete with emacs
 ; (require 'auto-complete)
 ; ; do default config for auto-complete
