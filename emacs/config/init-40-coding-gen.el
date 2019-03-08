@@ -29,15 +29,27 @@
   :init (add-hook 'after-init-hook 'global-company-mode)
   :config
   (use-package company-irony :ensure t :defer t)
-  (setq company-idle-delay              nil
-	company-minimum-prefix-length   2
-	company-show-numbers            t
-	company-tooltip-limit           20
-	company-dabbrev-downcase        nil
-	)
-  :bind ("C-;" . company-complete-common)
-  )
+;  (setq company-idle-delay              nil
+;	company-minimum-prefix-length   2
+;	company-show-numbers            t
+;	company-tooltip-limit           20
+;	company-dabbrev-downcase        nil
+;	)
+)
 
+(use-package go-mode
+  :ensure t
+  :defer t
+)
+(use-package company-go
+  :ensure t
+  :defer t
+	:config
+  (add-hook 'go-mode-hook
+     (lambda ()
+       (set (make-local-variable 'company-backends) '(company-go))
+       (company-mode)))
+)
 
 ;; === Tools ===
 
