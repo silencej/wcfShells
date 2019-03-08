@@ -25,7 +25,10 @@
   :init
   (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.xml?\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.jsx?$" . web-mode)) ;; auto-enable for .js/.jsx files
+  (add-to-list 'auto-mode-alist '("\\.es6$" . web-mode))
   (setq web-mode-engines-alist '(("django" . "\\.html\\'")))
+	(setq web-mode-content-types-alist '(("jsx" . "\\.js[x]?\\'") ("jsx" . "\\.es6\\'")))
   
   (defun my-web-mode-hook ()
     "Hooks for Web mode."
@@ -46,7 +49,11 @@
 				("\\.ts\\'" . web-mode))
   :hook ((typescript-mode . tide-setup)
          (typescript-mode . tide-hl-identifier-mode)
-         (before-save . tide-format-before-save)))
+; Disable tide-format-before-save and add hooks for e.g. prettier-js-mode
+; It should respect a tsfmt.json though
+;         (before-save . tide-format-before-save)
+	 )
+)
 (defun setup-tide-mode ()
   (interactive)
   (tide-setup)

@@ -6,6 +6,8 @@
 (require 'editorconfig)
 (editorconfig-mode 1)
 
+(use-package magit)
+
 ;; Etag
 
 
