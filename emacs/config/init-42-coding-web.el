@@ -29,6 +29,11 @@
   (add-to-list 'auto-mode-alist '("\\.es6$" . web-mode))
   (setq web-mode-engines-alist '(("django" . "\\.html\\'")))
 	(setq web-mode-content-types-alist '(("jsx" . "\\.js[x]?\\'") ("jsx" . "\\.es6\\'")))
+	(setq web-mode-ac-sources-alist
+		'(("css" . (ac-source-css-property))
+		  ("html" . (ac-source-words-in-buffer ac-source-abbrev))))
+	(setq web-mode-enable-auto-closing t) ; Type </ will automatically close for you.
+  (setq web-mode-enable-auto-quoting t) ; does the automatic quote insert.
   
   (defun my-web-mode-hook ()
     "Hooks for Web mode."
@@ -39,6 +44,24 @@
     (setq web-mode-enable-current-element-highlight t)
     )
   (add-hook 'web-mode-hook  'my-web-mode-hook)
+)
+
+(use-package emmet-mode
+  :ensure t
+  :defer t
+  :init
+	(add-hook 'sgml-mode-hook 'emmet-mode) ;; Auto-start on any markup modes
+	(add-hook 'css-mode-hook  'emmet-mode) ;; enable Emmet's css abbreviation.
+	(add-hook 'web-mode-hook  'emmet-mode) ;; enable Emmet's css abbreviation.
+	; By default, inserted markup will be indented with indent-region, according to the buffer's mode. To disable this
+	; (add-hook 'emmet-mode-hook (lambda () (setq emmet-indent-after-insert nil)))
+	(add-hook 'emmet-mode-hook (lambda () (setq emmet-indentation 2))) ;; indent 2 spaces.
+	; the cursor to be positioned between first empty quotes after expanding:
+	(setq emmet-move-cursor-between-quotes t) ;; default nil
+	; if you don't want to move cursor after expanding:
+	; (setq emmet-move-cursor-after-expanding nil) ;; default t
+	; If you want to use emmet with react-js's JSX, you probably want emmet to expand 'className="..."' instead of 'class="..."':
+	(setq emmet-expand-jsx-className? t) ;; default nil
 )
 
 ;---------- tide
