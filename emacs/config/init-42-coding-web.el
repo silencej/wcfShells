@@ -27,6 +27,7 @@
   (add-to-list 'auto-mode-alist '("\\.xml?\\'" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.jsx?$" . web-mode)) ;; auto-enable for .js/.jsx files
   (add-to-list 'auto-mode-alist '("\\.es6$" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.erb$" . web-mode))
   (setq web-mode-engines-alist '(("django" . "\\.html\\'")))
 	(setq web-mode-content-types-alist '(("jsx" . "\\.js[x]?\\'") ("jsx" . "\\.es6\\'")))
 	(setq web-mode-ac-sources-alist
