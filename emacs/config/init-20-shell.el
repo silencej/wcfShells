@@ -27,6 +27,13 @@
 (add-hook 'comint-input-filter-functions 'wcy-shell-mode-auto-rename-buffer-input-filter )
 (add-hook 'shell-mode-hook 'wcf-rename-shell-buffer-when-start)
 
+;;;;; Search
+
+(use-package ag
+  :ensure t
+  :defer t
+)
+
 ;;;;;;;;;; Windows
 
 ; http://www.ibm.com/developerworks/cn/linux/l-cn-emacs-shell2/index.html
