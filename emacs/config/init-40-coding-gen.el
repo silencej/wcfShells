@@ -41,6 +41,7 @@
   :ensure t
   :defer t
 )
+(add-hook 'before-save-hook #'gofmt-before-save)
 (use-package company-go
   :ensure t
   :defer t
