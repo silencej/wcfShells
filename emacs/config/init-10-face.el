@@ -5,6 +5,17 @@
   (load-theme 'ir-black t)
 )
 
+; wcfNote: may be already on by default, so no need to config here.
+; Save last place of point in a buffer
+(use-package saveplace
+  :init (save-place-mode))
+
+; Enhance ido. Try with 'C-x b'
+(setq ido-enable-flex-matching nil)
+(setq ido-everywhere t)
+(ido-mode 1)
+;(defalias 'list-buffers 'ibuffer-other-window)
+
 (use-package markdown-mode
     :demand)
 
