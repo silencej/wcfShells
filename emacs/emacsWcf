@@ -76,7 +76,6 @@
 (load "init-10-face")
 (load "init-10-copypaste")
 
-(load "init-20-dired")
 (load "init-20-shell")
 (load "init-41-coding-others")
 (load "init-41-coding-ruby")

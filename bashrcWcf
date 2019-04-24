@@ -40,6 +40,8 @@ export PS1="\u@\h:\w \[$txtcyn\]\$git_branch\[$txtred\]\$git_dirty\[$txtrst\] "
 
 # Use emacs as default Editor instead of vim.
 # export EDITOR=emacs
+alias emacs='emacs -nw'
+export emacs
 
 # alias open="xdg-open"
 # export open
