@@ -37,21 +37,6 @@
 ;	)
 )
 
-(use-package go-mode
-  :ensure t
-  :defer t
-)
-(add-hook 'before-save-hook #'gofmt-before-save)
-(use-package company-go
-  :ensure t
-  :defer t
-	:config
-  (add-hook 'go-mode-hook
-     (lambda ()
-       (set (make-local-variable 'company-backends) '(company-go))
-       (company-mode)))
-)
-
 ;; === Tools ===
 
 ;; == YASnippet ==

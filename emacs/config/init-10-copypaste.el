@@ -47,7 +47,7 @@
   
   (setq interprogram-cut-function 'paste-to-osx)
   (setq interprogram-paste-function 'copy-from-osx)
-  )
+)
 
 (when (eq system-type 'gnu/linux)
  (use-package xclip
