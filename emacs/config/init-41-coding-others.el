@@ -16,9 +16,10 @@
 	(add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
 )
 
-(when (or (equal system-type 'ms-dos) (equal system-type 'windows-nt))
-  (use-package dos)
-)
+; (when (or (equal system-type 'ms-dos) (equal system-type 'windows-nt))
+;   (use-package dos)
+																				; )
+
 ;	:config
 ;	(add-to-list 'auto-mode-alist '("\\.bat$" . dos-mode))
 ; (autoload 'dos-mode "dos" "Edit Dos scripts." t)
