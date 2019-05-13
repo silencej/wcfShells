@@ -82,41 +82,48 @@
 
 ; ---------- Golang
 
-(use-package go-mode
-  :ensure t
-  :defer t
-)
-(add-hook 'before-save-hook #'gofmt-before-save)
-(use-package company-go
-  :ensure t
-  :defer t
-;	:config
-;  (add-hook 'go-mode-hook
-;     (lambda ()
-;       (set (make-local-variable 'company-backends) '(company-go))
-;       (company-mode)))
-)
-
-;; from https://www.youtube.com/watch?v=r6j2W5DZRtA
+;; From https://www.youtube.com/watch?v=r6j2W5DZRtA
 ;; get the following packages ("M-x package-list-packages"):
 ;;     go-mode
 ;;     go-eldoc
 ;;     company-mode
 ;;     company-go
 ;; get the following go programs (run each line in your shell):
-;;     go get golang.org/x/tools/cmd/godoc
-;;     go get golang.org/x/tools/cmd/goimports
-;;     go get github.com/rogpeppe/godef
-;;     go get github.com/nsf/gocode
+;;     go get -v golang.org/x/tools/cmd/godoc
+;;     go get -v golang.org/x/tools/cmd/goimports
+;;     go get -v github.com/rogpeppe/godef
+;;     go get -v github.com/nsf/gocode
+
+(use-package go-mode
+  :ensure t
+  :defer t
+)
+
+; Eldoc minor mode: echo area display of Lisp objects at point (ElDoc mode)
+; This is used to display golang hints at echo erea, including type information for variable, functions and current argument position of function.
+(use-package go-eldoc
+  :ensure t
+  :defer t
+)
+
+(use-package company-go
+  :ensure t
+  :defer t
+	:config
+  (add-hook 'go-mode-hook
+     (lambda ()
+       (set (make-local-variable 'company-backends) '(company-go))
+			 (go-eldoc-setup)
+       (company-mode)))
+)
 
 (setq company-idle-delay 0.25)
 
-; (setq gofmt-command "goimports")
-; ;; UPDATE: gofmt-before-save is more convenient then having a command
-; ;; for running gofmt manually. In practice, you want to
-; ;; gofmt/goimports every time you save anyways.
-; (add-hook 'before-save-hook 'gofmt-before-save)
-; 
+; goimports also formats your code in the same style as gofmt so it can be used as a replacement for your editor's gofmt-on-save hook.
+(setq gofmt-command "goimports")
+(add-hook 'before-save-hook #'gofmt-before-save)
+(add-hook 'go-mode-hook (lambda () (local-set-key (kbd "M-.") #'godef-jump)))
+
 ; (global-set-key (kbd "C-c M-n") 'company-complete)
 ; (global-set-key (kbd "C-c C-n") 'company-complete)
 ; 

@@ -1,6 +1,6 @@
 #!/bin/bash
 # -*- mode: shell-script; -*-
-# Time-stamp: <2019-03-18 15:41:26 i337146>
+# Time-stamp: <2019-05-12 17:04:09 wangcf>
 # Usage: add "source /path/bashrcWcf in ~/.bashrc. Note: bashrcWcf need not to be executable."
 
 # Suppress the annoying output.
@@ -46,7 +46,7 @@ export emacs
 # alias open="xdg-open"
 # export open
 
-export PATH=$PATH:~/bin
+export PATH=$PATH:~/bin:~/go/bin
 # export TERM='xterm-color';
 
 # Set CVSROOT for cvs.
