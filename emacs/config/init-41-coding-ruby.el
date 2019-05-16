@@ -41,8 +41,6 @@
   (add-hook 'ido-setup-hook 'ido-define-keys)
 )
 
-(use-package company)
-
 (use-package robe
 	:config
 	(add-hook 'ruby-mode-hook 'robe-mode)
