@@ -115,11 +115,20 @@
 (setq ansi-color-for-comint-mode t)
 ; We recommend to use utf-8 always, for cross-platform. If you use gb18030 on Windows but utf-8 elsewhere, the file will have problems for git- file change only because of encoding switching.
 (set-language-environment 'utf-8)
+(prefer-coding-system 'gb18030)
 (prefer-coding-system 'utf-8)
+; (set-default-coding-systems 'utf-8)
+; (set-terminal-coding-system 'utf-8)
+; (set-keyboard-coding-system 'utf-8)
+; ;; backwards compatibility as default-buffer-file-coding-system is deprecated in 23.2.
+; (if (boundp 'buffer-file-coding-system)
+;     (setq-default buffer-file-coding-system 'utf-8)
+;   (setq default-buffer-file-coding-system 'utf-8))
+; ;; Treat clipboard input as UTF-8 string first; compound text next, etc.
+; (setq x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING))
 
 ;; Fastfood
 (fset 'yes-or-no-p 'y-or-n-p) ;make the y or n suffice for a yes or no question.
-
 
 ;; Tabs to spaces and tab width
 (setq-default indent-tabs-mode nil)
