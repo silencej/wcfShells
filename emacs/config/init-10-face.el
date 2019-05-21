@@ -22,7 +22,7 @@
 ;; Splash Screen to Org-mode
 (setq inhibit-splash-screen t
       initial-scratch-message nil
-      initial-major-mode 'gfm-mode)
+      )
 
 ;; == Load Custom Theme ==
 

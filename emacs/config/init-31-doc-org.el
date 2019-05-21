@@ -76,4 +76,9 @@
     )
   )
 
+(custom-set-variables
+ '(initial-major-mode 'org-mode) ; previously gfm-mode
+ '(org-cycle-emulate-tab (quote white))
+)
+
 ;;; init-31-doc-org.el ends here
