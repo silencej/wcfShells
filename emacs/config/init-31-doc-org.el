@@ -21,7 +21,7 @@
 (use-package org
   :init
   (add-hook 'org-mode-hook 'visual-line-mode)
-  (add-hook 'org-mode-hook 'org-indent-mode)
+  ; (add-hook 'org-mode-hook 'org-indent-mode)
   (add-hook 'org-mode-hook 'flyspell-mode)
 
   :defer t
@@ -29,7 +29,7 @@
 	 ("\C-c c" . org-capture))
   :config
   ;; Custom functions for emacs & org mode
-  (load-file "~/.emacs.d/config/gs-org.el")
+  (load "gs-org")
   (require 'org)
 
   ;; == Agenda ==
@@ -47,34 +47,34 @@
   ;; Syntax hilight in #+begin_src blocks
   (setq org-src-fontify-natively t)
 
-  ;; Evil key configurations (agenda)
-  (evil-set-initial-state 'org-agenda-mode 'normal)
-  (defvar org-agenda-mode-map)
-  (evil-define-key 'normal org-agenda-mode-map
-    "l" 'org-agenda-later
-    "h" 'org-agenda-earlier
-    "j" 'org-agenda-next-line
-    "k" 'org-agenda-previous-line
-    (kbd "RET") 'org-agenda-switch-to
-    [escape] 'org-agenda-quit
-    "q" 'org-agenda-quit
-    "s" 'org-agenda-save-all-org-buffers
-    "t" 'org-agenda-todo
-    (kbd "SPC") 'org-agenda-show-and-scroll-up
-    )
-  (evil-leader/set-key-for-mode 'org-agenda-mode
-    "i" 'org-agenda-clock-in
-    "o" 'org-agenda-clock-out
-    "k" 'org-agenda-kill
-    "/" 'org-agenda-filter-by-tag
-    )
-
-  ;; Evil key configuration (org)
-  (evil-leader/set-key-for-mode 'org-mode
-    "i" 'org-clock-in
-    "o" 'org-clock-out
-    )
-  )
+  ; ;; Evil key configurations (agenda)
+  ; (evil-set-initial-state 'org-agenda-mode 'normal)
+  ; (defvar org-agenda-mode-map)
+  ; (evil-define-key 'normal org-agenda-mode-map
+  ;   "l" 'org-agenda-later
+  ;   "h" 'org-agenda-earlier
+  ;   "j" 'org-agenda-next-line
+  ;   "k" 'org-agenda-previous-line
+  ;   (kbd "RET") 'org-agenda-switch-to
+  ;   [escape] 'org-agenda-quit
+  ;   "q" 'org-agenda-quit
+  ;   "s" 'org-agenda-save-all-org-buffers
+  ;   "t" 'org-agenda-todo
+  ;   (kbd "SPC") 'org-agenda-show-and-scroll-up
+  ;   )
+  ; (evil-leader/set-key-for-mode 'org-agenda-mode
+  ;   "i" 'org-agenda-clock-in
+  ;   "o" 'org-agenda-clock-out
+  ;   "k" 'org-agenda-kill
+  ;   "/" 'org-agenda-filter-by-tag
+  ;   )
+	; 
+  ; ;; Evil key configuration (org)
+  ; (evil-leader/set-key-for-mode 'org-mode
+  ;   "i" 'org-clock-in
+  ;   "o" 'org-clock-out
+  ;   )
+)
 
 (custom-set-variables
  '(initial-major-mode 'org-mode) ; previously gfm-mode
