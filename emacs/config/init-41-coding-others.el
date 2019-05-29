@@ -80,6 +80,12 @@
 (use-package nginx-mode
 )
 
+(use-package csharp-mode
+  :config
+   (setq auto-mode-alist
+     (append '(("\\.cs$" . csharp-mode)) auto-mode-alist))
+)
+
 ; ---------- Golang
 
 ;; From https://www.youtube.com/watch?v=r6j2W5DZRtA
