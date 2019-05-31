@@ -22,7 +22,7 @@
   :init
   ; (add-hook 'org-mode-hook 'visual-line-mode)
   (add-hook 'org-mode-hook 'org-indent-mode)
-  (add-hook 'org-mode-hook 'flyspell-mode)
+;  (add-hook 'org-mode-hook 'flyspell-mode) TODO: use hunspell on windows. https://lists.gnu.org/archive/html/help-gnu-emacs/2014-04/msg00030.html
 
   :defer t
   :bind (("\C-c a" . org-agenda)
