@@ -1,6 +1,6 @@
 #!/bin/bash
 # -*- mode: shell-script; -*-
-# Time-stamp: <2019-05-12 17:04:09 wangcf>
+# Time-stamp: <2019-06-07 10:04:58 wangcf>
 # Usage: add "source /path/bashrcWcf in ~/.bashrc. Note: bashrcWcf need not to be executable."
 
 # Suppress the annoying output.
@@ -46,6 +46,7 @@ export emacs
 # alias open="xdg-open"
 # export open
 
+export GOPATH=~/go
 export PATH=$PATH:~/bin:~/go/bin
 # export TERM='xterm-color';
 
