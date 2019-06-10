@@ -139,7 +139,9 @@
 
 ; Make 'C-x C-f' completion case-sensitive.
 (setq read-file-name-completion-ignore-case nil)
-(setq-default truncate-lines nil)
+
+(custom-set-variables
+  '(truncate-lines nil))
 
 ;; Eye candy.
 (transient-mark-mode t) ;highlight the active region.

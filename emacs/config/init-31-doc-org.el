@@ -21,8 +21,9 @@
 (use-package org
   :init
   ; (add-hook 'org-mode-hook 'visual-line-mode)
-  (add-hook 'org-mode-hook 'org-indent-mode)
-;  (add-hook 'org-mode-hook 'flyspell-mode) TODO: use hunspell on windows. https://lists.gnu.org/archive/html/help-gnu-emacs/2014-04/msg00030.html
+  ; (add-hook 'org-mode-hook 'org-indent-mode)
+  ; (add-hook 'org-mode-hook 'flyspell-mode) TODO: use hunspell on windows. https://lists.gnu.org/archive/html/help-gnu-emacs/2014-04/msg00030.html
+    (add-hook 'org-mode-hook (lambda () (setq truncate-lines nil)))
 
   :defer t
   :bind (("\C-c a" . org-agenda)
@@ -30,7 +31,6 @@
   :config
   ;; Custom functions for emacs & org mode
   (load "gs-org")
-  (require 'org)
 
   ;; == Agenda ==
   (defvar org-agenda-window-setup)
