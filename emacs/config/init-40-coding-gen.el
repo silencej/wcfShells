@@ -19,6 +19,14 @@
 
 ;;; Code:
 
+;; == org mode source code syntax highlighting
+(use-package slime)
+(org-babel-do-load-languages
+ 'org-babel-load-languages '(
+		(C . t)
+		(lisp . t)
+))
+
 ;; === Code Completion ===
 
 ;; == company-mode ==
