@@ -145,13 +145,34 @@
   ; (helm-migemo-mode 1)
 )
 
-(use-package migemo
-  :ensure t)
+; (use-package migemo
+;   :ensure t)
 
-(use-package bookmark+
-	:ensure t
-  :config
-	(setq bookmark-version-control t)
-	(setq delete-old-versions t)
-;	:load-path "~/wcfShells/emacs/packages/bookmark-plus"
-)
+(use-package quelpa-use-package
+  :ensure t
+  :init
+  (setq quelpa-update-melpa-p nil)
+  (setq quelpa-self-upgrade-p nil))
+
+; Use the code from emacsWiki since melpa no longer supports it
+(let ((bookmarkplus-dir "~/.emacs.d/custom/bookmark-plus/")
+              (emacswiki-base "https://www.emacswiki.org/emacs/download/")
+              (bookmark-files '("bookmark+.el" "bookmark+-mac.el" "bookmark+-bmu.el" "bookmark+-key.el" "bookmark+-lit.el" "bookmark+-1.el")))
+          (require 'url)
+          (add-to-list 'load-path bookmarkplus-dir)
+          (make-directory bookmarkplus-dir t)
+          (mapcar (lambda (arg)
+                    (let ((local-file (concat bookmarkplus-dir arg)))
+                      (unless (file-exists-p local-file)
+                        (url-copy-file (concat emacswiki-base arg) local-file t))))
+                    bookmark-files)
+          (byte-recompile-directory bookmarkplus-dir 0)
+          (require 'bookmark+))
+
+; (use-package bookmark+
+;   :ensure t
+;   :config
+; 	(setq bookmark-version-control t)
+; 	(setq delete-old-versions t)
+; ;	:load-path "~/wcfShells/emacs/packages/bookmark-plus"
+; )

@@ -7,6 +7,9 @@
 (make-variable-buffer-local 'wcy-shell-mode-directory-changed)
 (setq wcy-shell-mode-directory-changed t)
 
+; Have support for ANSI color
+(add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
+
 (defun wcf-rename-shell-buffer-when-start()
   (let ((bn (concat "*sh:" (file-name-base (directory-file-name default-directory)) "*")))
     (if (not (string= (buffer-name) bn))
@@ -50,6 +53,8 @@
 
 (when (eq system-type 'windows-nt)
 
+;; NOTE: Term mode is still not working on Windows for term. Use shell or eshell instead.
+
 ;(set-default-font "-outline-Courier New-normal-normal-normal-mono-16-*-*-*-c-*-iso8859-1")
 ;; Use consolas for latin-3 charset.
 ;; (when (equal system-type "windows-nt")
@@ -61,6 +66,7 @@
 
 (global-set-key [?\C-,] 'shell) ; C-,
 ;      (setq explicit-shell-file-name "e:/proGreen/shells/bash.exe")
+; cmdproxy which is part of Emacs install
 (setq explicit-shell-file-name "cmdproxy.exe")
 ;(setq explicit-shell-file-name "powershell.exe")
 (setq shell-file-name explicit-shell-file-name)

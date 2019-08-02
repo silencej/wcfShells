@@ -12,7 +12,7 @@
 
 ; Enhance ido. Try with 'C-x b'
 (setq ido-enable-flex-matching nil)
-(setq ido-everywhere t)
+; (setq ido-everywhere t)
 (ido-mode 1)
 ;(defalias 'list-buffers 'ibuffer-other-window)
 
