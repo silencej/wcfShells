@@ -1,0 +1,3 @@
+(package-initialize)
+
+(load-file "/root/wcfShells/emacs/emacsWcf")
