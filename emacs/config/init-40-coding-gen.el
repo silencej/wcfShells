@@ -47,6 +47,21 @@
 
 ;; === Tools ===
 
+(use-package htmlize
+  :ensure t
+  :defer t
+)
+
+(use-package plantuml-mode
+  :ensure t
+  :defer t
+  :config (progn
+		(setq org-plantuml-jar-path (expand-file-name "~/wcfShells/support/plantuml.1.2020.2.jar"))
+		(add-to-list 'org-src-lang-modes '("plantuml" . plantuml))
+    (org-babel-do-load-languages 'org-babel-load-languages '((plantuml . t)))
+	)
+)
+
 ;; == YASnippet ==
 (use-package yasnippet
   :ensure t

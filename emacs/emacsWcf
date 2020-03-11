@@ -32,11 +32,20 @@
 (require 'package)
 (setq package-enable-at-startup nil)
 ;			 ("marmalade" . "http://marmalade-repo.org/packages/")
-(setq package-archives (append package-archives
-			 '(("melpa" . "http://melpa.org/packages/")
-			 ("gnu" . "http://elpa.gnu.org/packages/")
-			 ("elpy" . "http://jorgenschaefer.github.io/packages/"))))
+
+; (setq package-archives (append package-archives
+; 			 '(("melpa" . "http://melpa.org/packages/")
+; 			 ("gnu" . "http://elpa.gnu.org/packages/")
+; 			 ("elpy" . "http://jorgenschaefer.github.io/packages/"))))
+;--- Use china mirror
+; http://elpa.emacs-china.org/
+(setq package-archives '(("gnu"   . "http://elpa.emacs-china.org/gnu/")
+                         ("melpa" . "http://elpa.emacs-china.org/melpa/")
+												 ("elpy" . "http://jorgenschaefer.github.io/packages/")))
 (package-initialize)
+;--- Manual refresh content if outdated.
+; (package-refresh-contents)
+
 ;; quelpa
 ; If the following fails, run "M-x package-install RET quelpa RET" instead.
 (unless (require 'quelpa nil t)
