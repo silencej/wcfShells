@@ -254,9 +254,9 @@
 (when (fboundp 'electric-indent-mode) (electric-indent-mode -1))
 ; (electric-indent-mode -1)
 
-; (when (fboundp 'electric-pair-mode)
-;	(electric-pair-mode t)
-; )
+(when (fboundp 'electric-pair-mode)
+ (electric-pair-mode -1) ; NOTE: set nil will also enable it.
+)
 
 
 ;; Packages.
