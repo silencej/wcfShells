@@ -1,0 +1,9 @@
+# Compiled
+*.elc
+*~
+loaddefs.el
+bashscripts
+emacsEls
+.git
+support
+tests

@@ -1,0 +1,35 @@
+version: '3.4'
+
+services:
+  emacs:
+    build:
+      context: .
+    volumes:
+      - ./emacs:/emacs
+#     ports:
+#       # On windows, 50000 port needs permission.
+#       - "60003:80"
+#       - "60004:443"
+#       - "60005:22"
+    restart: unless-stopped
+    entrypoint: tail -f /dev/null
+#    environment:
+#      GITLAB_OMNIBUS_CONFIG: |
+#        external_url 'http://12.12.12.12:60003'
+
+# wcfNote:
+# Instead you can use clone_url in gitlab-runner settings to override the clone url.
+# https://docs.gitlab.com/runner/configuration/advanced-configuration.html#how-clone_url-works
+
+    # You cannot scale a service beyond 1 container if you have specified a custom name. Here it's acceptable.
+    container_name: emacs
+
+# volumes:
+#   gitlab_data:
+#     name: gitlab_data
+#   gitlab_config:
+#     name: gitlab_config
+#   gitlab_logs:
+#     name: gitlab_logs
+#   gitlab_runner_config:
+#     name: gitlab_runner_config
