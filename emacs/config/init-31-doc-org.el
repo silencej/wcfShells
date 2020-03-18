@@ -32,6 +32,11 @@
   ;; Custom functions for emacs & org mode
   (load "gs-org")
 
+	; For exporting to odt, doc, etc
+	; wcfNote: because of incompatibility of zip, odt export is still not working.
+	; (setq org-odt-convert-process 'LibreOffice); 'unoconv) ; Need to install libreoffice, and add wcfShells/support to PATH
+  ; (setq org-export-odt-preferred-output-format 'docx)
+
   ;; == Agenda ==
   (defvar org-agenda-window-setup)
   (setq org-agenda-window-setup 'current-window)
