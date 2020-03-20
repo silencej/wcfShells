@@ -128,9 +128,14 @@
       )
     (evil-define-key 'normal git-rebase-mode-map
       "l" 'git-rebase-show-commit
-      )
     )
   )
+)
+
+(use-package magit-lfs
+  :ensure t
+  :defer t
+)
 
 ;; == flycheck ==
 (use-package flycheck
