@@ -5,6 +5,11 @@
   (load-theme 'ir-black t)
 )
 
+(use-package ace-window
+  :ensure t
+	:config
+	(global-set-key (kbd "C-x o") 'ace-window))
+
 ; wcfNote: may be already on by default, so no need to config here.
 ; Save last place of point in a buffer
 (use-package saveplace
