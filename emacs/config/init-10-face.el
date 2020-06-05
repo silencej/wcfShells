@@ -147,7 +147,10 @@
 (setq read-file-name-completion-ignore-case nil)
 
 (custom-set-variables
-  '(truncate-lines nil))
+  '(truncate-lines nil)
+  '(create-lockfiles nil)
+  '(dired-auto-revert-buffer 1)
+)
 
 ;; Eye candy.
 (transient-mark-mode t) ;highlight the active region.
