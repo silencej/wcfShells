@@ -151,8 +151,10 @@
 	 )))
   (add-hook 'c++-mode-hook (lambda () (setq flycheck-clang-language-standard "c++11")))
   (setq-default flycheck-disabled-checkers '(c/c++-clang c/c++-gcc))
-  
-  )
+  ; Stop checking for lisp doc format.
+  ; https://emacs.stackexchange.com/questions/21664/how-to-prevent-flycheck-from-treating-my-init-el-as-a-package-file
+  (setq-default flycheck-disabled-checkers '(emacs-lisp-checkdoc))
+)
 
 ;; == OTHER LANGUAGES ==
 

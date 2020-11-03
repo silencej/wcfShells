@@ -88,9 +88,12 @@
 (load "init-20-shell")
 (load "init-31-doc-org")
 (load "init-40-coding-gen")
+(load "init-41-coding-c-cpp")
 (load "init-41-coding-others")
 (load "init-41-coding-ruby")
 (load "init-42-coding-web")
+
+(load "ldap-mode")
 
 ;; === Document Editing ===
 ; (load "init-30-doc-gen")

@@ -1,5 +1,13 @@
 (require 'use-package)
 
+; Auto update packages.
+; NOTE: Manually enable this and manually execute it, because it takes time.
+; (use-package auto-package-update
+;   :config
+;   (setq auto-package-update-delete-old-versions t)
+;   (setq auto-package-update-hide-results t)
+;   (auto-package-update-maybe))
+
 (use-package ir-black-theme
   :config
   (load-theme 'ir-black t)
