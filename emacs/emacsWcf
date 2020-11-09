@@ -33,13 +33,15 @@
 (setq package-enable-at-startup nil)
 ;			 ("marmalade" . "http://marmalade-repo.org/packages/")
 
-(setq package-archives (append package-archives
+; (append package-archives
+(setq package-archives 
                      '(
-;                       ("melpa" . "http://melpa.org/packages/")
 ;                       ("gnu" . "http://elpa.gnu.org/packages/")
-                       ("melpa" . "http://elpa.emacs-china.org/melpa/")
+;                       ("melpa" . "http://melpa.org/packages/")
                        ("gnu"   . "http://elpa.emacs-china.org/gnu/")
-                       ("elpy" . "http://jorgenschaefer.github.io/packages/"))))
+                       ("melpa" . "http://elpa.emacs-china.org/melpa/")
+                       ("elpy" . "http://jorgenschaefer.github.io/packages/")))
+;)
 ;--- Use china mirror
 ; http://elpa.emacs-china.org/
 
