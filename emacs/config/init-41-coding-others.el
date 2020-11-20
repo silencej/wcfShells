@@ -8,6 +8,11 @@
 
 (use-package magit)
 
+(use-package groovy-mode
+	:config
+	(add-to-list 'auto-mode-alist '("\\Jenkinsfile\\'" . groovy-mode))
+)
+
 ;; Etag
 
 
