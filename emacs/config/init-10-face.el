@@ -1,5 +1,14 @@
 (require 'use-package)
 
+;----- Improve chinese utf8 char displaying speed
+(setq inhibit-compacting-font-caches t)
+(when (eq system-type 'windows-nt)
+  (dolist 
+    (charset '(kana han symbol cjk-misc bopomofo))
+    (set-fontset-font (frame-parameter nil 'font)
+    charset (font-spec :family "Microsoft Yahei" :size 16)))
+)
+
 ; Auto update packages.
 ; NOTE: Manually enable this and manually execute it, because it takes time.
 ; (use-package auto-package-update
@@ -18,6 +27,38 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(custom-enabled-themes (quote (manoj-dark)))
+)
+
+; https://github.com/dimitri/emacs-kicker/blob/master/init.el
+
+; https://github.com/nonsequitur/smex
+; Smex is a M-x enhancement for Emacs. Built on top of Ido, it provides a convenient interface to your recently and most frequently used commands. And to all the other commands, too.
+(use-package smex
+  :ensure t
+  :config
+  (smex-initialize) ; Can be omitted. This might cause a (minimal) delay
+                    ; when Smex is auto-initialized on its first run.
+
+  ; Bind some keys:
+  (global-set-key (kbd "M-x") 'smex)
+  (global-set-key (kbd "M-X") 'smex-major-mode-commands)
+  ; (setq smex-save-file "~/.emacs.d/.smex-items")
+  ;; This is your old M-x.
+  (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
+)
+
+; https://github.com/lukhas/buffer-move
+(use-package buffer-move
+  :ensure t
+  :config
+  (global-set-key (kbd "<f7-up>")     'buf-move-up)
+  (global-set-key (kbd "<f7-down>")   'buf-move-down)
+  (global-set-key (kbd "<f7-left>")   'buf-move-left)
+  (global-set-key (kbd "<f7-right>")  'buf-move-right)
+  ; if you want the point to stay (as vim switches) you can set buffer-move-stay-after-swap to a non-nil value like so:
+  ; (setq buffer-move-stay-after-swap t)
+  ; Alternatively, you may let the current window switch back to the previous buffer, instead of swapping the buffers of both windows. Set the following customization variable to 'move to activate this behavior:
+  ; (setq buffer-move-behavior 'move)
 )
 
 (use-package ace-window

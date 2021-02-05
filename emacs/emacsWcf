@@ -1,24 +1,12 @@
 ;;; -*- mode: lisp -*-
 ;;; author: owen263@gmail.com
 
-;; This program is free software; you can redistribute it and/or
-;; modify it under the terms of the GNU General Public License as
-;; published by the Free Software Foundation; either version 2 of
-;; the License, or (at your option) any later version.
-;;
-;; This program is distributed in the hope that it will be
-;; useful, but WITHOUT ANY WARRANTY; without even the implied
-;; warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
-;; PURPOSE.  See the GNU General Public License for more details.
-
 ;;
 ;; Code inspired by:
 ;;      http://www.cachestocaches.com/2015/8/getting-started-use-package/
 
 ;;; Note for windows:
 ;; package-check-signature is a variable defined in ‘package.el’. Its value is ‘allow-unsigned’. Original value was nil. Non-nil means to check package signatures when installing.
-
-;;; Code:
 
 ;; Turn on debugging (comment this out for normal use)
 ; Emacs with the `--debug-init'
@@ -49,13 +37,59 @@
 ;--- Manual refresh content if outdated.
 ; (package-refresh-contents)
 
-;; quelpa
+;---------- quelpa
 ; If the following fails, run "M-x package-install RET quelpa RET" instead.
 (unless (require 'quelpa nil t)
   ;  (quelpa-self-upgrade)
   (with-temp-buffer
     (url-insert-file-contents "https://framagit.org/steckerhalter/quelpa/raw/master/bootstrap.el")
     (eval-buffer)))
+
+;---------- el-get
+
+; https://github.com/dimitri/el-get
+; Install on windows: https://github.com/dimitri/el-get/wiki/Installation-on-Windows
+
+; (setq url-proxy-services '(("no_proxy" . "work\\.com")
+;                            ("http" . "127.0.0.1:10809")
+;                            ("https" . "127.0.0.1:10809")
+; ))
+
+(add-to-list 'load-path "~/.emacs.d/el-get/el-get")
+; This script will use git to clone El-Get and install it to the default location (~/.emacs.d/el-get/el-get).
+(unless (require 'el-get nil 'noerror)
+;  (require 'package)
+;  (add-to-list 'package-archives
+;               '("melpa" . "http://melpa.org/packages/"))
+;  (package-refresh-contents)
+;  (package-initialize)
+  (package-install 'el-get)
+  (require 'el-get))
+(add-to-list 'el-get-recipe-path "~/.emacs.d/el-get-user/recipes")
+(el-get 'sync)
+
+;---------- straight.el
+
+; https://github.com/raxod502/straight.el
+
+(defvar bootstrap-version)
+(let ((bootstrap-file
+       (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+      (bootstrap-version 5))
+  (unless (file-exists-p bootstrap-file)
+    (with-current-buffer
+        (url-retrieve-synchronously
+         "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
+         'silent 'inhibit-cookies)
+      (goto-char (point-max))
+      (eval-print-last-sexp)))
+  (load bootstrap-file nil 'nomessage))
+
+; https://github.com/raxod502/apheleia
+(straight-use-package '(apheleia :host github :repo "raxod502/apheleia"))
+; (apheleia-global-mode +1)
+
+;---------- use-package
 
 ;; Bootstrap `use-package'
 (unless (package-installed-p 'use-package)
