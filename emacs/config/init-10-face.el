@@ -5,8 +5,9 @@
 (when (eq system-type 'windows-nt)
   (dolist 
     (charset '(kana han symbol cjk-misc bopomofo))
-    (set-fontset-font (frame-parameter nil 'font)
-    charset (font-spec :family "Microsoft Yahei" :size 16)))
+    (if (display-graphic-p)
+      (set-fontset-font (frame-parameter nil 'font)
+      charset (font-spec :family "Microsoft Yahei" :size 16))))
 )
 
 ; Auto update packages.
