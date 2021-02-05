@@ -47,6 +47,8 @@
 
 ;---------- el-get
 
+; TODO
+
 ; https://github.com/dimitri/el-get
 ; Install on windows: https://github.com/dimitri/el-get/wiki/Installation-on-Windows
 
@@ -55,39 +57,41 @@
 ;                            ("https" . "127.0.0.1:10809")
 ; ))
 
-(add-to-list 'load-path "~/.emacs.d/el-get/el-get")
-; This script will use git to clone El-Get and install it to the default location (~/.emacs.d/el-get/el-get).
-(unless (require 'el-get nil 'noerror)
-;  (require 'package)
-;  (add-to-list 'package-archives
-;               '("melpa" . "http://melpa.org/packages/"))
-;  (package-refresh-contents)
-;  (package-initialize)
-  (package-install 'el-get)
-  (require 'el-get))
-(add-to-list 'el-get-recipe-path "~/.emacs.d/el-get-user/recipes")
-(el-get 'sync)
+; (add-to-list 'load-path "~/.emacs.d/el-get/el-get")
+; ; This script will use git to clone El-Get and install it to the default location (~/.emacs.d/el-get/el-get).
+; (unless (require 'el-get nil 'noerror)
+; ;  (require 'package)
+; ;  (add-to-list 'package-archives
+; ;               '("melpa" . "http://melpa.org/packages/"))
+; ;  (package-refresh-contents)
+; ;  (package-initialize)
+;   (package-install 'el-get)
+;   (require 'el-get))
+; (add-to-list 'el-get-recipe-path "~/.emacs.d/el-get-user/recipes")
+; (el-get 'sync)
 
 ;---------- straight.el
 
+; TODO
+
 ; https://github.com/raxod502/straight.el
 
-(defvar bootstrap-version)
-(let ((bootstrap-file
-       (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
-      (bootstrap-version 5))
-  (unless (file-exists-p bootstrap-file)
-    (with-current-buffer
-        (url-retrieve-synchronously
-         "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
-         'silent 'inhibit-cookies)
-      (goto-char (point-max))
-      (eval-print-last-sexp)))
-  (load bootstrap-file nil 'nomessage))
-
-; https://github.com/raxod502/apheleia
-(straight-use-package '(apheleia :host github :repo "raxod502/apheleia"))
-; (apheleia-global-mode +1)
+;  (defvar bootstrap-version)
+;  (let ((bootstrap-file
+;         (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+;        (bootstrap-version 5))
+;    (unless (file-exists-p bootstrap-file)
+;      (with-current-buffer
+;          (url-retrieve-synchronously
+;           "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
+;           'silent 'inhibit-cookies)
+;        (goto-char (point-max))
+;        (eval-print-last-sexp)))
+;    (load bootstrap-file nil 'nomessage))
+;  
+;  ; https://github.com/raxod502/apheleia
+;  (straight-use-package '(apheleia :host github :repo "raxod502/apheleia"))
+;  ; (apheleia-global-mode +1)
 
 ;---------- use-package
 
