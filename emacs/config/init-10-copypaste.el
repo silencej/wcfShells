@@ -51,8 +51,8 @@
 ; )
 
 ; This package allows Emacs to copy to and paste from the GUI clipboard when running in text terminal.
-(when (not (eq system-type 'windows-nt))
-(use-package xclip
-  :config (xclip-mode 1)
-)
+(when (executable-find "xclip")
+  (use-package xclip
+    :config (xclip-mode 1)
+  )
 )
