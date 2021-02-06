@@ -50,6 +50,7 @@
 (use-package emmet-mode
   :ensure t
   :defer t
+  :diminish emmet-mode
   :init
 	(add-hook 'markdown-mode-hook 'emmet-mode) ;; Auto-start on any markup modes
 	(add-hook 'sgml-mode-hook 'emmet-mode) ;; Auto-start on any markup modes
@@ -111,16 +112,12 @@
 ;   (autoload 'jsx-mode "jsx-mode" "JSX mode" t)
 ; )
 
-;; == emmet ==
-(use-package emmet-mode
+;;---------- Modes
+
+(use-package graphql-mode
   :ensure t
   :defer t
-  :diminish emmet-mode
-  :init
-  (add-hook 'sgml-mode-hook 'emmet-mode) ;; Auto-start on any markup modes
-  (add-hook 'css-mode-hook  'emmet-mode) ;; enable Emmet's css abbreviation.
-  (add-hook 'web-mode-hook 'emmet-mode)
-  )
+)
 
 ;;---------- jsbeautify
 
