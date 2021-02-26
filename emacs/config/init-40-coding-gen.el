@@ -99,6 +99,11 @@
 
 ;; == compile ==
 
+(use-package php-mode
+  :ensure t
+  :defer t
+)
+
 ;; https://emacs.stackexchange.com/questions/8135/why-does-compilation-buffer-show-control-characters
 (use-package ansi-color
   :ensure t
