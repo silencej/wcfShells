@@ -28,31 +28,36 @@
     (mac-key-mode 1))
   
   ; (global-set-key [?\C-,] (lambda () (interactive) (term "/bin/bash"))) ; C-,
-  )
 
-;; (setq x-select-enable-clipboard t) ; make emacs use the clipboard.
+  (setq x-select-enable-clipboard t) ; make emacs use the clipboard.
 ;; (setq interprogram-paste-function 'x-cut-buffer-or-selection-value)
 ;; When the -nw is used, the interprograme-paste should be off.
-; (when (and (eq system-type 'darwin) (eq window-system nil) )
-;   ;	(setq-default select-enable-clipboard nil)
-;   ;	(setq interprogram-paste-function nil)
-;   
-;   (defun copy-from-osx ()
-;   (shell-command-to-string "pbpaste"))
-;   
-;   (defun paste-to-osx (text &optional push)
-;   (let ((process-connection-type nil))
-;   (let ((proc (start-process "pbcopy" "*Messages*" "pbcopy")))
-;   (process-send-string proc text)
-;   (process-send-eof proc))))
-;   
-;   (setq interprogram-cut-function 'paste-to-osx)
-;   (setq interprogram-paste-function 'copy-from-osx)
-; )
+  (when (and (eq system-type 'darwin) (eq window-system nil) )
+    ;	(setq-default select-enable-clipboard nil)
+    ;	(setq interprogram-paste-function nil)
+    
+    (defun copy-from-osx ()
+    (shell-command-to-string "pbpaste"))
+    
+    (defun paste-to-osx (text &optional push)
+    (let ((process-connection-type nil))
+    (let ((proc (start-process "pbcopy" "*Messages*" "pbcopy")))
+    (process-send-string proc text)
+    (process-send-eof proc))))
+    
+    (setq interprogram-cut-function 'paste-to-osx)
+    (setq interprogram-paste-function 'copy-from-osx)
+  )
+
+)
+
 
 ; This package allows Emacs to copy to and paste from the GUI clipboard when running in text terminal.
+
+(when (eq system-type 'gnu/linux)
 (when (executable-find "xclip")
   (use-package xclip
     :config (xclip-mode 1)
   )
+)
 )
