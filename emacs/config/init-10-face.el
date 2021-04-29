@@ -196,9 +196,13 @@
 ;; Tabs to spaces and tab width
 (setq-default indent-tabs-mode nil)
 (setq indent-tabs-width 2)
-(setq default-tab-width 2)
 ;(define-key text-mode-map (kbd "TAB") 'self-insert-command) ; only in text-mode, pressing TAB will not indent apropriately but insert TAB.
 ;; Reset these so it indents like in VS.
+
+; Set global tab-width
+; https://www.gnu.org/software/emacs/manual/html_node/efaq/Changing-the-length-of-a-Tab.html
+(setq-default tab-width 2)
+; Do not confuse variable tab-width with variable tab-stop-list.
 
 ; Make 'C-x C-f' completion case-sensitive.
 (setq read-file-name-completion-ignore-case nil)
