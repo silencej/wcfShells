@@ -7,7 +7,7 @@
     (charset '(kana han symbol cjk-misc bopomofo))
     (if (display-graphic-p)
       (set-fontset-font (frame-parameter nil 'font)
-      charset (font-spec :family "Microsoft Yahei" :size 16))))
+      charset (font-spec :family "Microsoft Yahei")))) ; Use default size instead. :size 16
 )
 
 ; Auto update packages.
