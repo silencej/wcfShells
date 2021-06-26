@@ -34,7 +34,7 @@
 		'(("css" . (ac-source-css-property))
 		  ("html" . (ac-source-words-in-buffer ac-source-abbrev))))
 	(setq web-mode-enable-auto-closing t) ; Type </ will automatically close for you.
-  (setq web-mode-enable-auto-quoting t) ; does the automatic quote insert.
+  (setq web-mode-enable-auto-quoting nil) ; does the automatic quote insert.
   
   (defun my-web-mode-hook ()
     "Hooks for Web mode."

@@ -4,6 +4,9 @@
 ;;;;; Automatic rename shell buffer
 ; http://ann77.emacser.com/Emacs/EmacsShellAutoDirName.html
 
+; https://stackoverflow.com/questions/6411121/how-to-make-emacs-use-my-bashrc-file
+(setq shell-command-switch "-ic")
+
 (make-variable-buffer-local 'wcy-shell-mode-directory-changed)
 (setq wcy-shell-mode-directory-changed t)
 
