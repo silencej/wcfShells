@@ -31,6 +31,7 @@
   :config
   ;; Custom functions for emacs & org mode
   (load "gs-org")
+  (add-to-list 'org-modules 'org-tempo t)
 
 	; For exporting to odt, doc, etc
 	; wcfNote: because of incompatibility of zip, odt export is still not working.
