@@ -34,7 +34,8 @@
 		'(("css" . (ac-source-css-property))
 		  ("html" . (ac-source-words-in-buffer ac-source-abbrev))))
 	(setq web-mode-enable-auto-closing t) ; Type </ will automatically close for you.
-  (setq web-mode-enable-auto-quoting nil) ; does the automatic quote insert.
+  (setq web-mode-enable-auto-quoting nil) ; Add double quotes after the character = in a tag. wcfNote: disable this for it always insert double quotes instead of single.
+  (setq web-mode-auto-quote-style 2) ; 1 (default) for double quotes, 2 for single quotes, 3 for auto quoting ={ }.
   
   (defun my-web-mode-hook ()
     "Hooks for Web mode."
